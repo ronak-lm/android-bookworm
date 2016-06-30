@@ -3,7 +3,7 @@ package com.ronakmanglani.booknerd;
 import android.app.Application;
 import android.content.Context;
 
-public class BookNerdApplication extends Application {
+public class BookNerdApp extends Application {
 
     @Override
     public void onCreate() {

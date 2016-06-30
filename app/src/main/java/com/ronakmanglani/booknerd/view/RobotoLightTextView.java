@@ -1,9 +1,11 @@
-package com.ronakmanglani.booknerd;
+package com.ronakmanglani.booknerd.view;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import com.ronakmanglani.booknerd.util.FontUtil;
 
 public class RobotoLightTextView extends TextView {
 
@@ -23,7 +25,7 @@ public class RobotoLightTextView extends TextView {
     }
 
     private void applyCustomFont() {
-        Typeface customFont = FontCacheUtil.getTypeface(FontCacheUtil.ROBOTO_LIGHT);
+        Typeface customFont = FontUtil.getTypeface(FontUtil.ROBOTO_LIGHT);
         setTypeface(customFont);
     }
 }

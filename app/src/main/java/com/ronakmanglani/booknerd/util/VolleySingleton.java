@@ -1,12 +1,12 @@
-package com.ronakmanglani.booknerd;
+package com.ronakmanglani.booknerd.util;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.ronakmanglani.booknerd.BookNerdApp;
 
 public class VolleySingleton {
 
@@ -25,7 +25,7 @@ public class VolleySingleton {
 
     // Constructor
     private VolleySingleton() {
-        requestQueue = Volley.newRequestQueue(BookNerdApplication.getAppContext());
+        requestQueue = Volley.newRequestQueue(BookNerdApp.getAppContext());
         imageLoader = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
             private final LruCache<String, Bitmap> cache = new LruCache<>(20);
             @Override
