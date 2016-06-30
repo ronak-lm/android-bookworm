@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">BookNerd</string>
     <string name="action_settings">Settings</string>
+
+    <string name="drawer_search">Search Books</string>
+    <string name="drawer_barcode">Scan Barcode</string>
+    <string name="drawer_bestseller">Bestsellers</string>
+    <string name="drawer_to_read">To Read</string>
+    <string name="drawer_reading">Reading</string>
+    <string name="drawer_finished">Finished</string>
+    <string name="drawer_settings">Settings</string>
+    <string name="drawer_about">About</string>
+
 </resources>

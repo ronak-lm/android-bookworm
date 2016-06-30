@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group_explore"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/drawer_search"
+            android:title="@string/drawer_search"
+            android:icon="@drawable/drawer_search"/>
+
+        <item android:id="@+id/drawer_barcode"
+            android:title="@string/drawer_barcode"
+            android:icon="@drawable/drawer_barcode"/>
+
+        <item android:id="@+id/drawer_bestseller"
+            android:title="@string/drawer_bestseller"
+            android:icon="@drawable/drawer_bestseller"/>
+
+    </group>
+
+    <group android:id="@+id/group_lists"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/drawer_to_read"
+            android:title="@string/drawer_to_read"
+            android:icon="@drawable/drawer_to_read"/>
+
+        <item android:id="@+id/drawer_reading"
+            android:title="@string/drawer_reading"
+            android:icon="@drawable/drawer_reading"/>
+
+        <item android:id="@+id/drawer_finished"
+            android:title="@string/drawer_finished"
+            android:icon="@drawable/drawer_finished"/>
+
+    </group>
+
+    <group android:id="@+id/group_other"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/drawer_settings"
+            android:title="@string/drawer_settings"/>
+
+        <item android:id="@+id/drawer_about"
+            android:title="@string/drawer_about"/>
+
+    </group>
+
+</menu>
