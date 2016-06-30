@@ -18,4 +18,7 @@
     <!-- App Drawer -->
     <dimen name="drawer_header_height">132dp</dimen>
 
+    <!-- Category Item -->
+    <dimen name="category_arrow_size">36dp</dimen>
+
 </resources>
