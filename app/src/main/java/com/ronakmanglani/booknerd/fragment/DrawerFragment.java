@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -58,6 +59,19 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
+        drawerLayout.closeDrawers();
+        setSelectedDrawerItem(item);
+        return true;
+    }
+    private void setSelectedDrawerItem(MenuItem item) {
+        toolbar.setTitle(item.getTitle());
+        item.setChecked(true);
+        int id = item.getItemId();
+        if (id == R.id.drawer_bestseller) {
+            CategoryFragment fragment = new CategoryFragment();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_frame, fragment);
+            transaction.commit();
+        }
     }
 }
