@@ -5,6 +5,10 @@ import android.content.Context;
 
 public class BookNerdApp extends Application {
 
+    // Constants
+    public static final String TOOLBAR_TITLE = "toolbar_title";
+
+    // Initialize context
     @Override
     public void onCreate() {
         super.onCreate();

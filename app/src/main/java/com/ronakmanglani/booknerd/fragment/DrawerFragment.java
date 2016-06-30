@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 
 import butterknife.BindView;
@@ -28,6 +29,7 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
     @BindView(R.id.drawer_layout)   DrawerLayout drawerLayout;
     @BindView(R.id.navigation_view) NavigationView navigationView;
 
+    // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_drawer, container, false);
@@ -49,7 +51,17 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         navigationView.setNavigationItemSelectedListener(this);
         actionBarDrawerToggle.syncState();
 
+        // Restore toolbar title
+        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.TOOLBAR_TITLE)) {
+            toolbar.setTitle(savedInstanceState.getString(BookNerdApp.TOOLBAR_TITLE));
+        }
+
         return v;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(BookNerdApp.TOOLBAR_TITLE, toolbar.getTitle().toString());
     }
     @Override
     public void onDestroyView() {
@@ -57,6 +69,7 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         unbinder.unbind();
     }
 
+    // Navigation drawer
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         drawerLayout.closeDrawers();
