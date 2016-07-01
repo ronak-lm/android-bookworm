@@ -7,7 +7,6 @@ public class BestsellerBook {
     private String author;
     private String description;
     private String imageUrl;
-    private String weeksOnList;
     private String isbn10;
     private String isbn13;
 
@@ -24,9 +23,6 @@ public class BestsellerBook {
     public String getImageUrl() {
         return imageUrl;
     }
-    public String getWeeksOnList() {
-        return weeksOnList;
-    }
     public String getIsbn10() {
         return isbn10;
     }
@@ -35,12 +31,11 @@ public class BestsellerBook {
     }
 
     // Constructor
-    public BestsellerBook(String title, String author, String description, String imageUrl, String weeksOnList, String isbn10, String isbn13) {
+    public BestsellerBook(String title, String author, String description, String imageUrl, String isbn10, String isbn13) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.weeksOnList = weeksOnList;
         this.isbn10 = isbn10;
         this.isbn13 = isbn13;
     }
