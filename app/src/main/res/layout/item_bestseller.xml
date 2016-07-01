@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bestseller_card"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bestseller_card_height"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    cardview:cardPreventCornerOverlap="false"
+    cardview:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Book cover -->
+        <ImageView android:id="@+id/bestseller_image"
+            android:layout_width="@dimen/bestseller_cover_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorCardBackground"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_book_cover" />
+
+        <!-- Book title -->
+        <com.ronakmanglani.booknerd.view.RobotoRegularTextView
+            android:id="@+id/bestseller_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_medium"
+            android:layout_marginLeft="@dimen/dist_medium"
+            android:layout_marginRight="@dimen/dist_medium"
+            android:layout_toRightOf="@+id/bestseller_image"
+            android:layout_toEndOf="@+id/bestseller_image"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_xxlarge"
+            android:textColor="@color/colorTextPrimary"
+            tools:text="The Foundation Trilogy"/>
+
+        <!-- Book details -->
+        <LinearLayout android:id="@+id/bestseller_detail_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bestseller_title"
+            android:layout_toRightOf="@+id/bestseller_image"
+            android:layout_toEndOf="@+id/bestseller_image"
+            android:layout_marginRight="@dimen/dist_medium"
+            android:layout_marginLeft="@dimen/dist_medium"
+            android:layout_marginBottom="@dimen/dist_medium"
+            android:orientation="vertical">
+
+            <com.ronakmanglani.booknerd.view.RobotoRegularTextView
+                android:id="@+id/bestseller_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_medium"
+                tools:text="by Issac Asimov"/>
+
+            <com.ronakmanglani.booknerd.view.AutoResizeTextView
+                android:id="@+id/bestseller_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dist_small"
+                android:textSize="@dimen/text_large"
+                android:ellipsize="end"
+                tools:text="For twelve thousand years the Galactic Empire has ruled. Now it is dying. But only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future."/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -21,4 +21,8 @@
     <!-- Category Item -->
     <dimen name="category_arrow_size">36dp</dimen>
 
+    <!-- Bestseller Book Item -->
+    <dimen name="bestseller_card_height">200dp</dimen>
+    <dimen name="bestseller_cover_width">120dp</dimen>
+
 </resources>
