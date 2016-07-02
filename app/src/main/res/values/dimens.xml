@@ -15,6 +15,11 @@
     <dimen name="text_medium">14sp</dimen>
     <dimen name="text_small">12sp</dimen>
 
+    <!-- Error Message -->
+    <dimen name="error_icon_width">120dp</dimen>
+    <dimen name="error_message_marginTop">15dp</dimen>
+    <dimen name="error_try_again_padding">8dp</dimen>
+
     <!-- App Drawer -->
     <dimen name="drawer_header_height">132dp</dimen>
 
