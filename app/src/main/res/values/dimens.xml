@@ -31,8 +31,8 @@
     <dimen name="error_try_again_padding">8dp</dimen>
 
     <!-- Bestseller Book Item -->
-    <dimen name="bestseller_card_height">200dp</dimen>
-    <dimen name="bestseller_card_width">400dp</dimen>
-    <dimen name="bestseller_cover_width">125dp</dimen>
+    <dimen name="bestseller_card_height">160dp</dimen>
+    <dimen name="bestseller_card_width">380dp</dimen>
+    <dimen name="bestseller_cover_width">105dp</dimen>
 
 </resources>
