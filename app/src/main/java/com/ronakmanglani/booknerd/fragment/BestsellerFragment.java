@@ -20,6 +20,7 @@ import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
 import com.ronakmanglani.booknerd.model.BestsellerBook;
 import com.ronakmanglani.booknerd.util.ApiUtil;
 import com.ronakmanglani.booknerd.util.DimenUtil;
+import com.ronakmanglani.booknerd.util.StringUtil;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -91,7 +92,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                                 String isbn10 = bookObject.getString("primary_isbn10");
                                 String isbn13 = bookObject.getString("primary_isbn13");
                                 String description = bookObject.getString("description");
-                                String title = bookObject.getString("title");
+                                String title = StringUtil.toTitleCase(bookObject.getString("title"));
                                 String author = bookObject.getString("author");
                                 String imageUrl = bookObject.getString("book_image");
 
