@@ -22,6 +22,7 @@ import com.ronakmanglani.booknerd.util.ApiUtil;
 import com.ronakmanglani.booknerd.util.DimenUtil;
 import com.ronakmanglani.booknerd.util.StringUtil;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
+import com.ronakmanglani.booknerd.view.PaddingDecorationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -59,6 +60,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
         recyclerView.setAdapter(adapter);
 
         // Download bestseller list
