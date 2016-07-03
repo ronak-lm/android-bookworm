@@ -15,6 +15,10 @@
     <dimen name="text_medium">14sp</dimen>
     <dimen name="text_small">12sp</dimen>
 
+    <!-- Other Dimensions -->
+    <dimen name="drawer_header_height">132dp</dimen>
+    <dimen name="recycler_view_padding">6dp</dimen>
+
     <!-- Progress Circle -->
     <dimen name="progress_circle_width">80dp</dimen>
     <dimen name="progress_circle_height">80dp</dimen>
@@ -25,14 +29,9 @@
     <dimen name="error_message_marginTop">15dp</dimen>
     <dimen name="error_try_again_padding">8dp</dimen>
 
-    <!-- App Drawer -->
-    <dimen name="drawer_header_height">132dp</dimen>
-
-    <!-- Category Item -->
-    <dimen name="category_arrow_size">36dp</dimen>
-
     <!-- Bestseller Book Item -->
     <dimen name="bestseller_card_height">200dp</dimen>
+    <dimen name="bestseller_card_width">400dp</dimen>
     <dimen name="bestseller_cover_width">120dp</dimen>
 
 </resources>
