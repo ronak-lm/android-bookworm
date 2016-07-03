@@ -5,8 +5,10 @@ import android.content.Context;
 
 public class BookNerdApp extends Application {
 
-    // Constants
+    // Constants for SavedInstanceState
     public static final String TOOLBAR_TITLE = "toolbar_title";
+    // Constants for Bundle Arguments
+    public static final String LIST_NAME = "list_name";
 
     // Initialize context
     @Override
