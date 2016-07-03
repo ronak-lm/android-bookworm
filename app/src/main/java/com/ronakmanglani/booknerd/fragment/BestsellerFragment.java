@@ -32,7 +32,7 @@ import butterknife.Unbinder;
 
 import static com.ronakmanglani.booknerd.adapter.BestsellerAdapter.*;
 
-public class FragmentBestseller extends Fragment implements OnBestsellerClickListener {
+public class BestsellerFragment extends Fragment implements OnBestsellerClickListener {
 
     private Unbinder unbinder;
 
