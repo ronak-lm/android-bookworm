@@ -32,6 +32,6 @@
     <!-- Bestseller Book Item -->
     <dimen name="bestseller_card_height">200dp</dimen>
     <dimen name="bestseller_card_width">400dp</dimen>
-    <dimen name="bestseller_cover_width">120dp</dimen>
+    <dimen name="bestseller_cover_width">125dp</dimen>
 
 </resources>
