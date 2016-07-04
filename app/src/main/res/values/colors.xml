@@ -8,5 +8,5 @@
     <color name="text_primary">#000000</color>
 
     <color name="divider">#40808080</color>
-    <color name="card_background">#40808080</color>
+    <color name="image_background">#40808080</color>
 </resources>
