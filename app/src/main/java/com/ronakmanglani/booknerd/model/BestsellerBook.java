@@ -1,6 +1,9 @@
 package com.ronakmanglani.booknerd.model;
 
-public class BestsellerBook {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BestsellerBook implements Parcelable {
 
     // Attributes
     private String title;
@@ -38,5 +41,36 @@ public class BestsellerBook {
         this.imageUrl = imageUrl;
         this.isbn10 = isbn10;
         this.isbn13 = isbn13;
+    }
+
+    // Parceling methods
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public BestsellerBook createFromParcel(Parcel in) {
+            return new BestsellerBook(in);
+        }
+        public BestsellerBook[] newArray(int size) {
+            return new BestsellerBook[size];
+        }
+    };
+    public BestsellerBook(Parcel in) {
+        this.title = in.readString();
+        this.author = in.readString();
+        this.description = in.readString();
+        this.imageUrl = in.readString();
+        this.isbn10 = in.readString();
+        this.isbn13 = in.readString();
+    }
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(title);
+        out.writeString(author);
+        out.writeString(description);
+        out.writeString(imageUrl);
+        out.writeString(isbn10);
+        out.writeString(isbn13);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }
