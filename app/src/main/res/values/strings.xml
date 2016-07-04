@@ -20,4 +20,8 @@
     <string name="try_again">Try Again?</string>
     <string name="loading">Loading&#8230;</string>
 
+    <!-- Book Detail Page -->
+    <string name="detail_publication">PUBLICATION</string>
+    <string name="detail_description">DESCRIPTION</string>
+
 </resources>
