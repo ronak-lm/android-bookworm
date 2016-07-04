@@ -30,6 +30,8 @@ import com.ronakmanglani.booknerd.view.PaddingDecorationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,7 +43,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
 
     private Unbinder unbinder;
 
-    public boolean canGoBack;
+    private int currentState;
     private String listName;
     private BestsellerAdapter adapter;
     private GridLayoutManager layoutManager;
@@ -64,7 +66,44 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         categoryList.setLayoutManager(layoutManager);
         categoryList.setAdapter(categoryAdapter);
 
+        // Restore saved state, if exists
+        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.CURRENT_STATE)) {
+            currentState = savedInstanceState.getInt(BookNerdApp.CURRENT_STATE);
+            listName = savedInstanceState.getString(BookNerdApp.LIST_NAME);
+            // Data had already been loaded: Display the data again
+            if (currentState == BookNerdApp.STATE_LOADED) {
+                ArrayList<BestsellerBook> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookNerdApp.BESTSELLER_LIST);
+
+                layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
+                adapter = new BestsellerAdapter(bestsellerBooks, this);
+
+                bestsellerList.setHasFixedSize(true);
+                bestsellerList.setLayoutManager(layoutManager);
+                bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
+                bestsellerList.setAdapter(adapter);
+
+                onDownloadSuccessful();
+            }
+            // Data was still loading when fragment was lost: Load again
+            else if (currentState == BookNerdApp.STATE_LOADING) {
+                navigateToBestsellers();
+            }
+            // Data had failed to load when fragment was lost: Show error message again
+            else if (currentState == BookNerdApp.STATE_FAILED) {
+                onDownloadFailed();
+            }
+        }
+
         return v;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(BookNerdApp.CURRENT_STATE, currentState);
+        outState.putString(BookNerdApp.LIST_NAME, listName);
+        if (adapter != null) {
+            outState.putParcelableArrayList(BookNerdApp.BESTSELLER_LIST, adapter.getList());
+        }
     }
     @Override
     public void onDestroyView() {
@@ -75,8 +114,6 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
 
     // Navigation helpers
     public void navigateToBestsellers() {
-        // Set flag
-        canGoBack = true;
         // Toggle Visibility
         categoryList.setVisibility(View.GONE);
         bestsellerList.setVisibility(View.GONE);
@@ -93,21 +130,29 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         downloadBestsellerList();
     }
     public void navigateToCategories() {
-        // Set flag
-        canGoBack = false;
         // Cancel any pending network requests
         VolleySingleton.getInstance().requestQueue.cancelAll(getClass().getName());
+        // Reset objects/flags
+        layoutManager = null;
+        adapter = null;
         // Toggle Visibility
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         bestsellerList.setVisibility(View.GONE);
         categoryList.setVisibility(View.VISIBLE);
     }
+    public boolean canGoBack() {
+        return (adapter != null);
+    }
 
     // JSON parsing and display
     private void downloadBestsellerList() {
         if (adapter == null) {
             adapter = new BestsellerAdapter(this);
+            layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
+            bestsellerList.setHasFixedSize(true);
+            bestsellerList.setLayoutManager(layoutManager);
+            bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
             bestsellerList.setAdapter(adapter);
         }
         String urlToDownload = ApiUtil.getBestsellerList(listName);
@@ -148,26 +193,33 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                 });
         request.setTag(this.getClass().getName());
         VolleySingleton.getInstance().requestQueue.add(request);
+
+        currentState = BookNerdApp.STATE_LOADING;
     }
     private void onDownloadSuccessful() {
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
+        categoryList.setVisibility(View.GONE);
         bestsellerList.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
+
+        currentState = BookNerdApp.STATE_LOADED;
     }
     private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
         bestsellerList.setVisibility(View.GONE);
+        categoryList.setVisibility(View.GONE);
+
+        currentState = BookNerdApp.STATE_FAILED;
     }
 
     // Click events
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
-        // Hide all views
+        // Toggle Visibility
         errorMessage.setVisibility(View.GONE);
         bestsellerList.setVisibility(View.GONE);
-        // Show progress circle
         progressCircle.setVisibility(View.VISIBLE);
         // Try to download the data again
         adapter = null;

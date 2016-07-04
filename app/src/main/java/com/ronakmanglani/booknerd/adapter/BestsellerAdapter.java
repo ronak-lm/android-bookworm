@@ -29,13 +29,17 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.bestsellerBooks = new ArrayList<>();
         this.onBestsellerClickListener = onBestsellerClickListener;
     }
+    public BestsellerAdapter(ArrayList<BestsellerBook> bestsellerBooks, OnBestsellerClickListener onBestsellerClickListener) {
+        this.bestsellerBooks = bestsellerBooks;
+        this.onBestsellerClickListener = onBestsellerClickListener;
+    }
 
     // Helper methods
     public void addToList(BestsellerBook book) {
         bestsellerBooks.add(book);
     }
-    public BestsellerBook getFromList(int position) {
-        return bestsellerBooks.get(position);
+    public ArrayList<BestsellerBook> getList() {
+        return bestsellerBooks;
     }
 
     // RecyclerView methods
