@@ -83,7 +83,7 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         if (id == R.id.drawer_bestseller) {
             BestsellerFragment fragment = new BestsellerFragment();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_frame, fragment, "bestseller_fragment");
+            transaction.replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER_FRAGMENT);
             transaction.commit();
         }
     }

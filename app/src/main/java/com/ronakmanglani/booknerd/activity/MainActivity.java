@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.fragment.BestsellerFragment;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        BestsellerFragment fragment = (BestsellerFragment) getSupportFragmentManager().findFragmentByTag("bestseller_fragment");
+        BestsellerFragment fragment = (BestsellerFragment) getSupportFragmentManager().findFragmentByTag(BookNerdApp.TAG_BESTSELLER_FRAGMENT);
         if (fragment != null && fragment.canGoBack) {
             fragment.navigateToCategories();
         } else {
