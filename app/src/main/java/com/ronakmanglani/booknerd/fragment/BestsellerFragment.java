@@ -59,12 +59,15 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         View v = inflater.inflate(R.layout.fragment_bestseller, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-        // Setup Category List
+        // Setup category list
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         CategoryAdapter categoryAdapter = new CategoryAdapter(this);
         categoryList.setHasFixedSize(true);
         categoryList.setLayoutManager(layoutManager);
         categoryList.setAdapter(categoryAdapter);
+
+        // Add padding decoration for bestseller list
+        bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
 
         // Restore saved state, if exists
         if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.CURRENT_STATE)) {
@@ -79,7 +82,6 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
 
                 bestsellerList.setHasFixedSize(true);
                 bestsellerList.setLayoutManager(layoutManager);
-                bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
                 bestsellerList.setAdapter(adapter);
 
                 onDownloadSuccessful();
@@ -119,14 +121,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         bestsellerList.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.VISIBLE);
-        // Setup RecyclerView
-        adapter = new BestsellerAdapter(this);
-        layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
-        bestsellerList.setHasFixedSize(true);
-        bestsellerList.setLayoutManager(layoutManager);
-        bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
-        bestsellerList.setAdapter(adapter);
-        // Download bestseller list
+        // Download data
         downloadBestsellerList();
     }
     public void navigateToCategories() {
@@ -135,11 +130,18 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         // Reset objects/flags
         layoutManager = null;
         adapter = null;
+        updateToolbarTitle(getString(R.string.drawer_bestseller));
         // Toggle Visibility
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         bestsellerList.setVisibility(View.GONE);
         categoryList.setVisibility(View.VISIBLE);
+    }
+    public void updateToolbarTitle(String title) {
+        ((DrawerFragment) getActivity()
+                .getSupportFragmentManager()
+                .findFragmentById(R.id.main_fragment))
+                .toolbar.setTitle(title);
     }
     public boolean canGoBack() {
         return (adapter != null);
@@ -152,7 +154,6 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
             layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
             bestsellerList.setHasFixedSize(true);
             bestsellerList.setLayoutManager(layoutManager);
-            bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
             bestsellerList.setAdapter(adapter);
         }
         String urlToDownload = ApiUtil.getBestsellerList(listName);
@@ -227,7 +228,9 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     }
     @Override
     public void onCategoryClicked(int position) {
+        String displayName = Category.getCategoryList().get(position).getDisplayName();
         listName = Category.getCategoryList().get(position).getListName();
+        updateToolbarTitle(displayName);
         navigateToBestsellers();
     }
     @Override
