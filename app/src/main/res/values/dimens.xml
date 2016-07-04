@@ -35,4 +35,10 @@
     <dimen name="bestseller_card_width">380dp</dimen>
     <dimen name="bestseller_cover_width">105dp</dimen>
 
+    <!-- Book Details Page -->
+    <dimen name="detail_cover_height">150dp</dimen>
+    <dimen name="detail_cover_width">100dp</dimen>
+    <dimen name="detail_icon_size">16dp</dimen>
+
+
 </resources>

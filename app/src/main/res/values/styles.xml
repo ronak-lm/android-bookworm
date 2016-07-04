@@ -1,8 +1,7 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base Application Theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
@@ -14,8 +13,37 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- ActionBar Themes -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Book Details Page -->
+    <style name="BookDetailIconsStyle">
+        <item name="android:layout_height">@dimen/detail_icon_size</item>
+        <item name="android:layout_width">@dimen/detail_icon_size</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="BookDetailHeaderStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/dist_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="BookDetailValueStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dist_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="BookDetailPublicationStyle" parent="@style/BookDetailValueStyle">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
 </resources>
