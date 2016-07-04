@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/basic_info_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dist_large"
+    android:background="@color/text_secondary"
+    android:orientation="horizontal"
+    tools:showIn="@layout/fragment_detail">
+
+    <!-- Book Cover -->
+    <ImageView android:id="@+id/book_cover"
+        android:layout_width="@dimen/detail_cover_width"
+        android:layout_height="@dimen/detail_cover_height"
+        android:background="@color/image_background"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_book_cover"/>
+
+    <!-- Text Area -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dist_large"
+        android:layout_marginStart="@dimen/dist_large"
+        android:orientation="vertical">
+
+        <!-- Book Title -->
+        <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+            android:id="@+id/book_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_xxlarge"
+            tools:text="Ender's Game"/>
+
+        <!-- Author and Page Count -->
+        <com.ronakmanglani.booknerd.view.RobotoLightTextView
+            android:id="@+id/book_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_small"
+            android:textColor="@color/text_primary"
+            tools:text="by Orson Scott Card\n352 pages"/>
+
+        <!-- Rating Area -->
+        <LinearLayout android:id="@+id/book_rating_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dist_large"
+            android:orientation="horizontal">
+
+            <!-- Average Rating -->
+            <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+                android:id="@+id/book_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_rating"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                tools:text="4.0"/>
+
+            <!-- Vote Count -->
+            <com.ronakmanglani.booknerd.view.RobotoRegularTextView
+                android:id="@+id/book_vote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dist_medium"
+                android:layout_marginStart="@dimen/dist_medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="@color/text_primary"
+                android:drawableLeft="@drawable/icon_votes"
+                android:drawableStart="@drawable/icon_votes"
+                android:drawablePadding="@dimen/dist_small"
+                tools:text="1680 votes"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
