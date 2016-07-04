@@ -81,9 +81,9 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         item.setChecked(true);
         int id = item.getItemId();
         if (id == R.id.drawer_bestseller) {
-            CategoryFragment fragment = new CategoryFragment();
+            BestsellerFragment fragment = new BestsellerFragment();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_frame, fragment);
+            transaction.replace(R.id.content_frame, fragment, "bestseller_fragment");
             transaction.commit();
         }
     }

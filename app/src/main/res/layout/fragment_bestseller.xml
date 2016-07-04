@@ -3,15 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <include layout="@layout/layout_error_message"
         android:visibility="gone"/>
 
     <include layout="@layout/layout_progress_circle"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bestseller_list"
-        android:name="com.ronakmanglani.watchlist.MovieGridFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/recycler_view_padding"
