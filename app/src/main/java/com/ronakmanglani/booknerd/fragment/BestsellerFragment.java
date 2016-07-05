@@ -1,5 +1,6 @@
 package com.ronakmanglani.booknerd.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
+import com.ronakmanglani.booknerd.activity.DetailActivity;
 import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter.OnCategoryClickListener;
@@ -193,6 +196,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                     }
                 });
         request.setTag(this.getClass().getName());
+        request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance().requestQueue.add(request);
 
         currentState = BookNerdApp.STATE_LOADING;
@@ -235,7 +239,9 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     }
     @Override
     public void onBestsellerClicked(int position) {
-        // TODO: Navigate to details page
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(BookNerdApp.ISBN_NUMBER, adapter.getList().get(position).getIsbn10());
+        startActivity(intent);
     }
 }
 
