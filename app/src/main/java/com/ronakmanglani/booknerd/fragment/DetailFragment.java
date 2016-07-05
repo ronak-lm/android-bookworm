@@ -48,6 +48,7 @@ public class DetailFragment extends Fragment {
     @BindView(R.id.book_cover)              ImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
     @BindView(R.id.book_subtitle)           TextView bookSubtitle;
+    @BindView(R.id.book_rating_holder)      View bookRatingHolder;
     @BindView(R.id.book_rating)             TextView bookRating;
     @BindView(R.id.book_vote_count)         TextView bookVoteCount;
     @BindView(R.id.book_publisher_holder)   View bookPublisherHolder;
@@ -108,6 +109,7 @@ public class DetailFragment extends Fragment {
                             String volumeId = bookObject.getString("id");
                             JSONObject volumeInfo = bookObject.getJSONObject("volumeInfo");
                             String title = volumeInfo.getString("title");
+
                             JSONArray authorsObject = volumeInfo.getJSONArray("authors");
                             StringBuilder sb = new StringBuilder();
                             for (int i = 0; i < authorsObject.length(); i++) {
@@ -115,22 +117,18 @@ public class DetailFragment extends Fragment {
                             }
                             sb.delete(sb.length() - 2, sb.length());
                             String authors = sb.toString();
-                            String publisher;
-                            try {
-                                publisher = volumeInfo.getString("publisher");
-                            } catch (Exception e) {
-                                publisher = "";
-                            }
-                            String publishedDate = volumeInfo.getString("publishedDate");
-                            String description = volumeInfo.getString("description");
-                            String pageCount = volumeInfo.getString("pageCount");
-                            String averageRating = volumeInfo.getString("averageRating");
+
+                            String publisher = getStringFromObject(volumeInfo, "publisher");
+                            String publishedDate = getStringFromObject(volumeInfo, "publishedDate");
+                            String description = getStringFromObject(volumeInfo, "description");
+                            String pageCount = getStringFromObject(volumeInfo, "pageCount");
+                            String ratingCount = getStringFromObject(volumeInfo, "ratingsCount");
+                            String averageRating = getStringFromObject(volumeInfo, "averageRating");
                             if (averageRating.length() == 1) {
                                 averageRating = averageRating + ".0";
                             }
-                            String ratingCount = volumeInfo.getString("ratingsCount");
-                            String imageUrl;
 
+                            String imageUrl;
                             if (volumeInfo.has("imageLinks")) {
                                 JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
                                 if (imageLinks.has("thumbnail")) {
@@ -143,7 +141,6 @@ public class DetailFragment extends Fragment {
                             } else { // No images
                                 imageUrl = "";
                             }
-
 
                             bookDetail = new BookDetail(volumeId, title, authors, pageCount,
                                     averageRating, ratingCount, imageUrl, publisher, publishedDate, description);
@@ -170,13 +167,20 @@ public class DetailFragment extends Fragment {
 
         currentState = BookNerdApp.STATE_LOADING;
     }
+    private String getStringFromObject(JSONObject object, String key) {
+        try {
+            return object.getString(key);
+        } catch (Exception e) {
+            return "";
+        }
+    }
     private void onDownloadSuccessful() {
         // Toggle visibility
         progressCircle.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         bookDetailHolder.setVisibility(View.VISIBLE);
 
-        // Basic info
+        // Cover Image
         if (bookDetail.getImageUrl().length() == 0) {
             bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
         } else {
@@ -191,11 +195,27 @@ public class DetailFragment extends Fragment {
                 }
             });
         }
+
+        // Title and Subtitle
         toolbar.setTitle(bookDetail.getTitle());
         bookTitle.setText(bookDetail.getTitle());
-        bookSubtitle.setText(getString(R.string.detail_subtitle, bookDetail.getAuthors(), bookDetail.getPageCount()));
-        bookRating.setText(bookDetail.getAverageRating());
-        bookVoteCount.setText(getString(R.string.detail_rating, bookDetail.getRatingCount()));
+        if (bookDetail.getAuthors().length() == 0 && bookDetail.getPageCount().length() == 0) {
+            bookSubtitle.setVisibility(View.GONE);
+        } else if (bookDetail.getPageCount().length() == 0) {
+            bookSubtitle.setText(getString(R.string.detail_subtitle_by, bookDetail.getAuthors()));
+        } else if (bookDetail.getAuthors().length() == 0) {
+            bookSubtitle.setText(getString(R.string.detail_subtitle_page, bookDetail.getPageCount()));
+        } else {
+            bookSubtitle.setText(getString(R.string.detail_subtitle, bookDetail.getAuthors(), bookDetail.getPageCount()));
+        }
+
+        // Rating
+        if (bookRating.length() == 0 || bookVoteCount.length() == 0) {
+            bookRatingHolder.setVisibility(View.GONE);
+        } else {
+            bookRating.setText(bookDetail.getAverageRating());
+            bookVoteCount.setText(getString(R.string.detail_rating, bookDetail.getRatingCount()));
+        }
 
         // Publication info
         if (bookDetail.getPublisher().length() == 0 && bookDetail.getPublishDate().length() == 0) {
