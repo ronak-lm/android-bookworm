@@ -8,12 +8,11 @@ public class BookDetail {
     private String authors;
     private String pageCount;
     private String averageRating;
-    private String voteCount;
+    private String ratingCount;
+    private String imageUrl;
     private String publisher;
     private String publishDate;
     private String description;
-    private String isbn10;
-    private String isbn13;
 
     // Getters
     public String getVolumeId() {
@@ -31,8 +30,11 @@ public class BookDetail {
     public String getAverageRating() {
         return averageRating;
     }
-    public String getVoteCount() {
-        return voteCount;
+    public String getRatingCount() {
+        return ratingCount;
+    }
+    public String getImageUrl() {
+        return imageUrl;
     }
     public String getPublisher() {
         return publisher;
@@ -43,28 +45,20 @@ public class BookDetail {
     public String getDescription() {
         return description;
     }
-    public String getIsbn10() {
-        return isbn10;
-    }
-    public String getIsbn13() {
-        return isbn13;
-    }
 
     // Constructor
-    public BookDetail(String volumeId, String title, String authors,
-                      String pageCount, String averageRating, String voteCount,
-                      String publisher, String publishDate, String description,
-                      String isbn10, String isbn13) {
+    public BookDetail(String volumeId, String title, String authors, String pageCount,
+                      String averageRating, String ratingCount,String imageUrl,
+                      String publisher, String publishDate, String description) {
         this.volumeId = volumeId;
         this.title = title;
         this.authors = authors;
         this.pageCount = pageCount;
         this.averageRating = averageRating;
-        this.voteCount = voteCount;
+        this.ratingCount = ratingCount;
+        this.imageUrl = imageUrl;
         this.publisher = publisher;
         this.publishDate = publishDate;
         this.description = description;
-        this.isbn10 = isbn10;
-        this.isbn13 = isbn13;
     }
 }
