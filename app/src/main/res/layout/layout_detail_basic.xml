@@ -41,7 +41,6 @@
             android:id="@+id/book_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dist_small"
             android:textColor="@color/text_primary"
             tools:text="by Orson Scott Card\n352 pages"/>
 
