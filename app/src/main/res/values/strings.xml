@@ -19,9 +19,14 @@
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
     <string name="try_again">Try Again?</string>
     <string name="loading">Loading&#8230;</string>
+    <string name="unable_to_load">Unable to Load</string>
 
     <!-- Book Detail Page -->
-    <string name="detail_publication">PUBLICATION</string>
+    <string name="detail_subtitle">by %1$s\n%2$s pages</string>
+    <string name="detail_rating">%1$s ratings</string>
     <string name="detail_description">DESCRIPTION</string>
+    <string name="detail_publication">PUBLICATION</string>
+    <string name="detail_publication_name">Publisher : %1$s</string>
+    <string name="detail_publication_date">Date : %1$s</string>
 
 </resources>
