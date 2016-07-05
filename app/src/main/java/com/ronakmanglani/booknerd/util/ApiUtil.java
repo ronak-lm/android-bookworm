@@ -21,4 +21,7 @@ public class ApiUtil {
     public static String getBestsellerList(String listName) {
         return "https://api.nytimes.com/svc/books/v3/lists//" + listName + ".json?api-key=" + getNewYorkTimesBestsellerApiKey();
     }
+    public static String getBookDetails(String isbn) {
+        return "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + getGoogleBooksApiKey();
+    }
 }
