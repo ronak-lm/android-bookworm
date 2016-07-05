@@ -63,9 +63,19 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         unbinder = ButterKnife.bind(this, v);
-        toolbar.setTitle(R.string.loading);
-        isbnNumber = getArguments().getString(BookNerdApp.ISBN_NUMBER);
 
+        // Setup toolbar
+        toolbar.setTitle(R.string.loading);
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        // Load book details
+        isbnNumber = getArguments().getString(BookNerdApp.ISBN_NUMBER);
         if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.CURRENT_STATE)) {
             currentState = savedInstanceState.getInt(BookNerdApp.CURRENT_STATE);
             if (currentState == BookNerdApp.STATE_LOADED) {
