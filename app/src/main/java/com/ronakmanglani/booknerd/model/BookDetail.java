@@ -1,6 +1,9 @@
 package com.ronakmanglani.booknerd.model;
 
-public class BookDetail {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BookDetail implements Parcelable {
 
     // Attributes
     private String volumeId;
@@ -60,5 +63,44 @@ public class BookDetail {
         this.publisher = publisher;
         this.publishDate = publishDate;
         this.description = description;
+    }
+
+    // Parceling methods
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public BookDetail createFromParcel(Parcel in) {
+            return new BookDetail(in);
+        }
+        public BookDetail[] newArray(int size) {
+            return new BookDetail[size];
+        }
+    };
+    public BookDetail(Parcel in) {
+        this.volumeId = in.readString();
+        this.title = in.readString();
+        this.authors = in.readString();
+        this.pageCount = in.readString();
+        this.averageRating = in.readString();
+        this.ratingCount = in.readString();
+        this.imageUrl = in.readString();
+        this.publisher = in.readString();
+        this.publishDate = in.readString();
+        this.description = in.readString();
+    }
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(volumeId);
+        out.writeString(title);
+        out.writeString(authors);
+        out.writeString(pageCount);
+        out.writeString(averageRating);
+        out.writeString(ratingCount);
+        out.writeString(imageUrl);
+        out.writeString(publisher);
+        out.writeString(publishDate);
+        out.writeString(description);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }
