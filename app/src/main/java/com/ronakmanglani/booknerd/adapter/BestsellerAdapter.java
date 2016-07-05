@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.BestsellerBook;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
@@ -59,16 +60,7 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.title.setText(book.getTitle());
         holder.author.setText(book.getAuthor());
         holder.description.setText(book.getDescription());
-        VolleySingleton.getInstance().imageLoader.get(book.getImageUrl(), new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                holder.coverImage.setImageBitmap(response.getBitmap());
-            }
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Load default image
-            }
-        });
+        holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
     }
 
     // ViewHolder
@@ -77,7 +69,7 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         @BindView(R.id.bestseller_title)        TextView title;
         @BindView(R.id.bestseller_author)       TextView author;
         @BindView(R.id.bestseller_description)  TextView description;
-        @BindView(R.id.bestseller_image)        ImageView coverImage;
+        @BindView(R.id.bestseller_image)        NetworkImageView coverImage;
 
         public BestsellerViewHolder(final ViewGroup itemView, final OnBestsellerClickListener onBestsellerClickListener) {
             super(itemView);

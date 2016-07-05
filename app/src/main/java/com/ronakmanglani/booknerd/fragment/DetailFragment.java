@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.BookDetail;
@@ -45,7 +46,7 @@ public class DetailFragment extends Fragment {
     @BindView(R.id.book_detail_holder)      NestedScrollView bookDetailHolder;
 
     // Detail views
-    @BindView(R.id.book_cover)              ImageView bookCover;
+    @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
     @BindView(R.id.book_subtitle)           TextView bookSubtitle;
     @BindView(R.id.book_rating_holder)      View bookRatingHolder;
@@ -97,6 +98,13 @@ public class DetailFragment extends Fragment {
     }
 
     // JSON parsing and display
+    private String getStringFromObject(JSONObject object, String key) {
+        try {
+            return object.getString(key);
+        } catch (Exception e) {
+            return "";
+        }
+    }
     private void downloadBookDetails() {
         String url = ApiUtil.getBookDetails(isbnNumber);
         JsonObjectRequest request = new JsonObjectRequest(
@@ -167,13 +175,6 @@ public class DetailFragment extends Fragment {
 
         currentState = BookNerdApp.STATE_LOADING;
     }
-    private String getStringFromObject(JSONObject object, String key) {
-        try {
-            return object.getString(key);
-        } catch (Exception e) {
-            return "";
-        }
-    }
     private void onDownloadSuccessful() {
         // Toggle visibility
         progressCircle.setVisibility(View.GONE);
@@ -184,16 +185,7 @@ public class DetailFragment extends Fragment {
         if (bookDetail.getImageUrl().length() == 0) {
             bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
         } else {
-            VolleySingleton.getInstance().imageLoader.get(bookDetail.getImageUrl(), new ImageLoader.ImageListener() {
-                @Override
-                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    bookCover.setImageBitmap(response.getBitmap());
-                }
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
-                }
-            });
+            bookCover.setImageUrl(bookDetail.getImageUrl(), VolleySingleton.getInstance().imageLoader);
         }
 
         // Title and Subtitle

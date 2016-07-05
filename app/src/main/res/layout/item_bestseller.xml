@@ -16,7 +16,8 @@
         android:layout_height="match_parent">
 
         <!-- Book cover -->
-        <ImageView android:id="@+id/bestseller_image"
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/bestseller_image"
             android:layout_width="@dimen/bestseller_cover_width"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
