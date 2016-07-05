@@ -2,6 +2,7 @@ package com.ronakmanglani.booknerd.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class DetailFragment extends Fragment {
 
     private Unbinder unbinder;
 
+    private int currentState;
     private String isbnNumber;
     private BookDetail bookDetail;
 
@@ -60,11 +62,31 @@ public class DetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         unbinder = ButterKnife.bind(this, v);
         toolbar.setTitle(R.string.loading);
-
         isbnNumber = getArguments().getString(BookNerdApp.ISBN_NUMBER);
-        downloadBookDetails();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.CURRENT_STATE)) {
+            currentState = savedInstanceState.getInt(BookNerdApp.CURRENT_STATE);
+            if (currentState == BookNerdApp.STATE_LOADED) {
+                bookDetail = savedInstanceState.getParcelable(BookNerdApp.BOOK_DETAIL);
+                onDownloadSuccessful();
+            } else if (currentState == BookNerdApp.STATE_LOADING) {
+                downloadBookDetails();
+            } else if (currentState == BookNerdApp.STATE_FAILED) {
+                onDownloadFailed();
+            }
+        } else {
+            downloadBookDetails();
+        }
 
         return v;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(BookNerdApp.CURRENT_STATE, currentState);
+        if (bookDetail != null) {
+            outState.putParcelable(BookNerdApp.BOOK_DETAIL, bookDetail);
+        }
     }
     @Override
     public void onDestroyView() {
@@ -108,14 +130,20 @@ public class DetailFragment extends Fragment {
                             }
                             String ratingCount = volumeInfo.getString("ratingsCount");
                             String imageUrl;
-                            JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                            if (imageLinks.has("thumbnail")) {
-                                imageUrl = imageLinks.getString("thumbnail");
-                            } else if (imageLinks.has("smallThumbnail")) {
-                                imageUrl = imageLinks.getString("smallThumbnail");
-                            } else { // No image found
+
+                            if (volumeInfo.has("imageLinks")) {
+                                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                                if (imageLinks.has("thumbnail")) {
+                                    imageUrl = imageLinks.getString("thumbnail");
+                                } else if (imageLinks.has("smallThumbnail")) {
+                                    imageUrl = imageLinks.getString("smallThumbnail");
+                                } else { // No image found
+                                    imageUrl = "";
+                                }
+                            } else { // No images
                                 imageUrl = "";
                             }
+
 
                             bookDetail = new BookDetail(volumeId, title, authors, pageCount,
                                     averageRating, ratingCount, imageUrl, publisher, publishedDate, description);
@@ -139,6 +167,8 @@ public class DetailFragment extends Fragment {
                 });
         request.setTag(getClass().getName());
         VolleySingleton.getInstance().requestQueue.add(request);
+
+        currentState = BookNerdApp.STATE_LOADING;
     }
     private void onDownloadSuccessful() {
         // Toggle visibility
@@ -147,15 +177,20 @@ public class DetailFragment extends Fragment {
         bookDetailHolder.setVisibility(View.VISIBLE);
 
         // Basic info
-        VolleySingleton.getInstance().imageLoader.get(bookDetail.getImageUrl(), new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                bookCover.setImageBitmap(response.getBitmap());
-            }
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
+        if (bookDetail.getImageUrl().length() == 0) {
+            bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
+        } else {
+            VolleySingleton.getInstance().imageLoader.get(bookDetail.getImageUrl(), new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+                    bookCover.setImageBitmap(response.getBitmap());
+                }
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
+                }
+            });
+        }
         toolbar.setTitle(bookDetail.getTitle());
         bookTitle.setText(bookDetail.getTitle());
         bookSubtitle.setText(getString(R.string.detail_subtitle, bookDetail.getAuthors(), bookDetail.getPageCount()));
@@ -167,13 +202,13 @@ public class DetailFragment extends Fragment {
             bookPublisherHolder.setVisibility(View.GONE);
         } else if (bookDetail.getPublisher().length() == 0) {
             bookPublisher.setVisibility(View.GONE);
-            bookDate.setText(bookDetail.getPublishDate());
+            bookDate.setText(getString(R.string.detail_publication_date, bookDetail.getPublishDate()));
         } else if (bookDetail.getPublishDate().length() == 0) {
-            bookPublisher.setText(bookDetail.getPublisher());
+            bookPublisher.setText(getString(R.string.detail_publication_name, bookDetail.getPublisher()));
             bookDate.setVisibility(View.GONE);
         } else {
-            bookPublisher.setText(bookDetail.getPublisher());
-            bookDate.setText(bookDetail.getPublishDate());
+            bookPublisher.setText(getString(R.string.detail_publication_name, bookDetail.getPublisher()));
+            bookDate.setText(getString(R.string.detail_publication_date, bookDetail.getPublishDate()));
         }
 
         // Book description
@@ -182,12 +217,17 @@ public class DetailFragment extends Fragment {
         } else {
             bookDescription.setText(bookDetail.getDescription());
         }
+
+        // Update flag
+        currentState = BookNerdApp.STATE_LOADED;
     }
     private void onDownloadFailed() {
         progressCircle.setVisibility(View.GONE);
         bookDetailHolder.setVisibility(View.GONE);
         errorMessage.setVisibility(View.VISIBLE);
         toolbar.setTitle(R.string.unable_to_load);
+
+        currentState = BookNerdApp.STATE_FAILED;
     }
 
     // Click Events
