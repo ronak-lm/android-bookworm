@@ -9,6 +9,7 @@ public class BookNerdApp extends Application {
     public static final String TOOLBAR_TITLE = "toolbar_title";
     public static final String LIST_NAME = "list_name";
     public static final String BESTSELLER_LIST = "bestseller_list";
+    public static final String ISBN_NUMBER = "isbn_number";
     public static final String TAG_BESTSELLER = "bestseller_fragment";
     public static final String CURRENT_STATE = "current_state";
     public static final int STATE_LOADING = 1;
