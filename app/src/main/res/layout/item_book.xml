@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bestseller_card"
+    android:id="@+id/book_card"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/bestseller_card_height"
+    android:layout_height="@dimen/book_card_height"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     cardview:cardPreventCornerOverlap="false"
@@ -17,8 +17,8 @@
 
         <!-- Book cover -->
         <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/bestseller_image"
-            android:layout_width="@dimen/bestseller_cover_width"
+            android:id="@+id/book_cover"
+            android:layout_width="@dimen/book_cover_width"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -28,14 +28,14 @@
 
         <!-- Book title -->
         <com.ronakmanglani.booknerd.view.RobotoRegularTextView
-            android:id="@+id/bestseller_title"
+            android:id="@+id/book_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dist_medium"
             android:layout_marginLeft="@dimen/dist_medium"
             android:layout_marginRight="@dimen/dist_medium"
-            android:layout_toRightOf="@+id/bestseller_image"
-            android:layout_toEndOf="@+id/bestseller_image"
+            android:layout_toRightOf="@+id/book_cover"
+            android:layout_toEndOf="@+id/book_cover"
             android:maxLines="2"
             android:ellipsize="end"
             android:textSize="@dimen/text_xxlarge"
@@ -43,26 +43,27 @@
             tools:text="The Foundation Trilogy"/>
 
         <!-- Book details -->
-        <LinearLayout android:id="@+id/bestseller_detail_holder"
+        <LinearLayout android:id="@+id/book_detail_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/bestseller_title"
-            android:layout_toRightOf="@+id/bestseller_image"
-            android:layout_toEndOf="@+id/bestseller_image"
+            android:layout_above="@+id/book_rating_holder"
+            android:layout_below="@+id/book_title"
+            android:layout_toRightOf="@+id/book_cover"
+            android:layout_toEndOf="@+id/book_cover"
             android:layout_marginRight="@dimen/dist_medium"
             android:layout_marginLeft="@dimen/dist_medium"
             android:layout_marginBottom="@dimen/dist_medium"
             android:orientation="vertical">
 
             <com.ronakmanglani.booknerd.view.RobotoRegularTextView
-                android:id="@+id/bestseller_author"
+                android:id="@+id/book_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
                 tools:text="by Issac Asimov"/>
 
             <com.ronakmanglani.booknerd.view.AutoResizeTextView
-                android:id="@+id/bestseller_description"
+                android:id="@+id/book_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dist_small"
@@ -71,6 +72,43 @@
                 tools:text="For twelve thousand years the Galactic Empire has ruled. Now it is dying. But only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future."/>
 
         </LinearLayout>
+
+        <!-- Book Rating -->
+        <RelativeLayout android:id="@+id/book_rating_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/book_cover"
+            android:layout_toEndOf="@+id/book_cover"
+            android:layout_marginLeft="@dimen/dist_medium"
+            android:layout_marginRight="@dimen/dist_medium"
+            android:layout_marginBottom="@dimen/dist_medium">
+
+            <com.ronakmanglani.booknerd.view.RobotoRegularTextView
+                android:id="@+id/book_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/rating_icon"
+                android:layout_toStartOf="@+id/rating_icon"
+                android:layout_marginRight="@dimen/dist_small"
+                android:layout_marginEnd="@dimen/dist_small"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_medium"
+                android:maxLines="1"
+                tools:text="4.5"/>
+
+            <ImageView android:id="@+id/rating_icon"
+                android:layout_width="@dimen/book_rating_icon_size"
+                android:layout_height="@dimen/book_rating_icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_star"
+                android:scaleType="fitCenter"
+                tools:ignore="contentDescription"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

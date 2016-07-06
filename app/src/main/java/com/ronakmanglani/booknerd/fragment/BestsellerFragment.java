@@ -80,7 +80,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
             if (currentState == BookNerdApp.STATE_LOADED) {
                 ArrayList<Bestseller> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookNerdApp.BESTSELLER_LIST);
 
-                layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
+                layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_card_width, 1));
                 adapter = new BestsellerAdapter(bestsellerBooks, this);
 
                 bestsellerList.setHasFixedSize(true);
@@ -154,7 +154,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     private void downloadBestsellerList() {
         if (adapter == null) {
             adapter = new BestsellerAdapter(this);
-            layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
+            layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_card_width, 1));
             bestsellerList.setHasFixedSize(true);
             bestsellerList.setLayoutManager(layoutManager);
             bestsellerList.setAdapter(adapter);

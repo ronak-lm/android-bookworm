@@ -47,7 +47,7 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bestseller, parent, false);
+        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
         return new BestsellerViewHolder(v, onBestsellerClickListener);
     }
     @Override
@@ -58,15 +58,17 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.author.setText(book.getAuthor());
         holder.description.setText(book.getDescription());
         holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
+        holder.bookRatingHolder.setVisibility(View.GONE);
     }
 
     // ViewHolder
     public class BestsellerViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.bestseller_card)         CardView cardView;
-        @BindView(R.id.bestseller_title)        TextView title;
-        @BindView(R.id.bestseller_author)       TextView author;
-        @BindView(R.id.bestseller_description)  TextView description;
-        @BindView(R.id.bestseller_image)        NetworkImageView coverImage;
+        @BindView(R.id.book_card)           CardView cardView;
+        @BindView(R.id.book_title)          TextView title;
+        @BindView(R.id.book_author)         TextView author;
+        @BindView(R.id.book_description)    TextView description;
+        @BindView(R.id.book_cover)          NetworkImageView coverImage;
+        @BindView(R.id.book_rating_holder)  View bookRatingHolder;
 
         public BestsellerViewHolder(final ViewGroup itemView, final OnBestsellerClickListener onBestsellerClickListener) {
             super(itemView);

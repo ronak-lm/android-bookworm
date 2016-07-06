@@ -30,10 +30,11 @@
     <dimen name="error_message_marginTop">15dp</dimen>
     <dimen name="error_try_again_padding">8dp</dimen>
 
-    <!-- Bestseller Book Item -->
-    <dimen name="bestseller_card_height">160dp</dimen>
-    <dimen name="bestseller_card_width">380dp</dimen>
-    <dimen name="bestseller_cover_width">105dp</dimen>
+    <!-- Book Item -->
+    <dimen name="book_card_height">180dp</dimen>
+    <dimen name="book_card_width">380dp</dimen>
+    <dimen name="book_cover_width">110dp</dimen>
+    <dimen name="book_rating_icon_size">16dp</dimen>
 
     <!-- Book Details Page -->
     <dimen name="detail_cover_height">150dp</dimen>
