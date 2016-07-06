@@ -6,7 +6,6 @@ import android.os.Parcelable;
 public class Book implements Parcelable {
 
     // Attributes
-    private String volumeId;
     private String title;
     private String authors;
     private String pageCount;
@@ -16,11 +15,9 @@ public class Book implements Parcelable {
     private String publisher;
     private String publishDate;
     private String description;
+    private String itemUrl;
 
     // Getters
-    public String getVolumeId() {
-        return volumeId;
-    }
     public String getTitle() {
         return title;
     }
@@ -48,12 +45,14 @@ public class Book implements Parcelable {
     public String getDescription() {
         return description;
     }
+    public String getItemUrl() {
+        return itemUrl;
+    }
 
     // Constructor
-    public Book(String volumeId, String title, String authors, String pageCount,
-                String averageRating, String ratingCount, String imageUrl,
-                String publisher, String publishDate, String description) {
-        this.volumeId = volumeId;
+    public Book(String title, String authors, String pageCount, String averageRating,
+                String ratingCount, String imageUrl, String publisher,
+                String publishDate, String description, String itemUrl) {
         this.title = title;
         this.authors = authors;
         this.pageCount = pageCount;
@@ -63,6 +62,7 @@ public class Book implements Parcelable {
         this.publisher = publisher;
         this.publishDate = publishDate;
         this.description = description;
+        this.itemUrl = itemUrl;
     }
 
     // Parceling methods
@@ -75,7 +75,6 @@ public class Book implements Parcelable {
         }
     };
     public Book(Parcel in) {
-        this.volumeId = in.readString();
         this.title = in.readString();
         this.authors = in.readString();
         this.pageCount = in.readString();
@@ -85,10 +84,10 @@ public class Book implements Parcelable {
         this.publisher = in.readString();
         this.publishDate = in.readString();
         this.description = in.readString();
+        this.itemUrl = in.readString();
     }
     @Override
     public void writeToParcel(Parcel out, int i) {
-        out.writeString(volumeId);
         out.writeString(title);
         out.writeString(authors);
         out.writeString(pageCount);
@@ -98,6 +97,7 @@ public class Book implements Parcelable {
         out.writeString(publisher);
         out.writeString(publishDate);
         out.writeString(description);
+        out.writeString(itemUrl);
     }
     @Override
     public int describeContents() {

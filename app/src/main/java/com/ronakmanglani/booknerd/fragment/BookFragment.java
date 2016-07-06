@@ -127,7 +127,6 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject bookObject = response.getJSONArray("items").getJSONObject(0);
-                            String volumeId = bookObject.getString("id");
                             JSONObject volumeInfo = bookObject.getJSONObject("volumeInfo");
                             String title = volumeInfo.getString("title");
 
@@ -145,6 +144,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
                             String pageCount = getStringFromObject(volumeInfo, "pageCount");
                             String ratingCount = getStringFromObject(volumeInfo, "ratingsCount");
                             String averageRating = getStringFromObject(volumeInfo, "averageRating");
+                            String itemUrl = getStringFromObject(volumeInfo, "infoLink");
                             if (averageRating.length() == 1) {
                                 averageRating = averageRating + ".0";
                             }
@@ -163,8 +163,8 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
                                 imageUrl = "";
                             }
 
-                            bookDetail = new Book(volumeId, title, authors, pageCount,
-                                    averageRating, ratingCount, imageUrl, publisher, publishedDate, description);
+                            bookDetail = new Book(title, authors, pageCount, averageRating, ratingCount,
+                                    imageUrl, publisher, publishedDate, description, itemUrl);
 
                             onDownloadSuccessful();
 
