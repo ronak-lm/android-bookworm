@@ -37,6 +37,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public ArrayList<Book> getList() {
         return booksList;
     }
+    public void setList(ArrayList<Book> booksList) {
+        this.booksList = booksList;
+    }
 
     // RecyclerView methods
     @Override
