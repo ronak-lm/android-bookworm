@@ -7,7 +7,7 @@
     android:padding="@dimen/dist_large"
     android:background="@color/text_secondary"
     android:orientation="horizontal"
-    tools:showIn="@layout/fragment_detail">
+    tools:showIn="@layout/fragment_book">
 
     <!-- Book Cover -->
     <com.android.volley.toolbox.NetworkImageView

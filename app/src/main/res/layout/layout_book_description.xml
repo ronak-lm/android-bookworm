@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/book_publisher_holder"
+    android:id="@+id/book_description_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dist_medium"
-    android:padding="@dimen/dist_large"
     android:orientation="vertical"
+    android:padding="@dimen/dist_large"
     android:background="@color/text_secondary"
-    tools:showIn="@layout/fragment_detail">
+    tools:showIn="@layout/fragment_book">
 
     <!-- Header -->
     <LinearLayout
@@ -18,25 +18,19 @@
         android:gravity="center_vertical">
 
         <ImageView style="@style/BookDetailIconsStyle"
-            android:src="@drawable/icon_publication"
+            android:src="@drawable/icon_description"
             tools:ignore="ContentDescription" />
 
         <com.ronakmanglani.booknerd.view.RobotoBoldTextView
             style="@style/BookDetailHeaderStyle"
-            android:text="@string/detail_publication" />
+            android:text="@string/detail_description" />
 
     </LinearLayout>
 
-    <!-- Publisher Name -->
+    <!-- Value -->
     <com.ronakmanglani.booknerd.view.RobotoLightTextView
-        android:id="@+id/publication_name"
-        style="@style/BookDetailPublicationStyle"
-        tools:text="Publisher: Sample Name" />
-
-    <!-- Publication Date -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
-        android:id="@+id/publication_date"
-        style="@style/BookDetailPublicationStyle"
-        tools:text="Date: 04 July 2016" />
+        android:id="@+id/book_description"
+        style="@style/BookDetailValueStyle"
+        tools:text="My book description goes here"/>
 
 </LinearLayout>

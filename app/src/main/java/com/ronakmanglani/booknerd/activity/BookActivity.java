@@ -5,17 +5,17 @@ import android.os.Bundle;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.fragment.DetailFragment;
+import com.ronakmanglani.booknerd.fragment.BookFragment;
 
-public class DetailActivity extends AppCompatActivity {
+public class BookActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_book);
 
         if (savedInstanceState == null) {
-            DetailFragment fragment = new DetailFragment();
+            BookFragment fragment = new BookFragment();
 
             Bundle args = new Bundle();
             args.putString(BookNerdApp.ISBN_NUMBER, getIntent().getStringExtra(BookNerdApp.ISBN_NUMBER));

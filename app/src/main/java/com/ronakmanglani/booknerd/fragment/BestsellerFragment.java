@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.activity.DetailActivity;
+import com.ronakmanglani.booknerd.activity.BookActivity;
 import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter.OnCategoryClickListener;
@@ -240,7 +240,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     }
     @Override
     public void onBestsellerClicked(int position) {
-        Intent intent = new Intent(getContext(), DetailActivity.class);
+        Intent intent = new Intent(getContext(), BookActivity.class);
         intent.putExtra(BookNerdApp.ISBN_NUMBER, adapter.getList().get(position).getIsbn10());
         startActivity(intent);
     }

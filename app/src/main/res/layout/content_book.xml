@@ -22,13 +22,13 @@
             android:layout_height="wrap_content">
 
             <!-- Title, Author, Rating, etc -->
-            <include layout="@layout/layout_detail_basic" />
+            <include layout="@layout/layout_book_basic" />
 
             <!-- Publication Name and Date -->
-            <include layout="@layout/layout_detail_publication" />
+            <include layout="@layout/layout_book_publication" />
 
             <!-- Book Description -->
-            <include layout="@layout/layout_detail_description" />
+            <include layout="@layout/layout_book_description" />
 
         </LinearLayout>
 

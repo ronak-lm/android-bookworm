@@ -18,7 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.model.Detail;
+import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.util.ApiUtil;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
 
@@ -32,13 +32,13 @@ import butterknife.Unbinder;
 
 import static android.support.v7.widget.Toolbar.*;
 
-public class DetailFragment extends Fragment implements OnMenuItemClickListener {
+public class BookFragment extends Fragment implements OnMenuItemClickListener {
 
     private Unbinder unbinder;
 
     private int currentState;
     private String isbnNumber;
-    private Detail bookDetail;
+    private Book bookDetail;
 
     // Main views
     @BindView(R.id.toolbar)                 Toolbar toolbar;
@@ -62,13 +62,13 @@ public class DetailFragment extends Fragment implements OnMenuItemClickListener 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_detail, container, false);
+        View v = inflater.inflate(R.layout.fragment_book, container, false);
         unbinder = ButterKnife.bind(this, v);
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
         toolbar.setOnMenuItemClickListener(this);
-        toolbar.inflateMenu(R.menu.menu_detail);
+        toolbar.inflateMenu(R.menu.menu_book);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +163,7 @@ public class DetailFragment extends Fragment implements OnMenuItemClickListener 
                                 imageUrl = "";
                             }
 
-                            bookDetail = new Detail(volumeId, title, authors, pageCount,
+                            bookDetail = new Book(volumeId, title, authors, pageCount,
                                     averageRating, ratingCount, imageUrl, publisher, publishedDate, description);
 
                             onDownloadSuccessful();
