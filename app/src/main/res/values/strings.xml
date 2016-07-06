@@ -18,12 +18,14 @@
     <!-- Content Descriptions for ImageViews -->
     <string name="description_book_cover">Book Cover</string>
     <string name="description_error_icon">Error Icon</string>
+    <string name="description_no_results">No Results Icon</string>
 
     <!-- Loading and Error Message -->
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
     <string name="try_again">Try Again?</string>
     <string name="loading">Loading&#8230;</string>
     <string name="unable_to_load">Unable to Load</string>
+    <string name="no_results">No Results Found</string>
 
     <!-- Book Detail Page -->
     <string name="detail_subtitle">by %1$s\n%2$s pages</string>
