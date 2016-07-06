@@ -1,5 +1,6 @@
 package com.ronakmanglani.booknerd.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
+import com.ronakmanglani.booknerd.activity.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,7 +75,11 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         drawerLayout.closeDrawers();
-        setSelectedDrawerItem(item);
+        if (item.getItemId() == R.id.drawer_search) {
+            startActivity(new Intent(getContext(), SearchActivity.class));
+        } else {
+            setSelectedDrawerItem(item);
+        }
         return true;
     }
     private void setSelectedDrawerItem(MenuItem item) {
