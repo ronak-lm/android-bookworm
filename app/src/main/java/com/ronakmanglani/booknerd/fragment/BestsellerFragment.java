@@ -171,12 +171,13 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                                 JSONObject bookObject = books.getJSONObject(i);
                                 String isbn10 = bookObject.getString("primary_isbn10");
                                 String isbn13 = bookObject.getString("primary_isbn13");
+                                String publisher = bookObject.getString("publisher");
                                 String description = bookObject.getString("description");
                                 String title = StringUtil.toTitleCase(bookObject.getString("title"));
                                 String author = bookObject.getString("author");
                                 String imageUrl = bookObject.getString("book_image");
 
-                                Bestseller book = new Bestseller(title, author, description, imageUrl, isbn10, isbn13);
+                                Bestseller book = new Bestseller(title, author, description, imageUrl, publisher, isbn10, isbn13);
                                 adapter.addToList(book);
                             }
 

@@ -10,6 +10,7 @@ public class Bestseller implements Parcelable {
     private String author;
     private String description;
     private String imageUrl;
+    private String publisher;
     private String isbn10;
     private String isbn13;
 
@@ -26,6 +27,9 @@ public class Bestseller implements Parcelable {
     public String getImageUrl() {
         return imageUrl;
     }
+    public String getPublisher() {
+        return publisher;
+    }
     public String getIsbn10() {
         return isbn10;
     }
@@ -34,11 +38,12 @@ public class Bestseller implements Parcelable {
     }
 
     // Constructor
-    public Bestseller(String title, String author, String description, String imageUrl, String isbn10, String isbn13) {
+    public Bestseller(String title, String author, String description, String imageUrl, String publisher, String isbn10, String isbn13) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.publisher = publisher;
         this.isbn10 = isbn10;
         this.isbn13 = isbn13;
     }
@@ -57,6 +62,7 @@ public class Bestseller implements Parcelable {
         this.author = in.readString();
         this.description = in.readString();
         this.imageUrl = in.readString();
+        this.publisher = in.readString();
         this.isbn10 = in.readString();
         this.isbn13 = in.readString();
     }
@@ -66,6 +72,7 @@ public class Bestseller implements Parcelable {
         out.writeString(author);
         out.writeString(description);
         out.writeString(imageUrl);
+        out.writeString(publisher);
         out.writeString(isbn10);
         out.writeString(isbn13);
     }
