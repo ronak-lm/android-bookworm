@@ -65,7 +65,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         // TextViews
         holder.title.setText(book.getTitle());
         if (book.getAuthors().length() > 0) {
-            holder.author.setText(book.getAuthors());
+            holder.author.setText(BookNerdApp.getAppContext().getString(R.string.detail_subtitle_by, book.getAuthors()));
         } else {
             holder.author.setVisibility(View.GONE);
         }

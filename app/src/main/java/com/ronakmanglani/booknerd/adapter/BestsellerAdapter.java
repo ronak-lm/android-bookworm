@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.Bestseller;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
@@ -55,7 +56,7 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Bestseller book = bestsellerBooks.get(position);
         final BestsellerViewHolder holder = (BestsellerViewHolder) viewHolder;
         holder.title.setText(book.getTitle());
-        holder.author.setText(book.getAuthor());
+        holder.author.setText(BookNerdApp.getAppContext().getString(R.string.detail_subtitle_by, book.getAuthor()));
         holder.description.setText(book.getDescription());
         holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
         holder.bookRatingHolder.setVisibility(View.GONE);
