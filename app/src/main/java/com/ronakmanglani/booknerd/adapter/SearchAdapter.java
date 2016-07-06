@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.model.Bestseller;
 import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
 
@@ -28,10 +27,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // Constructor
     public SearchAdapter(OnBookClickListener onBookClickListener) {
         this.booksList = new ArrayList<>();
-        this.onBookClickListener = onBookClickListener;
-    }
-    public SearchAdapter(ArrayList<Book> booksList, OnBookClickListener onBookClickListener) {
-        this.booksList = booksList;
         this.onBookClickListener = onBookClickListener;
     }
 
@@ -66,7 +61,11 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         // TextViews
         holder.title.setText(book.getTitle());
-        holder.author.setText(book.getAuthors());
+        if (book.getAuthors().length() > 0) {
+            holder.author.setText(book.getAuthors());
+        } else {
+            holder.author.setVisibility(View.GONE);
+        }
         holder.description.setText(book.getDescription());
         if (book.getAverageRating().length() == 0) {
             holder.bookRatingHolder.setVisibility(View.GONE);
