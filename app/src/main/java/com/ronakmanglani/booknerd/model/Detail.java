@@ -3,7 +3,7 @@ package com.ronakmanglani.booknerd.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class BookDetail implements Parcelable {
+public class Detail implements Parcelable {
 
     // Attributes
     private String volumeId;
@@ -50,9 +50,9 @@ public class BookDetail implements Parcelable {
     }
 
     // Constructor
-    public BookDetail(String volumeId, String title, String authors, String pageCount,
-                      String averageRating, String ratingCount,String imageUrl,
-                      String publisher, String publishDate, String description) {
+    public Detail(String volumeId, String title, String authors, String pageCount,
+                  String averageRating, String ratingCount, String imageUrl,
+                  String publisher, String publishDate, String description) {
         this.volumeId = volumeId;
         this.title = title;
         this.authors = authors;
@@ -67,14 +67,14 @@ public class BookDetail implements Parcelable {
 
     // Parceling methods
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public BookDetail createFromParcel(Parcel in) {
-            return new BookDetail(in);
+        public Detail createFromParcel(Parcel in) {
+            return new Detail(in);
         }
-        public BookDetail[] newArray(int size) {
-            return new BookDetail[size];
+        public Detail[] newArray(int size) {
+            return new Detail[size];
         }
     };
-    public BookDetail(Parcel in) {
+    public Detail(Parcel in) {
         this.volumeId = in.readString();
         this.title = in.readString();
         this.authors = in.readString();

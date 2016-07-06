@@ -3,7 +3,7 @@ package com.ronakmanglani.booknerd.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class BestsellerBook implements Parcelable {
+public class Bestseller implements Parcelable {
 
     // Attributes
     private String title;
@@ -34,7 +34,7 @@ public class BestsellerBook implements Parcelable {
     }
 
     // Constructor
-    public BestsellerBook(String title, String author, String description, String imageUrl, String isbn10, String isbn13) {
+    public Bestseller(String title, String author, String description, String imageUrl, String isbn10, String isbn13) {
         this.title = title;
         this.author = author;
         this.description = description;
@@ -45,14 +45,14 @@ public class BestsellerBook implements Parcelable {
 
     // Parceling methods
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public BestsellerBook createFromParcel(Parcel in) {
-            return new BestsellerBook(in);
+        public Bestseller createFromParcel(Parcel in) {
+            return new Bestseller(in);
         }
-        public BestsellerBook[] newArray(int size) {
-            return new BestsellerBook[size];
+        public Bestseller[] newArray(int size) {
+            return new Bestseller[size];
         }
     };
-    public BestsellerBook(Parcel in) {
+    public Bestseller(Parcel in) {
         this.title = in.readString();
         this.author = in.readString();
         this.description = in.readString();

@@ -22,7 +22,7 @@ import com.ronakmanglani.booknerd.activity.DetailActivity;
 import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter.OnCategoryClickListener;
-import com.ronakmanglani.booknerd.model.BestsellerBook;
+import com.ronakmanglani.booknerd.model.Bestseller;
 import com.ronakmanglani.booknerd.model.Category;
 import com.ronakmanglani.booknerd.util.ApiUtil;
 import com.ronakmanglani.booknerd.util.DimenUtil;
@@ -78,7 +78,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
             listName = savedInstanceState.getString(BookNerdApp.LIST_NAME);
             // Data had already been loaded: Display the data again
             if (currentState == BookNerdApp.STATE_LOADED) {
-                ArrayList<BestsellerBook> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookNerdApp.BESTSELLER_LIST);
+                ArrayList<Bestseller> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookNerdApp.BESTSELLER_LIST);
 
                 layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.bestseller_card_width, 1));
                 adapter = new BestsellerAdapter(bestsellerBooks, this);
@@ -176,7 +176,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                                 String author = bookObject.getString("author");
                                 String imageUrl = bookObject.getString("book_image");
 
-                                BestsellerBook book = new BestsellerBook(title, author, description, imageUrl, isbn10, isbn13);
+                                Bestseller book = new Bestseller(title, author, description, imageUrl, isbn10, isbn13);
                                 adapter.addToList(book);
                             }
 

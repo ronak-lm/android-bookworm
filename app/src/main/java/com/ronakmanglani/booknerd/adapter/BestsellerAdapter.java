@@ -5,14 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.model.BestsellerBook;
+import com.ronakmanglani.booknerd.model.Bestseller;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
 
 import java.util.ArrayList;
@@ -23,23 +20,23 @@ import butterknife.ButterKnife;
 public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // ArrayList of books to display
-    private ArrayList<BestsellerBook> bestsellerBooks;
+    private ArrayList<Bestseller> bestsellerBooks;
 
     // Constructor
     public BestsellerAdapter(OnBestsellerClickListener onBestsellerClickListener) {
         this.bestsellerBooks = new ArrayList<>();
         this.onBestsellerClickListener = onBestsellerClickListener;
     }
-    public BestsellerAdapter(ArrayList<BestsellerBook> bestsellerBooks, OnBestsellerClickListener onBestsellerClickListener) {
+    public BestsellerAdapter(ArrayList<Bestseller> bestsellerBooks, OnBestsellerClickListener onBestsellerClickListener) {
         this.bestsellerBooks = bestsellerBooks;
         this.onBestsellerClickListener = onBestsellerClickListener;
     }
 
     // Helper methods
-    public void addToList(BestsellerBook book) {
+    public void addToList(Bestseller book) {
         bestsellerBooks.add(book);
     }
-    public ArrayList<BestsellerBook> getList() {
+    public ArrayList<Bestseller> getList() {
         return bestsellerBooks;
     }
 
@@ -55,7 +52,7 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        BestsellerBook book = bestsellerBooks.get(position);
+        Bestseller book = bestsellerBooks.get(position);
         final BestsellerViewHolder holder = (BestsellerViewHolder) viewHolder;
         holder.title.setText(book.getTitle());
         holder.author.setText(book.getAuthor());

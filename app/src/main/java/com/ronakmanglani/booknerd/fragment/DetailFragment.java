@@ -8,18 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.model.BookDetail;
+import com.ronakmanglani.booknerd.model.Detail;
 import com.ronakmanglani.booknerd.util.ApiUtil;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
 
@@ -37,7 +35,7 @@ public class DetailFragment extends Fragment {
 
     private int currentState;
     private String isbnNumber;
-    private BookDetail bookDetail;
+    private Detail bookDetail;
 
     // Main views
     @BindView(R.id.toolbar)                 Toolbar toolbar;
@@ -160,7 +158,7 @@ public class DetailFragment extends Fragment {
                                 imageUrl = "";
                             }
 
-                            bookDetail = new BookDetail(volumeId, title, authors, pageCount,
+                            bookDetail = new Detail(volumeId, title, authors, pageCount,
                                     averageRating, ratingCount, imageUrl, publisher, publishedDate, description);
 
                             onDownloadSuccessful();
