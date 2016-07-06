@@ -11,6 +11,9 @@
     <string name="drawer_settings">Settings</string>
     <string name="drawer_about">About</string>
 
+    <!-- Toolbar Actions -->
+    <string name="action_share">Share</string>
+
     <!-- Content Descriptions for ImageViews -->
     <string name="description_book_cover">Book Cover</string>
     <string name="description_error_icon">Error Icon</string>

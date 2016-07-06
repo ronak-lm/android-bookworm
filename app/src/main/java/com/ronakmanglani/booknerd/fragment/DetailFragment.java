@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -29,7 +30,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DetailFragment extends Fragment {
+import static android.support.v7.widget.Toolbar.*;
+
+public class DetailFragment extends Fragment implements OnMenuItemClickListener {
 
     private Unbinder unbinder;
 
@@ -64,6 +67,8 @@ public class DetailFragment extends Fragment {
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
+        toolbar.setOnMenuItemClickListener(this);
+        toolbar.inflateMenu(R.menu.menu_detail);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,6 +256,10 @@ public class DetailFragment extends Fragment {
     }
 
     // Click Events
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
+    }
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
         toolbar.setTitle(R.string.loading);
