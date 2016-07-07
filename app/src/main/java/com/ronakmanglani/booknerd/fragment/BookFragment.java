@@ -84,7 +84,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         }
 
         // Rating
-        if (bookRating.length() == 0 || bookVoteCount.length() == 0) {
+        if (book.getAverageRating().length() == 0 || book.getRatingCount().length() == 0) {
             bookRatingHolder.setVisibility(View.GONE);
         } else {
             bookRating.setText(book.getAverageRating());

@@ -38,7 +38,7 @@
             android:layout_toEndOf="@+id/book_cover"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textSize="@dimen/text_xxlarge"
+            android:textSize="@dimen/text_xlarge"
             android:textColor="@color/text_primary"
             tools:text="The Foundation Trilogy"/>
 
@@ -59,14 +59,14 @@
                 android:id="@+id/book_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_medium"
+                android:textSize="@dimen/text_small"
                 tools:text="by Issac Asimov"/>
 
             <com.ronakmanglani.booknerd.view.AutoResizeTextView
                 android:id="@+id/book_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dist_small"
+                android:layout_marginTop="6dp"
                 android:textSize="@dimen/text_large"
                 android:ellipsize="end"
                 tools:text="For twelve thousand years the Galactic Empire has ruled. Now it is dying. But only Hari Seldon, creator of the revolutionary science of psychohistory, can see into the future."/>
