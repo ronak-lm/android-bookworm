@@ -64,6 +64,18 @@ public class Book implements Parcelable {
         this.description = description;
         this.itemUrl = itemUrl;
     }
+    public Book(Bestseller bestsellerBook) {
+        this.title = bestsellerBook.getTitle();
+        this.authors = bestsellerBook.getAuthor();
+        this.pageCount = "";
+        this.averageRating = "";
+        this.ratingCount = "";
+        this.imageUrl = bestsellerBook.getImageUrl();
+        this.publisher = bestsellerBook.getPublisher();
+        this.publishDate = "";
+        this.description = bestsellerBook.getDescription();
+        this.itemUrl = "";
+    }
 
     // Parceling methods
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

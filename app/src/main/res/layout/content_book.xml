@@ -1,50 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/book_detail_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:paddingBottom="@dimen/dist_medium"
+    android:clipToPadding="false"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/fragment_book">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/book_detail_holder"
+    <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/dist_medium"
-        android:clipToPadding="false"
-        android:visibility="gone"
-        app:layout_scrollFlags="scroll"
-        tools:visibility="visible">
+        android:layout_height="wrap_content">
 
-        <LinearLayout android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!-- Title, Author, Rating, etc -->
+        <include layout="@layout/layout_book_basic" />
 
-            <!-- Title, Author, Rating, etc -->
-            <include layout="@layout/layout_book_basic" />
+        <!-- Publication Name and Date -->
+        <include layout="@layout/layout_book_publication" />
 
-            <!-- Publication Name and Date -->
-            <include layout="@layout/layout_book_publication" />
+        <!-- Book Description -->
+        <include layout="@layout/layout_book_description" />
 
-            <!-- Book Description -->
-            <include layout="@layout/layout_book_description" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-    <!-- Error message, loading circle and FAB -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include layout="@layout/layout_error_message"
-            android:visibility="gone"/>
-
-        <include layout="@layout/layout_progress_circle"
-            android:visibility="visible"/>
-
-    </FrameLayout>
-
-</FrameLayout>
+</android.support.v4.widget.NestedScrollView>

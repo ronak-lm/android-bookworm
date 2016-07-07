@@ -1,5 +1,6 @@
 package com.ronakmanglani.booknerd.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
+import com.ronakmanglani.booknerd.activity.BookActivity;
 import com.ronakmanglani.booknerd.adapter.SearchAdapter;
 import com.ronakmanglani.booknerd.adapter.SearchAdapter.OnBookClickListener;
 import com.ronakmanglani.booknerd.model.Book;
@@ -265,6 +267,8 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     }
     @Override
     public void onBookClicked(int position) {
-        // TODO: Navigate to Book Page
+        Intent intent = new Intent(getContext(), BookActivity.class);
+        intent.putExtra(BookNerdApp.KEY_BOOK, adapter.getList().get(position));
+        startActivity(intent);
     }
 }

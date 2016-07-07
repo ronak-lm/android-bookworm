@@ -18,7 +18,7 @@ public class BookActivity extends AppCompatActivity {
             BookFragment fragment = new BookFragment();
 
             Bundle args = new Bundle();
-            args.putString(BookNerdApp.ISBN_NUMBER, getIntent().getStringExtra(BookNerdApp.ISBN_NUMBER));
+            args.putParcelable(BookNerdApp.KEY_BOOK, getIntent().getParcelableExtra(BookNerdApp.KEY_BOOK));
             fragment.setArguments(args);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.book_detail_container, fragment).commit();

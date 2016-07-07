@@ -6,11 +6,11 @@ import android.content.Context;
 public class BookNerdApp extends Application {
 
     // Constants
+    public static final String KEY_BOOK = "book";
     public static final String TOOLBAR_TITLE = "toolbar_title";
     public static final String LIST_NAME = "list_name";
     public static final String BESTSELLER_LIST = "bestseller_list";
     public static final String ISBN_NUMBER = "isbn_number";
-    public static final String BOOK_DETAIL = "book_detail";
     public static final String SEARCH_QUERY = "search_query";
     public static final String SEARCH_LIST = "search_list";
     public static final String TAG_BESTSELLER = "bestseller_fragment";

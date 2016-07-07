@@ -23,6 +23,7 @@ import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter.OnCategoryClickListener;
 import com.ronakmanglani.booknerd.model.Bestseller;
+import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.model.Category;
 import com.ronakmanglani.booknerd.util.ApiUtil;
 import com.ronakmanglani.booknerd.util.DimenUtil;
@@ -241,7 +242,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     @Override
     public void onBestsellerClicked(int position) {
         Intent intent = new Intent(getContext(), BookActivity.class);
-        intent.putExtra(BookNerdApp.ISBN_NUMBER, adapter.getList().get(position).getIsbn10());
+        intent.putExtra(BookNerdApp.KEY_BOOK, new Book(adapter.getList().get(position)));
         startActivity(intent);
     }
 }
