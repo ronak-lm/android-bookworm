@@ -177,9 +177,10 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                                 String title = StringUtil.toTitleCase(bookObject.getString("title"));
                                 String author = bookObject.getString("author");
                                 String imageUrl = bookObject.getString("book_image");
+                                String itemUrl = bookObject.getString("amazon_product_url");
 
-                                Bestseller book = new Bestseller(title, author, description, imageUrl, publisher, isbn10, isbn13);
-                                adapter.addToList(book);
+                                adapter.addToList(new Bestseller(isbn10, isbn13, title,
+                                        author, description, imageUrl, publisher, itemUrl));
                             }
 
                             onDownloadSuccessful();

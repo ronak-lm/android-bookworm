@@ -74,7 +74,7 @@ public class Book implements Parcelable {
         this.publisher = bestsellerBook.getPublisher();
         this.publishDate = "";
         this.description = bestsellerBook.getDescription();
-        this.itemUrl = "";
+        this.itemUrl = bestsellerBook.getItemUrl();
     }
 
     // Parceling methods
