@@ -99,12 +99,12 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         searchList.setLayoutManager(layoutManager);
 
         // Restore state
-        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.CURRENT_STATE)) {
-            currentState = savedInstanceState.getInt(BookNerdApp.CURRENT_STATE);
+        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.KEY_STATE)) {
+            currentState = savedInstanceState.getInt(BookNerdApp.KEY_STATE);
             // Data had already been loaded: Display the data again
             if (currentState == BookNerdApp.STATE_LOADED) {
-                searchQuery = savedInstanceState.getString(BookNerdApp.SEARCH_QUERY);
-                ArrayList<Book> booksList = savedInstanceState.getParcelableArrayList(BookNerdApp.SEARCH_LIST);
+                searchQuery = savedInstanceState.getString(BookNerdApp.KEY_QUERY);
+                ArrayList<Book> booksList = savedInstanceState.getParcelableArrayList(BookNerdApp.KEY_SEARCH);
                 adapter = new SearchAdapter(this);
                 adapter.setList(booksList);
                 searchList.swapAdapter(adapter, true);
@@ -112,7 +112,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             }
             // Data was still loading when fragment was lost: Load again
             else if (currentState == BookNerdApp.STATE_LOADING) {
-                searchQuery = savedInstanceState.getString(BookNerdApp.SEARCH_QUERY);
+                searchQuery = savedInstanceState.getString(BookNerdApp.KEY_QUERY);
                 progressCircle.setVisibility(View.VISIBLE);
                 searchBooksList();
             }
@@ -127,10 +127,10 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(BookNerdApp.CURRENT_STATE, currentState);
+        outState.putInt(BookNerdApp.KEY_STATE, currentState);
         if (searchQuery != null) {
-            outState.putString(BookNerdApp.SEARCH_QUERY, searchQuery);
-            outState.putParcelableArrayList(BookNerdApp.SEARCH_LIST, adapter.getList());
+            outState.putString(BookNerdApp.KEY_QUERY, searchQuery);
+            outState.putParcelableArrayList(BookNerdApp.KEY_SEARCH, adapter.getList());
         }
     }
     @Override

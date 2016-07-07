@@ -74,12 +74,12 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         bestsellerList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
 
         // Restore saved state, if exists
-        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.CURRENT_STATE)) {
-            currentState = savedInstanceState.getInt(BookNerdApp.CURRENT_STATE);
-            listName = savedInstanceState.getString(BookNerdApp.LIST_NAME);
+        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.KEY_STATE)) {
+            currentState = savedInstanceState.getInt(BookNerdApp.KEY_STATE);
+            listName = savedInstanceState.getString(BookNerdApp.KEY_NAME);
             // Data had already been loaded: Display the data again
             if (currentState == BookNerdApp.STATE_LOADED) {
-                ArrayList<Bestseller> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookNerdApp.BESTSELLER_LIST);
+                ArrayList<Bestseller> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookNerdApp.KEY_BESTSELLER);
 
                 layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_card_width, 1));
                 adapter = new BestsellerAdapter(bestsellerBooks, this);
@@ -105,10 +105,10 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(BookNerdApp.CURRENT_STATE, currentState);
-        outState.putString(BookNerdApp.LIST_NAME, listName);
+        outState.putInt(BookNerdApp.KEY_STATE, currentState);
+        outState.putString(BookNerdApp.KEY_NAME, listName);
         if (adapter != null) {
-            outState.putParcelableArrayList(BookNerdApp.BESTSELLER_LIST, adapter.getList());
+            outState.putParcelableArrayList(BookNerdApp.KEY_BESTSELLER, adapter.getList());
         }
     }
     @Override

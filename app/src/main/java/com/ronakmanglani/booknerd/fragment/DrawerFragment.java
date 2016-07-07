@@ -54,8 +54,8 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         actionBarDrawerToggle.syncState();
 
         // Restore toolbar title
-        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.TOOLBAR_TITLE)) {
-            toolbar.setTitle(savedInstanceState.getString(BookNerdApp.TOOLBAR_TITLE));
+        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.KEY_TITLE)) {
+            toolbar.setTitle(savedInstanceState.getString(BookNerdApp.KEY_TITLE));
         }
 
         return v;
@@ -63,7 +63,7 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(BookNerdApp.TOOLBAR_TITLE, toolbar.getTitle().toString());
+        outState.putString(BookNerdApp.KEY_TITLE, toolbar.getTitle().toString());
     }
     @Override
     public void onDestroyView() {
