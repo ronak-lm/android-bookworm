@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Book implements Parcelable {
 
     // Attributes
+    private String uniqueId;
     private String title;
     private String authors;
     private String pageCount;
@@ -18,6 +19,9 @@ public class Book implements Parcelable {
     private String itemUrl;
 
     // Getters
+    public String getUniqueId() {
+        return uniqueId;
+    }
     public String getTitle() {
         return title;
     }
@@ -50,9 +54,10 @@ public class Book implements Parcelable {
     }
 
     // Constructor
-    public Book(String title, String authors, String pageCount, String averageRating,
-                String ratingCount, String imageUrl, String publisher,
+    public Book(String uniqueId, String title, String authors, String pageCount,
+                String averageRating, String ratingCount, String imageUrl, String publisher,
                 String publishDate, String description, String itemUrl) {
+        this.uniqueId = uniqueId;
         this.title = title;
         this.authors = authors;
         this.pageCount = pageCount;
@@ -65,6 +70,7 @@ public class Book implements Parcelable {
         this.itemUrl = itemUrl;
     }
     public Book(Bestseller bestsellerBook) {
+        this.uniqueId = bestsellerBook.getUniqueId();
         this.title = bestsellerBook.getTitle();
         this.authors = bestsellerBook.getAuthor();
         this.pageCount = "";
@@ -87,6 +93,7 @@ public class Book implements Parcelable {
         }
     };
     public Book(Parcel in) {
+        this.uniqueId = in.readString();
         this.title = in.readString();
         this.authors = in.readString();
         this.pageCount = in.readString();
@@ -100,6 +107,7 @@ public class Book implements Parcelable {
     }
     @Override
     public void writeToParcel(Parcel out, int i) {
+        out.writeString(uniqueId);
         out.writeString(title);
         out.writeString(authors);
         out.writeString(pageCount);

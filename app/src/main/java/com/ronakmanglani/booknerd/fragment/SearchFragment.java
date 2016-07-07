@@ -164,6 +164,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                 JSONArray itemsArray = response.getJSONArray("items");
                                 for (int i = 0; i < itemsArray.length(); i++) {
                                     JSONObject bookObject = itemsArray.getJSONObject(i);
+                                    String uniqueId = "gbid:" + bookObject.getString("id");
                                     JSONObject volumeInfo = bookObject.getJSONObject("volumeInfo");
                                     String title = volumeInfo.getString("title");
 
@@ -203,7 +204,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                         imageUrl = "";
                                     }
 
-                                    adapter.addToList(new Book(title, authors, pageCount, averageRating,
+                                    adapter.addToList(new Book(uniqueId, title, authors, pageCount, averageRating,
                                             ratingCount, imageUrl, publisher, publishedDate, description, itemUrl));
                                 }
                             }
@@ -213,7 +214,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                         } catch (Exception e) {
                             // Parsing error
                             onDownloadFailed();
-                            e.printStackTrace();
                         }
                     }
                 },
@@ -222,7 +222,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                     public void onErrorResponse(VolleyError error) {
                         // Network error
                         onDownloadFailed();
-                        error.printStackTrace();
                     }
                 });
         request.setTag(getClass().getName());
