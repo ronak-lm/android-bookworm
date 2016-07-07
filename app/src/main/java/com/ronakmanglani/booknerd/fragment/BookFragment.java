@@ -1,5 +1,7 @@
 package com.ronakmanglani.booknerd.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +27,7 @@ import static android.support.v7.widget.Toolbar.*;
 public class BookFragment extends Fragment implements OnMenuItemClickListener {
 
     private Unbinder unbinder;
+    private Book book;
 
     @BindView(R.id.toolbar)                 Toolbar toolbar;
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
@@ -46,7 +49,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         unbinder = ButterKnife.bind(this, v);
 
         // Get the book
-        Book book = getArguments().getParcelable(BookNerdApp.KEY_BOOK);
+        book = getArguments().getParcelable(BookNerdApp.KEY_BOOK);
         if (book == null) {
             return v;
         }
@@ -123,6 +126,26 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     // Click Events
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return false;
+        int id = item.getItemId();
+        switch (id) {
+
+            case R.id.action_share:
+                String shareSubject = getString(R.string.action_share_subject, book.getTitle());
+                String shareText = getString(R.string.action_share_text, book.getTitle(), book.getAuthors(), book.getItemUrl());
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+                startActivity(Intent.createChooser(sharingIntent, getString(R.string.action_share_title)));
+                return true;
+
+            case R.id.action_open:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getItemUrl()));
+                startActivity(browserIntent);
+                return true;
+
+            default:
+                return false;
+        }
     }
 }

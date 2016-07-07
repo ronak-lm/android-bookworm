@@ -13,6 +13,10 @@
 
     <!-- Toolbar Actions -->
     <string name="action_share">Share</string>
+    <string name="action_share_subject">Check out %1$s</string>     <!-- Example: Check out Dune -->
+    <string name="action_share_text">%1$s by %2$s\n%3$s</string>   <!-- Example: Dune by Frank Herbert \n http://.... -->
+    <string name="action_share_title">Share book&#8230;</string>
+    <string name="action_open">Open in Browser</string>
     <string name="action_search">Search for books&#8230;</string>
 
     <!-- Content Descriptions for ImageViews -->
