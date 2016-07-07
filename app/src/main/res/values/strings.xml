@@ -29,7 +29,7 @@
     <string name="try_again">Try Again?</string>
     <string name="loading">Loading&#8230;</string>
     <string name="unable_to_load">Unable to Load</string>
-    <string name="no_results">No Results Found</string>
+    <string name="no_results">Oops! Dobby couldn\'t find any results&#8230;</string>
 
     <!-- Book Detail Page -->
     <string name="detail_subtitle">by %1$s\n%2$s pages</string>
