@@ -29,5 +29,6 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.6-RELEASE'
+    compile 'me.dm7.barcodescanner:zbar:1.8.4'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
 }
