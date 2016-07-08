@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
+import com.ronakmanglani.booknerd.activity.BarcodeActivity;
 import com.ronakmanglani.booknerd.activity.SearchActivity;
 
 import butterknife.BindView;
@@ -75,10 +76,15 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         drawerLayout.closeDrawers();
-        if (item.getItemId() == R.id.drawer_search) {
+        int id = item.getItemId();
+        if (id == R.id.drawer_search) {
             startActivity(new Intent(getContext(), SearchActivity.class));
             return false;
-        } else if (item.getItemId() == R.id.drawer_bestseller) {
+        } else if (id == R.id.drawer_barcode) {
+            startActivity(new Intent(getContext(), BarcodeActivity.class));
+            return false;
+        }
+        else if (id == R.id.drawer_bestseller) {
             BestsellerFragment fragment = new BestsellerFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER)

@@ -28,6 +28,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activity.BarcodeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 
