@@ -252,6 +252,20 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         currentState = BookNerdApp.STATE_FAILED;
     }
 
+    // Helper methods
+    public void performSearchFor(String searchQuery) {
+        this.searchQuery = searchQuery;
+        searchBar.setText(searchQuery);
+
+        searchList.setVisibility(View.GONE);
+        errorMessage.setVisibility(View.GONE);
+        noResults.setVisibility(View.GONE);
+        progressCircle.setVisibility(View.VISIBLE);
+
+        adapter = null;
+        searchBooksList();
+    }
+
     // Click events
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
