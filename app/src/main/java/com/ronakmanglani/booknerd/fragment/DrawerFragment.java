@@ -77,20 +77,14 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         drawerLayout.closeDrawers();
         if (item.getItemId() == R.id.drawer_search) {
             startActivity(new Intent(getContext(), SearchActivity.class));
-        } else {
-            setSelectedDrawerItem(item);
-        }
-        return true;
-    }
-    private void setSelectedDrawerItem(MenuItem item) {
-        toolbar.setTitle(item.getTitle());
-        item.setChecked(true);
-        int id = item.getItemId();
-        if (id == R.id.drawer_bestseller) {
+            return false;
+        } else if (item.getItemId() == R.id.drawer_bestseller) {
             BestsellerFragment fragment = new BestsellerFragment();
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER);
-            transaction.commit();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER)
+                    .commit();
+            return true;
         }
+        return false;
     }
 }
