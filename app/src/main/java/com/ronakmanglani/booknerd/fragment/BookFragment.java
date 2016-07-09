@@ -16,6 +16,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.Book;
+import com.ronakmanglani.booknerd.util.DimenUtil;
 import com.ronakmanglani.booknerd.util.VolleySingleton;
 
 import butterknife.BindView;
@@ -30,6 +31,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     private Book book;
 
     @BindView(R.id.toolbar)                 Toolbar toolbar;
+    @BindView(R.id.book_detail_holder)      View bookDetailHolder;
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
     @BindView(R.id.book_subtitle)           TextView bookSubtitle;
@@ -51,6 +53,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         // Get the book
         book = getArguments().getParcelable(BookNerdApp.KEY_BOOK);
         if (book == null) {
+            bookDetailHolder.setVisibility(GONE);
             return v;
         }
 
@@ -58,13 +61,15 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         toolbar.setTitle(book.getTitle());
         toolbar.setOnMenuItemClickListener(this);
         toolbar.inflateMenu(R.menu.menu_book);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+        if (!DimenUtil.isTablet()) {
+            toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().onBackPressed();
+                }
+            });
+        }
 
         // Cover Image
         if (book.getImageUrl().length() == 0) {

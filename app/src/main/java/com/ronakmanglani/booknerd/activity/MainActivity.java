@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.fragment.BestsellerFragment;
+import com.ronakmanglani.booknerd.fragment.BookFragment;
+import com.ronakmanglani.booknerd.model.Book;
+import com.ronakmanglani.booknerd.util.DimenUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (DimenUtil.isTablet() && savedInstanceState == null) {
+            loadDetailFragmentWith(null);
+        }
     }
 
     @Override
@@ -23,5 +29,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void loadDetailFragmentWith(Book book) {
+        BookFragment fragment = new BookFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(BookNerdApp.KEY_BOOK, book);
+        fragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment, fragment).commit();
     }
 }

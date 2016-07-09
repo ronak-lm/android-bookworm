@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.activity.BookActivity;
+import com.ronakmanglani.booknerd.activity.MainActivity;
 import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter;
 import com.ronakmanglani.booknerd.adapter.CategoryAdapter.OnCategoryClickListener;
@@ -211,6 +212,11 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         bestsellerList.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
 
+        if (DimenUtil.isTablet()) {
+            Book book = new Book(adapter.getList().get(0));
+            ((MainActivity) getActivity()).loadDetailFragmentWith(book);
+        }
+
         currentState = BookNerdApp.STATE_LOADED;
     }
     private void onDownloadFailed() {
@@ -242,9 +248,14 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     }
     @Override
     public void onBestsellerClicked(int position) {
-        Intent intent = new Intent(getContext(), BookActivity.class);
-        intent.putExtra(BookNerdApp.KEY_BOOK, new Book(adapter.getList().get(position)));
-        startActivity(intent);
+        Book book = new Book(adapter.getList().get(position));
+        if (DimenUtil.isTablet()) {
+            ((MainActivity) getActivity()).loadDetailFragmentWith(book);
+        } else {
+            Intent intent = new Intent(getContext(), BookActivity.class);
+            intent.putExtra(BookNerdApp.KEY_BOOK, book);
+            startActivity(intent);
+        }
     }
 }
 
