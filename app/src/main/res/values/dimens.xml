@@ -1,5 +1,8 @@
 <resources>
 
+    <!-- Tablet Mode Flag -->
+    <bool name="is_tablet">false</bool>
+
     <!-- General Margin/Padding -->
     <dimen name="dist_xlarge">32dp</dimen>
     <dimen name="dist_large">16dp</dimen>

@@ -1,0 +1,6 @@
+<resources>
+
+    <!-- Tablet Mode Flag -->
+    <bool name="is_tablet">true</bool>
+	
+</resources>
