@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.activity.BookActivity;
+import com.ronakmanglani.booknerd.activity.SearchActivity;
 import com.ronakmanglani.booknerd.adapter.SearchAdapter;
 import com.ronakmanglani.booknerd.adapter.SearchAdapter.OnBookClickListener;
 import com.ronakmanglani.booknerd.model.Book;
@@ -239,6 +240,10 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             noResults.setVisibility(View.GONE);
             searchList.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
+
+            if (DimenUtil.isTablet()) {
+                ((SearchActivity) getActivity()).loadDetailFragmentWith(adapter.getList().get(0));
+            }
         }
 
         currentState = BookNerdApp.STATE_LOADED;
@@ -280,8 +285,13 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     }
     @Override
     public void onBookClicked(int position) {
-        Intent intent = new Intent(getContext(), BookActivity.class);
-        intent.putExtra(BookNerdApp.KEY_BOOK, adapter.getList().get(position));
-        startActivity(intent);
+        Book book = adapter.getList().get(position);
+        if (DimenUtil.isTablet()) {
+            ((SearchActivity) getActivity()).loadDetailFragmentWith(book);
+        } else {
+            Intent intent = new Intent(getContext(), BookActivity.class);
+            intent.putExtra(BookNerdApp.KEY_BOOK, book);
+            startActivity(intent);
+        }
     }
 }
