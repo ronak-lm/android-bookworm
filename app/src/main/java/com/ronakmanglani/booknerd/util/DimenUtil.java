@@ -21,6 +21,9 @@ public class DimenUtil {
         // Get screen width
         DisplayMetrics displayMetrics = BookNerdApp.getAppContext().getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;
+        if (isTablet()) {
+            widthPx = widthPx / 3;
+        }
         // Calculate desired width
         float desiredPx = BookNerdApp.getAppContext().getResources().getDimensionPixelSize(dimenId);
         int columns = Math.round(widthPx / desiredPx);
