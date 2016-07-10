@@ -31,6 +31,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     private Book book;
 
     @BindView(R.id.toolbar)                 Toolbar toolbar;
+    @BindView(R.id.book_message_holder)     View bookMessageHolder;
     @BindView(R.id.book_detail_holder)      View bookDetailHolder;
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
@@ -54,6 +55,9 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         book = getArguments().getParcelable(BookNerdApp.KEY_BOOK);
         if (book == null) {
             bookDetailHolder.setVisibility(GONE);
+            if (getArguments().getBoolean(BookNerdApp.KEY_VISIBILITY, false)) {
+                bookMessageHolder.setVisibility(VISIBLE);
+            }
             return v;
         }
 

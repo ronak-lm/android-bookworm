@@ -29,7 +29,7 @@
     <dimen name="progress_circle_stroke">4dp</dimen>
 
     <!-- Error Message -->
-    <dimen name="error_icon_width">120dp</dimen>
+    <dimen name="error_icon_size">120dp</dimen>
     <dimen name="error_message_marginTop">15dp</dimen>
     <dimen name="error_try_again_padding">8dp</dimen>
 

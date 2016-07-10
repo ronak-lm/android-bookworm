@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (DimenUtil.isTablet() && savedInstanceState == null) {
-            loadDetailFragmentWith(null);
+            loadDetailFragmentWith(null, false);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
@@ -28,15 +28,17 @@ public class MainActivity extends AppCompatActivity {
         BestsellerFragment fragment = (BestsellerFragment) getSupportFragmentManager().findFragmentByTag(BookNerdApp.TAG_BESTSELLER);
         if (fragment != null && fragment.canGoBack()) {
             fragment.navigateToCategories();
+            loadDetailFragmentWith(null, true);
         } else {
             super.onBackPressed();
         }
     }
 
-    public void loadDetailFragmentWith(Book book) {
+    public void loadDetailFragmentWith(Book book, boolean isMessageVisible) {
         BookFragment fragment = new BookFragment();
         Bundle args = new Bundle();
         args.putParcelable(BookNerdApp.KEY_BOOK, book);
+        args.putBoolean(BookNerdApp.KEY_VISIBILITY, isMessageVisible);
         fragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment, fragment).commit();
     }

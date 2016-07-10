@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.activity.BarcodeActivity;
+import com.ronakmanglani.booknerd.activity.MainActivity;
 import com.ronakmanglani.booknerd.activity.SearchActivity;
 
 import butterknife.BindView;
@@ -89,6 +90,7 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER)
                     .commit();
+            ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
             return true;
         }
         return false;

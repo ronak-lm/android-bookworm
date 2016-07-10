@@ -32,6 +32,7 @@
     <string name="no_results">Oops! Dobby couldn\'t find any results&#8230;</string>
 
     <!-- Book Detail Page -->
+    <string name="detail_message">Select a category from the list&#8230;</string>
     <string name="detail_subtitle">by %1$s\n%2$s pages</string>
     <string name="detail_subtitle_by">by %1$s</string>
     <string name="detail_subtitle_page">%1$s pages</string>

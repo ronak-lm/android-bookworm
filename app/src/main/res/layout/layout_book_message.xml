@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/no_results"
+    android:id="@+id/book_message_holder"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:visibility="visible">
 
     <LinearLayout
         android:orientation="vertical"
@@ -16,17 +18,16 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/error_icon_size"
             android:layout_gravity="center"
-            android:src="@drawable/icon_dobby"
+            android:src="@drawable/icon_booknerd"
             android:contentDescription="@string/description_no_results"/>
 
         <com.ronakmanglani.booknerd.view.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dist_large"
             android:layout_marginLeft="@dimen/dist_large"
             android:layout_marginRight="@dimen/dist_large"
             android:gravity="center"
-            android:text="@string/no_results"
+            android:text="@string/detail_message"
             android:textSize="@dimen/text_large"/>
 
     </LinearLayout>

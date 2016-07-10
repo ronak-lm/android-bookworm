@@ -214,7 +214,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
 
         if (DimenUtil.isTablet()) {
             Book book = new Book(adapter.getList().get(0));
-            ((MainActivity) getActivity()).loadDetailFragmentWith(book);
+            ((MainActivity) getActivity()).loadDetailFragmentWith(book, false);
         }
 
         currentState = BookNerdApp.STATE_LOADED;
@@ -250,7 +250,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
     public void onBestsellerClicked(int position) {
         Book book = new Book(adapter.getList().get(position));
         if (DimenUtil.isTablet()) {
-            ((MainActivity) getActivity()).loadDetailFragmentWith(book);
+            ((MainActivity) getActivity()).loadDetailFragmentWith(book, false);
         } else {
             Intent intent = new Intent(getContext(), BookActivity.class);
             intent.putExtra(BookNerdApp.KEY_BOOK, book);

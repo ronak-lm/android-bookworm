@@ -8,7 +8,7 @@
 
     <!-- Error Icon -->
     <ImageView android:src="@drawable/server_unreachable"
-        android:layout_width="@dimen/error_icon_width"
+        android:layout_width="@dimen/error_icon_size"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_error_icon"/>
 

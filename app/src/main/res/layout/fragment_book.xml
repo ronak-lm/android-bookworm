@@ -20,5 +20,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_book" />
+    <include layout="@layout/layout_book_message" />
 
 </android.support.design.widget.CoordinatorLayout>
