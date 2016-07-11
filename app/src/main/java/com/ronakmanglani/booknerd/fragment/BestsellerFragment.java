@@ -245,6 +245,9 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         listName = Category.getCategoryList().get(position).getListName();
         updateToolbarTitle(displayName);
         navigateToBestsellers();
+        if (DimenUtil.isTablet()) {
+            ((MainActivity) getActivity()).loadDetailFragmentWith(null, false);
+        }
     }
     @Override
     public void onBestsellerClicked(int position) {
