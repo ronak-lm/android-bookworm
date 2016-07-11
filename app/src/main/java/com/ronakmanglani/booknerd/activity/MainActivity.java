@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         BestsellerFragment fragment = (BestsellerFragment) getSupportFragmentManager().findFragmentByTag(BookNerdApp.TAG_BESTSELLER);
         if (fragment != null && fragment.canGoBack()) {
             fragment.navigateToCategories();
-            loadDetailFragmentWith(null, true);
+            if (DimenUtil.isTablet()) {
+                loadDetailFragmentWith(null, true);
+            }
         } else {
             super.onBackPressed();
         }
