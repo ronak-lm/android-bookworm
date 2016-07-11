@@ -171,6 +171,8 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                             JSONArray books = response.getJSONObject("results").getJSONArray("books");
                             for (int i = 0; i < books.length(); i++) {
                                 JSONObject bookObject = books.getJSONObject(i);
+                                String currentRank = bookObject.getString("rank");
+                                String weeksOnList = bookObject.getString("weeks_on_list");
                                 String isbn10 = bookObject.getString("primary_isbn10");
                                 String isbn13 = bookObject.getString("primary_isbn13");
                                 String publisher = bookObject.getString("publisher");
@@ -180,8 +182,8 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
                                 String imageUrl = bookObject.getString("book_image");
                                 String itemUrl = bookObject.getString("amazon_product_url");
 
-                                adapter.addToList(new Bestseller(isbn10, isbn13, title,
-                                        author, description, imageUrl, publisher, itemUrl));
+                                adapter.addToList(new Bestseller(isbn10, isbn13, title, author, description,
+                                        imageUrl, currentRank, weeksOnList, publisher, itemUrl));
                             }
 
                             onDownloadSuccessful();

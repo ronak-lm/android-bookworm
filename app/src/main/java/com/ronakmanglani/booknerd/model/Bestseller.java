@@ -16,6 +16,8 @@ public class Bestseller implements Parcelable {
     private String author;
     private String description;
     private String imageUrl;
+    private String currentRank;
+    private String weeksOnList;
     private String publisher;
     private String itemUrl;
 
@@ -46,6 +48,12 @@ public class Bestseller implements Parcelable {
     public String getImageUrl() {
         return imageUrl;
     }
+    public String getCurrentRank() {
+        return currentRank;
+    }
+    public String getWeeksOnList() {
+        return weeksOnList;
+    }
     public String getPublisher() {
         return publisher;
     }
@@ -55,13 +63,16 @@ public class Bestseller implements Parcelable {
 
     // Constructor
     public Bestseller(String isbn10, String isbn13, String title, String author,
-                      String description, String imageUrl, String publisher, String itemUrl) {
+                      String description, String imageUrl, String currentRank,
+                      String weeksOnList, String publisher, String itemUrl) {
         this.isbn10 = isbn10;
         this.isbn13 = isbn13;
         this.title = title;
         this.author = author;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.currentRank = currentRank;
+        this.weeksOnList = weeksOnList;
         this.publisher = publisher;
         this.itemUrl = itemUrl;
     }
@@ -82,6 +93,8 @@ public class Bestseller implements Parcelable {
         this.author = in.readString();
         this.description = in.readString();
         this.imageUrl = in.readString();
+        this.currentRank = in.readString();
+        this.weeksOnList = in.readString();
         this.publisher = in.readString();
         this.itemUrl = in.readString();
     }
@@ -93,6 +106,8 @@ public class Bestseller implements Parcelable {
         out.writeString(author);
         out.writeString(description);
         out.writeString(imageUrl);
+        out.writeString(currentRank);
+        out.writeString(weeksOnList);
         out.writeString(publisher);
         out.writeString(itemUrl);
     }
