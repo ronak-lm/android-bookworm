@@ -6,6 +6,17 @@ public class StringUtil {
     private StringUtil() {
     }
 
+    public static boolean isNullOrEmpty(String s) {
+        if (s == null ||
+            s.length() == 0 ||
+            s.toLowerCase().equals("null") ||
+            s.toLowerCase().equals("none")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static String toTitleCase(String s) {
         final String ACTIONABLE_DELIMITERS = " -/";
 

@@ -3,6 +3,8 @@ package com.ronakmanglani.booknerd.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ronakmanglani.booknerd.util.StringUtil;
+
 import java.util.UUID;
 
 public class Bestseller implements Parcelable {
@@ -20,16 +22,16 @@ public class Bestseller implements Parcelable {
     // Getters
     public String getUniqueId() {
         // If book has ISBN10, use it as ID
-        if (isbn10.length() > 0) {
+        if (!StringUtil.isNullOrEmpty(isbn10)) {
             return "nyt1:" + isbn10;
         }
         // If no ISBN10, use ISBN13
-        else if (isbn13.length() > 0) {
+        else if (!StringUtil.isNullOrEmpty(isbn13)) {
             return "nyt2:" + isbn13;
         }
         // If no ISBN numbers, use combination of title and author
         else {
-            return "nyt3" + title + author;
+            return "nyt3:" + title + author;
         }
     }
     public String getTitle() {
