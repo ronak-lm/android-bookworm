@@ -39,7 +39,7 @@
 
         <!-- Author and Page Count -->
         <com.ronakmanglani.booknerd.view.RobotoLightTextView
-            android:id="@+id/book_subtitle"
+            android:id="@+id/book_author_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"

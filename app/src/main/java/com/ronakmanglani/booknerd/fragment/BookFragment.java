@@ -31,17 +31,20 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     private Book book;
 
     @BindView(R.id.toolbar)                 Toolbar toolbar;
+    @BindView(R.id.toolbar_text_holder)     View toolbarTextHolder;
+    @BindView(R.id.toolbar_title)           TextView toolbarTitle;
+    @BindView(R.id.toolbar_subtitle)        TextView toolbarSubtitle;
     @BindView(R.id.book_message_holder)     View bookMessageHolder;
     @BindView(R.id.book_detail_holder)      View bookDetailHolder;
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
-    @BindView(R.id.book_subtitle)           TextView bookSubtitle;
+    @BindView(R.id.book_author_page)        TextView bookAuthorAndPage;
     @BindView(R.id.book_rating_holder)      View bookRatingHolder;
     @BindView(R.id.book_rating)             TextView bookRating;
     @BindView(R.id.book_vote_count)         TextView bookVoteCount;
     @BindView(R.id.book_publisher_holder)   View bookPublisherHolder;
-    @BindView(R.id.publication_name)        TextView bookPublisher;
-    @BindView(R.id.publication_date)        TextView bookDate;
+    @BindView(R.id.book_publication_name)   TextView bookPublisher;
+    @BindView(R.id.book_publication_date)   TextView bookDate;
     @BindView(R.id.book_description_holder) View bookDescriptionHolder;
     @BindView(R.id.book_description)        TextView bookDescription;
 
@@ -62,7 +65,13 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         }
 
         // Setup toolbar
-        toolbar.setTitle(book.getTitle());
+        if (book.getSubtitle().length() == 0) {
+            toolbarTextHolder.setVisibility(GONE);
+            toolbar.setTitle(book.getTitle());
+        } else {
+            toolbarTitle.setText(book.getTitle());
+            toolbarSubtitle.setText(book.getSubtitle());
+        }
         toolbar.setOnMenuItemClickListener(this);
         toolbar.inflateMenu(R.menu.menu_book);
         if (!DimenUtil.isTablet()) {
@@ -82,17 +91,16 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
             bookCover.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
         }
 
-        // Title and Subtitle
-        toolbar.setTitle(book.getTitle());
+        // Title, author and page count
         bookTitle.setText(book.getTitle());
         if (book.getAuthors().length() == 0 && book.getPageCount().length() == 0) {
-            bookSubtitle.setVisibility(View.GONE);
+            bookAuthorAndPage.setVisibility(View.GONE);
         } else if (book.getPageCount().length() == 0) {
-            bookSubtitle.setText(getString(R.string.detail_subtitle_by, book.getAuthors()));
+            bookAuthorAndPage.setText(getString(R.string.detail_subtitle_by, book.getAuthors()));
         } else if (book.getAuthors().length() == 0) {
-            bookSubtitle.setText(getString(R.string.detail_subtitle_page, book.getPageCount()));
+            bookAuthorAndPage.setText(getString(R.string.detail_subtitle_page, book.getPageCount()));
         } else {
-            bookSubtitle.setText(getString(R.string.detail_subtitle, book.getAuthors(), book.getPageCount()));
+            bookAuthorAndPage.setText(getString(R.string.detail_subtitle, book.getAuthors(), book.getPageCount()));
         }
 
         // Rating
