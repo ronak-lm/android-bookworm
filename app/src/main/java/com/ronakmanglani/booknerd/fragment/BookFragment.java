@@ -45,6 +45,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     @BindView(R.id.book_publisher_holder)   View bookPublisherHolder;
     @BindView(R.id.book_publication_name)   TextView bookPublisher;
     @BindView(R.id.book_publication_date)   TextView bookDate;
+    @BindView(R.id.book_publication_isbn)   TextView bookIsbn;
     @BindView(R.id.book_description_holder) View bookDescriptionHolder;
     @BindView(R.id.book_description)        TextView bookDescription;
 
@@ -112,17 +113,30 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         }
 
         // Publication info
-        if (book.getPublisher().length() == 0 && book.getPublishDate().length() == 0) {
+        String publisher = book.getPublisher();
+        String publishDate = book.getPublishDate();
+        String identifiers = book.getIdentifier();
+        if (publisher.length() == 0 && publishDate.length() == 0 && identifiers.length() == 0) {
             bookPublisherHolder.setVisibility(View.GONE);
-        } else if (book.getPublisher().length() == 0) {
-            bookPublisher.setVisibility(View.GONE);
-            bookDate.setText(getString(R.string.detail_publication_date, book.getPublishDate()));
-        } else if (book.getPublishDate().length() == 0) {
-            bookPublisher.setText(getString(R.string.detail_publication_name, book.getPublisher()));
-            bookDate.setVisibility(View.GONE);
         } else {
-            bookPublisher.setText(getString(R.string.detail_publication_name, book.getPublisher()));
-            bookDate.setText(getString(R.string.detail_publication_date, book.getPublishDate()));
+            // Publisher
+            if (publisher.length() == 0) {
+                bookPublisher.setVisibility(GONE);
+            } else {
+                bookPublisher.setText(getString(R.string.detail_publication_name, publisher));
+            }
+            // Publish date
+            if (publishDate.length() == 0) {
+                bookDate.setVisibility(GONE);
+            } else {
+                bookDate.setText(getString(R.string.detail_publication_date, publishDate));
+            }
+            // Identifiers
+            if (identifiers.length() == 0) {
+                bookIsbn.setVisibility(GONE);
+            } else {
+                bookIsbn.setText(getString(R.string.detail_publication_isbn, identifiers));
+            }
         }
 
         // Book description

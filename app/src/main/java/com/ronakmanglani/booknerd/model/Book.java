@@ -3,6 +3,8 @@ package com.ronakmanglani.booknerd.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ronakmanglani.booknerd.util.StringUtil;
+
 public class Book implements Parcelable {
 
     // Attributes
@@ -28,11 +30,14 @@ public class Book implements Parcelable {
     public String getUniqueId() {
         return uniqueId;
     }
-    public String getIsbn10() {
-        return isbn10;
-    }
-    public String getIsbn13() {
-        return isbn13;
+    public String getIdentifier() {
+        if (StringUtil.isNullOrEmpty(isbn10) && StringUtil.isNullOrEmpty(isbn13)) {
+            return "";
+        } else if (StringUtil.isNullOrEmpty(isbn10)) {
+            return isbn13;
+        } else {
+            return isbn10;
+        }
     }
     public String getTitle() {
         return title;
