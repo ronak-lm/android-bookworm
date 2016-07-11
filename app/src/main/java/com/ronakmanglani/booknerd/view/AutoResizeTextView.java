@@ -11,7 +11,6 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.widget.TextView;
 
 public class AutoResizeTextView  extends RobotoLightTextView {
 

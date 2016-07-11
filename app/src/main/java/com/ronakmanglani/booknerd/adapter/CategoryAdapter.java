@@ -9,8 +9,6 @@ import android.widget.TextView;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.Category;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

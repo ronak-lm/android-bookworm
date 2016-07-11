@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 import com.ronakmanglani.booknerd.util.StringUtil;
 
-import java.util.UUID;
-
 public class Bestseller implements Parcelable {
 
     // Attributes
