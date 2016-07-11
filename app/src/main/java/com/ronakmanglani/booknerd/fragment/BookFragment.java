@@ -125,7 +125,11 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
             bookRankingHolder.setVisibility(GONE);
         } else {
             bookCurrentRank.setText(getString(R.string.detail_ranking_current, book.getCurrentRank()));
-            bookWeeksOnList.setText(getString(R.string.detail_ranking_weeks, book.getWeeksOnList()));
+            if (book.getWeeksOnList().equals("0")) {
+                bookWeeksOnList.setVisibility(GONE);
+            } else {
+                bookWeeksOnList.setText(getString(R.string.detail_ranking_weeks, book.getWeeksOnList()));
+            }
         }
 
         // Publication info
