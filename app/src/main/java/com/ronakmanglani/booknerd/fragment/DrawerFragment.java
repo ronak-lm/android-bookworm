@@ -20,6 +20,7 @@ import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.activity.BarcodeActivity;
 import com.ronakmanglani.booknerd.activity.MainActivity;
 import com.ronakmanglani.booknerd.activity.SearchActivity;
+import com.ronakmanglani.booknerd.util.DimenUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,7 +91,9 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER)
                     .commit();
-            ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
+            if (DimenUtil.isTablet()) {
+                ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
+            }
             return true;
         }
         return false;
