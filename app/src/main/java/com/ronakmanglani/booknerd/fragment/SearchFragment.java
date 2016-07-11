@@ -167,30 +167,50 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                     JSONObject bookObject = itemsArray.getJSONObject(i);
                                     String uniqueId = "gbid:" + bookObject.getString("id");
                                     JSONObject volumeInfo = bookObject.getJSONObject("volumeInfo");
-                                    String title = volumeInfo.getString("title");
 
+                                    // Title, subtitle and author
+                                    String title = volumeInfo.getString("title");
+                                    String subtitle = getStringFromObject(volumeInfo, "subtitle");
                                     String authors = "";
                                     if (volumeInfo.has("authors")) {
-                                        JSONArray authorsObject = volumeInfo.getJSONArray("authors");
-                                        StringBuilder sb = new StringBuilder();
-                                        for (int j = 0; j < authorsObject.length(); j++) {
-                                            sb.append(authorsObject.getString(j)).append(", ");
+                                        JSONArray authorsArray = volumeInfo.getJSONArray("authors");
+                                        StringBuilder sb1 = new StringBuilder();
+                                        for (int j = 0; j < authorsArray.length(); j++) {
+                                            sb1.append(authorsArray.getString(j)).append(", ");
                                         }
-                                        sb.delete(sb.length() - 2, sb.length());
-                                        authors = sb.toString();
+                                        sb1.delete(sb1.length() - 2, sb1.length());
+                                        authors = sb1.toString();
                                     }
 
-                                    String publisher = getStringFromObject(volumeInfo, "publisher");
-                                    String publishedDate = getStringFromObject(volumeInfo, "publishedDate");
-                                    String description = getStringFromObject(volumeInfo, "description");
-                                    String pageCount = getStringFromObject(volumeInfo, "pageCount");
-                                    String ratingCount = getStringFromObject(volumeInfo, "ratingsCount");
-                                    String averageRating = getStringFromObject(volumeInfo, "averageRating");
-                                    String itemUrl = getStringFromObject(volumeInfo, "infoLink");
-                                    if (averageRating.length() == 1) {
-                                        averageRating = averageRating + ".0";
+                                    // ISBN numbers
+                                    String isbn10 = "";
+                                    String isbn13 = "";
+                                    if (volumeInfo.has("industryIdentifiers")) {
+                                        JSONArray identifiers = volumeInfo.getJSONArray("industryIdentifiers");
+                                        for (int j = 0; j < identifiers.length(); j++) {
+                                            JSONObject identifier = identifiers.getJSONObject(j);
+                                            if (identifier.getString("type").equals("ISBN_13")) {
+                                                isbn13 = identifier.getString("identifier");
+                                            }
+                                            if (identifier.getString("type").equals("ISBN_10")) {
+                                                isbn10 = identifier.getString("identifier");
+                                            }
+                                        }
                                     }
 
+                                    // Book's categories/genre
+                                    String categories = "";
+                                    if (volumeInfo.has("categories")) {
+                                        JSONArray categoriesArray = volumeInfo.getJSONArray("categories");                                        StringBuilder sb = new StringBuilder();
+                                        StringBuilder sb2 = new StringBuilder();
+                                        for (int j = 0; j < categoriesArray.length(); j++) {
+                                            sb2.append(categoriesArray.getString(j)).append(", ");
+                                        }
+                                        sb2.delete(sb2.length() - 2, sb2.length());
+                                        categories = sb2.toString();
+                                    }
+
+                                    // Book's cover image
                                     String imageUrl;
                                     if (volumeInfo.has("imageLinks")) {
                                         JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
@@ -205,8 +225,21 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                         imageUrl = "";
                                     }
 
-                                    adapter.addToList(new Book(uniqueId, title, authors, pageCount, averageRating,
-                                            ratingCount, imageUrl, publisher, publishedDate, description, itemUrl));
+                                    // Other info
+                                    String publisher = getStringFromObject(volumeInfo, "publisher");
+                                    String publishedDate = getStringFromObject(volumeInfo, "publishedDate");
+                                    String description = getStringFromObject(volumeInfo, "description");
+                                    String pageCount = getStringFromObject(volumeInfo, "pageCount");
+                                    String ratingCount = getStringFromObject(volumeInfo, "ratingsCount");
+                                    String averageRating = getStringFromObject(volumeInfo, "averageRating");
+                                    String itemUrl = getStringFromObject(volumeInfo, "infoLink");
+                                    if (averageRating.length() == 1) {
+                                        averageRating = averageRating + ".0";
+                                    }
+
+                                    adapter.addToList(new Book(uniqueId, isbn10, isbn13, title, subtitle, authors,
+                                            pageCount, averageRating, ratingCount, imageUrl, categories, publisher,
+                                            publishedDate, description, itemUrl));
                                 }
                             }
 

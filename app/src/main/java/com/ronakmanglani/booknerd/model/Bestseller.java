@@ -36,6 +36,12 @@ public class Bestseller implements Parcelable {
             return "nyt3:" + title + author;
         }
     }
+    public String getIsbn10() {
+        return isbn10;
+    }
+    public String getIsbn13() {
+        return isbn13;
+    }
     public String getTitle() {
         return title;
     }
