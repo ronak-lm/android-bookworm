@@ -17,6 +17,9 @@
         <!-- Title, Author, Rating, etc -->
         <include layout="@layout/layout_book_basic" />
 
+        <!-- Bestseller Ranking -->
+        <include layout="@layout/layout_book_ranking" />
+
         <!-- Publication Name and Date -->
         <include layout="@layout/layout_book_publication" />
 

@@ -37,8 +37,11 @@
     <string name="detail_subtitle_by">by %1$s</string>
     <string name="detail_subtitle_page">%1$s pages</string>
     <string name="detail_rating">%1$s ratings</string>
+    <string name="detail_ranking">RANKING</string>
     <string name="detail_description">DESCRIPTION</string>
     <string name="detail_publication">PUBLICATION</string>
+    <string name="detail_ranking_current">Current Rank : %1$s</string>
+    <string name="detail_ranking_weeks">Weeks on List : %1$s</string>
     <string name="detail_publication_name">Publisher : %1$s</string>
     <string name="detail_publication_date">Published : %1$s</string>
     <string name="detail_publication_isbn">ISBN : %1$s</string>

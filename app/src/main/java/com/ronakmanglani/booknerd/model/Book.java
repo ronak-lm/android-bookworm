@@ -20,7 +20,6 @@ public class Book implements Parcelable {
     private String imageUrl;
     private String currentRank;
     private String weeksOnList;
-    private String categories;
     private String publisher;
     private String publishDate;
     private String description;
@@ -66,9 +65,6 @@ public class Book implements Parcelable {
     public String getWeeksOnList() {
         return weeksOnList;
     }
-    public String getCategories() {
-        return categories;
-    }
     public String getPublisher() {
         return publisher;
     }
@@ -83,9 +79,10 @@ public class Book implements Parcelable {
     }
 
     // Constructor
-    public Book(String uniqueId, String isbn10, String isbn13, String title, String subtitle, String authors,
-                String pageCount, String averageRating, String ratingCount, String imageUrl, String categories,
-                String publisher, String publishDate, String description, String itemUrl) {
+    public Book(String uniqueId, String isbn10, String isbn13, String title, String subtitle,
+                String authors, String pageCount, String averageRating, String ratingCount,
+                String imageUrl, String publisher, String publishDate,
+                String description, String itemUrl) {
         this.uniqueId = uniqueId;
         this.isbn10 = isbn10;
         this.isbn13 = isbn13;
@@ -98,7 +95,6 @@ public class Book implements Parcelable {
         this.imageUrl = imageUrl;
         this.currentRank = "";
         this.weeksOnList = "";
-        this.categories = categories;
         this.publisher = publisher;
         this.publishDate = publishDate;
         this.description = description;
@@ -117,7 +113,6 @@ public class Book implements Parcelable {
         this.imageUrl = bestsellerBook.getImageUrl();
         this.currentRank = bestsellerBook.getCurrentRank();
         this.weeksOnList = bestsellerBook.getWeeksOnList();
-        this.categories = "";
         this.publisher = bestsellerBook.getPublisher();
         this.publishDate = "";
         this.description = bestsellerBook.getDescription();
@@ -146,7 +141,6 @@ public class Book implements Parcelable {
         this.imageUrl = in.readString();
         this.currentRank = in.readString();
         this.weeksOnList = in.readString();
-        this.categories = in.readString();
         this.publisher = in.readString();
         this.publishDate = in.readString();
         this.description = in.readString();
@@ -166,7 +160,6 @@ public class Book implements Parcelable {
         out.writeString(imageUrl);
         out.writeString(currentRank);
         out.writeString(weeksOnList);
-        out.writeString(categories);
         out.writeString(publisher);
         out.writeString(publishDate);
         out.writeString(description);

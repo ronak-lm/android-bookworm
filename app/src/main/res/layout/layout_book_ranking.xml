@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/book_publication_holder"
+    android:id="@+id/book_ranking_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dist_medium"
-    android:padding="@dimen/dist_large"
     android:orientation="vertical"
+    android:padding="@dimen/dist_large"
     android:background="@color/text_secondary"
     tools:showIn="@layout/fragment_book">
 
@@ -18,31 +18,25 @@
         android:gravity="center_vertical">
 
         <ImageView style="@style/BookDetailIconsStyle"
-            android:src="@drawable/icon_publication"
+            android:src="@drawable/icon_ranking"
             tools:ignore="ContentDescription" />
 
         <com.ronakmanglani.booknerd.view.RobotoBoldTextView
             style="@style/BookDetailHeaderStyle"
-            android:text="@string/detail_publication" />
+            android:text="@string/detail_ranking" />
 
     </LinearLayout>
 
-    <!-- Publisher Name -->
+    <!-- Value -->
     <com.ronakmanglani.booknerd.view.RobotoLightTextView
-        android:id="@+id/book_publication_name"
-        style="@style/BookDetailPublicationStyle"
-        tools:text="Publisher : Sample Name" />
+        android:id="@+id/book_current_rank"
+        style="@style/BookDetailValueStyle"
+        tools:text="Current Rank : 2"/>
 
-    <!-- Publication Date -->
+    <!-- Value -->
     <com.ronakmanglani.booknerd.view.RobotoLightTextView
-        android:id="@+id/book_publication_date"
-        style="@style/BookDetailPublicationStyle"
-        tools:text="Published : 04 July 2016" />
-
-    <!-- ISBN Number -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
-        android:id="@+id/book_publication_isbn"
-        style="@style/BookDetailPublicationStyle"
-        tools:text="ISBN : 1234567890123" />
+        android:id="@+id/book_weeks_list"
+        style="@style/BookDetailValueStyle"
+        tools:text="Weeks on List : 7"/>
 
 </LinearLayout>

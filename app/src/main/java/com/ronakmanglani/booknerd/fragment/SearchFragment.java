@@ -198,18 +198,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                         }
                                     }
 
-                                    // Book's categories/genre
-                                    String categories = "";
-                                    if (volumeInfo.has("categories")) {
-                                        JSONArray categoriesArray = volumeInfo.getJSONArray("categories");                                        StringBuilder sb = new StringBuilder();
-                                        StringBuilder sb2 = new StringBuilder();
-                                        for (int j = 0; j < categoriesArray.length(); j++) {
-                                            sb2.append(categoriesArray.getString(j)).append(", ");
-                                        }
-                                        sb2.delete(sb2.length() - 2, sb2.length());
-                                        categories = sb2.toString();
-                                    }
-
                                     // Book's cover image
                                     String imageUrl;
                                     if (volumeInfo.has("imageLinks")) {
@@ -237,9 +225,9 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                         averageRating = averageRating + ".0";
                                     }
 
-                                    adapter.addToList(new Book(uniqueId, isbn10, isbn13, title, subtitle, authors,
-                                            pageCount, averageRating, ratingCount, imageUrl, categories, publisher,
-                                            publishedDate, description, itemUrl));
+                                    adapter.addToList(new Book(uniqueId, isbn10, isbn13, title, subtitle,
+                                            authors, pageCount, averageRating, ratingCount, imageUrl,
+                                            publisher, publishedDate, description, itemUrl));
                                 }
                             }
 

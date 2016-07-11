@@ -34,18 +34,26 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     @BindView(R.id.toolbar_text_holder)     View toolbarTextHolder;
     @BindView(R.id.toolbar_title)           TextView toolbarTitle;
     @BindView(R.id.toolbar_subtitle)        TextView toolbarSubtitle;
+
     @BindView(R.id.book_message_holder)     View bookMessageHolder;
     @BindView(R.id.book_detail_holder)      View bookDetailHolder;
+
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
     @BindView(R.id.book_author_page)        TextView bookAuthorAndPage;
     @BindView(R.id.book_rating_holder)      View bookRatingHolder;
     @BindView(R.id.book_rating)             TextView bookRating;
     @BindView(R.id.book_vote_count)         TextView bookVoteCount;
-    @BindView(R.id.book_publisher_holder)   View bookPublisherHolder;
+
+    @BindView(R.id.book_ranking_holder)     View bookRankingHolder;
+    @BindView(R.id.book_current_rank)       TextView bookCurrentRank;
+    @BindView(R.id.book_weeks_list)         TextView bookWeeksOnList;
+
+    @BindView(R.id.book_publication_holder) View bookPublisherHolder;
     @BindView(R.id.book_publication_name)   TextView bookPublisher;
     @BindView(R.id.book_publication_date)   TextView bookDate;
     @BindView(R.id.book_publication_isbn)   TextView bookIsbn;
+
     @BindView(R.id.book_description_holder) View bookDescriptionHolder;
     @BindView(R.id.book_description)        TextView bookDescription;
 
@@ -110,6 +118,14 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         } else {
             bookRating.setText(book.getAverageRating());
             bookVoteCount.setText(getString(R.string.detail_rating, book.getRatingCount()));
+        }
+
+        // Ranking
+        if (book.getCurrentRank().length() == 0 || book.getWeeksOnList().length() == 0) {
+            bookRankingHolder.setVisibility(GONE);
+        } else {
+            bookCurrentRank.setText(getString(R.string.detail_ranking_current, book.getCurrentRank()));
+            bookWeeksOnList.setText(getString(R.string.detail_ranking_weeks, book.getWeeksOnList()));
         }
 
         // Publication info
