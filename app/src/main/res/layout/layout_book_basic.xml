@@ -27,7 +27,7 @@
         android:orientation="vertical">
 
         <!-- Book Title -->
-        <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+        <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
             android:id="@+id/book_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             tools:text="Ender's Game"/>
 
         <!-- Author and Page Count -->
-        <com.ronakmanglani.booknerd.view.RobotoLightTextView
+        <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
             android:id="@+id/book_author_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:orientation="horizontal">
 
             <!-- Average Rating -->
-            <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+            <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
                 android:id="@+id/book_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 tools:text="4.0"/>
 
             <!-- Vote Count -->
-            <com.ronakmanglani.booknerd.view.RobotoRegularTextView
+            <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
                 android:id="@+id/book_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

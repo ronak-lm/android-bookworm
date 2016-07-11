@@ -1,17 +1,17 @@
-package com.ronakmanglani.booknerd.util;
+package com.ronakmanglani.booknerd.api;
 
 import android.net.Uri;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 
-public class ApiUtil {
+public class ApiHelper {
 
     // Private constructor to prevent instantiation
-    private ApiUtil() {
+    private ApiHelper() {
     }
 
-    // Get API keys
+    // API keys
     private static String getGoogleBooksApiKey() {
         return BookNerdApp.getAppContext().getString(R.string.google_books_key);
     }
@@ -20,13 +20,10 @@ public class ApiUtil {
     }
 
     // API endpoints
-    public static String getBestsellerList(String listName) {
+    public static String getBestsellerListUrl(String listName) {
         return "https://api.nytimes.com/svc/books/v3/lists//" + listName + ".json?api-key=" + getNewYorkTimesBestsellerApiKey();
     }
-    public static String getBookDetails(String isbn) {
-        return "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + getGoogleBooksApiKey();
-    }
-    public static String getSearchList(String query) {
+    public static String getSearchListUrl(String query) {
         return Uri.parse("https://www.googleapis.com/books/v1/volumes").buildUpon()
                 .appendQueryParameter("q", query)
                 .appendQueryParameter("key", getGoogleBooksApiKey())

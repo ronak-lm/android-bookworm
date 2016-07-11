@@ -7,13 +7,13 @@
     android:orientation="vertical">
 
     <!-- Error Icon -->
-    <ImageView android:src="@drawable/server_unreachable"
+    <ImageView android:src="@drawable/error_cloud"
         android:layout_width="@dimen/error_icon_size"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_error_icon"/>
 
     <!-- Unable to connect -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginTop="@dimen/error_message_marginTop"
@@ -22,7 +22,7 @@
         android:textSize="@dimen/text_large"/>
 
     <!-- Try again -->
-    <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
         android:id="@+id/try_again"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"

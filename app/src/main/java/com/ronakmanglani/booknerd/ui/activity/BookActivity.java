@@ -1,11 +1,11 @@
-package com.ronakmanglani.booknerd.activity;
+package com.ronakmanglani.booknerd.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.fragment.BookFragment;
+import com.ronakmanglani.booknerd.ui.fragment.BookFragment;
 
 public class BookActivity extends AppCompatActivity {
 

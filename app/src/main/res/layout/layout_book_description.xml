@@ -21,14 +21,14 @@
             android:src="@drawable/icon_description"
             tools:ignore="ContentDescription" />
 
-        <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+        <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
             style="@style/BookDetailHeaderStyle"
             android:text="@string/detail_description" />
 
     </LinearLayout>
 
     <!-- Value -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:id="@+id/book_description"
         style="@style/BookDetailValueStyle"
         tools:text="My book description goes here"/>

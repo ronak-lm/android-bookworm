@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.fragment;
+package com.ronakmanglani.booknerd.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import android.view.ViewGroup;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.activity.BarcodeActivity;
-import com.ronakmanglani.booknerd.activity.MainActivity;
-import com.ronakmanglani.booknerd.activity.SearchActivity;
+import com.ronakmanglani.booknerd.ui.activity.BarcodeActivity;
+import com.ronakmanglani.booknerd.ui.activity.MainActivity;
+import com.ronakmanglani.booknerd.ui.activity.SearchActivity;
 import com.ronakmanglani.booknerd.util.DimenUtil;
 
 import butterknife.BindView;

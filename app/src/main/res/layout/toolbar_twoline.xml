@@ -9,7 +9,7 @@
     android:gravity="center_vertical"
     android:orientation="vertical">
 
-    <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:textColor="@android:color/white"
         tools:text="Book Name"/>
 
-    <com.ronakmanglani.booknerd.view.RobotoRegularTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
         android:id="@+id/toolbar_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

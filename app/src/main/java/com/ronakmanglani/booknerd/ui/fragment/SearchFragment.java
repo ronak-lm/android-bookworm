@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.fragment;
+package com.ronakmanglani.booknerd.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,15 +19,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.activity.BookActivity;
-import com.ronakmanglani.booknerd.activity.SearchActivity;
-import com.ronakmanglani.booknerd.adapter.SearchAdapter;
-import com.ronakmanglani.booknerd.adapter.SearchAdapter.OnBookClickListener;
+import com.ronakmanglani.booknerd.ui.activity.BookActivity;
+import com.ronakmanglani.booknerd.ui.activity.SearchActivity;
+import com.ronakmanglani.booknerd.ui.adapter.SearchAdapter;
+import com.ronakmanglani.booknerd.ui.adapter.SearchAdapter.OnBookClickListener;
 import com.ronakmanglani.booknerd.model.Book;
-import com.ronakmanglani.booknerd.util.ApiUtil;
+import com.ronakmanglani.booknerd.api.ApiHelper;
 import com.ronakmanglani.booknerd.util.DimenUtil;
-import com.ronakmanglani.booknerd.util.VolleySingleton;
-import com.ronakmanglani.booknerd.view.PaddingDecorationView;
+import com.ronakmanglani.booknerd.api.VolleySingleton;
+import com.ronakmanglani.booknerd.ui.view.PaddingDecorationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -154,7 +154,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             adapter = new SearchAdapter(this);
             searchList.swapAdapter(adapter, true);
         }
-        String urlToDownload = ApiUtil.getSearchList(searchQuery);
+        String urlToDownload = ApiHelper.getSearchListUrl(searchQuery);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, urlToDownload, null,
                 new Response.Listener<JSONObject>() {

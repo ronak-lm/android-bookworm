@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.activity;
+package com.ronakmanglani.booknerd.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

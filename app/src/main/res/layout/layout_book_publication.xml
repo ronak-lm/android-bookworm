@@ -21,26 +21,26 @@
             android:src="@drawable/icon_publication"
             tools:ignore="ContentDescription" />
 
-        <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+        <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
             style="@style/BookDetailHeaderStyle"
             android:text="@string/detail_publication" />
 
     </LinearLayout>
 
     <!-- Publisher Name -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:id="@+id/book_publication_name"
         style="@style/BookDetailPublicationStyle"
         tools:text="Publisher : Sample Name" />
 
     <!-- Publication Date -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:id="@+id/book_publication_date"
         style="@style/BookDetailPublicationStyle"
         tools:text="Published : 04 July 2016" />
 
     <!-- ISBN Number -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:id="@+id/book_publication_isbn"
         style="@style/BookDetailPublicationStyle"
         tools:text="ISBN : 1234567890123" />

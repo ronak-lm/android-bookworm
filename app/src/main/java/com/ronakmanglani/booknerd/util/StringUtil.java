@@ -7,14 +7,9 @@ public class StringUtil {
     }
 
     public static boolean isNullOrEmpty(String s) {
-        if (s == null ||
-            s.length() == 0 ||
-            s.toLowerCase().equals("null") ||
-            s.toLowerCase().equals("none")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (s == null || s.length() == 0 ||
+                s.toLowerCase().equals("null") ||
+                s.toLowerCase().equals("none"));
     }
 
     public static String toTitleCase(String s) {

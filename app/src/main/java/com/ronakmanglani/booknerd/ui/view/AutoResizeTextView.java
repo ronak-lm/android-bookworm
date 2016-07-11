@@ -2,7 +2,7 @@
 Source: http://adilatwork.blogspot.in/2014/08/android-textview-which-resizes-its-text.html
  */
 
-package com.ronakmanglani.booknerd.view;
+package com.ronakmanglani.booknerd.ui.view;
 
 import android.content.Context;
 import android.text.Layout;

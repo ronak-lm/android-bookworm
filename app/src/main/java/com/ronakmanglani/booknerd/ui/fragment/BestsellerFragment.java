@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.fragment;
+package com.ronakmanglani.booknerd.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,19 +18,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.activity.BookActivity;
-import com.ronakmanglani.booknerd.activity.MainActivity;
-import com.ronakmanglani.booknerd.adapter.BestsellerAdapter;
-import com.ronakmanglani.booknerd.adapter.CategoryAdapter;
-import com.ronakmanglani.booknerd.adapter.CategoryAdapter.OnCategoryClickListener;
+import com.ronakmanglani.booknerd.ui.activity.BookActivity;
+import com.ronakmanglani.booknerd.ui.activity.MainActivity;
+import com.ronakmanglani.booknerd.ui.adapter.BestsellerAdapter;
+import com.ronakmanglani.booknerd.ui.adapter.CategoryAdapter;
+import com.ronakmanglani.booknerd.ui.adapter.CategoryAdapter.OnCategoryClickListener;
 import com.ronakmanglani.booknerd.model.Bestseller;
 import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.model.Category;
-import com.ronakmanglani.booknerd.util.ApiUtil;
+import com.ronakmanglani.booknerd.api.ApiHelper;
 import com.ronakmanglani.booknerd.util.DimenUtil;
 import com.ronakmanglani.booknerd.util.StringUtil;
-import com.ronakmanglani.booknerd.util.VolleySingleton;
-import com.ronakmanglani.booknerd.view.PaddingDecorationView;
+import com.ronakmanglani.booknerd.api.VolleySingleton;
+import com.ronakmanglani.booknerd.ui.view.PaddingDecorationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,7 +42,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.ronakmanglani.booknerd.adapter.BestsellerAdapter.*;
+import static com.ronakmanglani.booknerd.ui.adapter.BestsellerAdapter.*;
 
 public class BestsellerFragment extends Fragment implements OnBestsellerClickListener, OnCategoryClickListener {
 
@@ -161,7 +161,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
             bestsellerList.setLayoutManager(layoutManager);
             bestsellerList.setAdapter(adapter);
         }
-        String urlToDownload = ApiUtil.getBestsellerList(listName);
+        String urlToDownload = ApiHelper.getBestsellerListUrl(listName);
         final JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, urlToDownload, null,
                 new Response.Listener<JSONObject>() {

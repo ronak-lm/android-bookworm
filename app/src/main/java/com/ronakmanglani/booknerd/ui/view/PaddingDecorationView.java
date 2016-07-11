@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.view;
+package com.ronakmanglani.booknerd.ui.view;
 
 import android.content.Context;
 import android.graphics.Rect;

@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.adapter;
+package com.ronakmanglani.booknerd.ui.adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.Bestseller;
-import com.ronakmanglani.booknerd.util.VolleySingleton;
+import com.ronakmanglani.booknerd.api.VolleySingleton;
 
 import java.util.ArrayList;
 

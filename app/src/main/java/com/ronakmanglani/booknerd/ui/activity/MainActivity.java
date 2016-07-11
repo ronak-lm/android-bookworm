@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.activity;
+package com.ronakmanglani.booknerd.ui.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
-import com.ronakmanglani.booknerd.fragment.BestsellerFragment;
-import com.ronakmanglani.booknerd.fragment.BookFragment;
+import com.ronakmanglani.booknerd.ui.fragment.BestsellerFragment;
+import com.ronakmanglani.booknerd.ui.fragment.BookFragment;
 import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.util.DimenUtil;
 

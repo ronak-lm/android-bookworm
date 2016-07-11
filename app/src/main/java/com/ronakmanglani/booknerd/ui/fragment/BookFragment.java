@@ -1,4 +1,4 @@
-package com.ronakmanglani.booknerd.fragment;
+package com.ronakmanglani.booknerd.ui.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,7 +17,7 @@ import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.util.DimenUtil;
-import com.ronakmanglani.booknerd.util.VolleySingleton;
+import com.ronakmanglani.booknerd.api.VolleySingleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

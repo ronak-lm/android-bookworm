@@ -21,20 +21,20 @@
             android:src="@drawable/icon_ranking"
             tools:ignore="ContentDescription" />
 
-        <com.ronakmanglani.booknerd.view.RobotoBoldTextView
+        <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
             style="@style/BookDetailHeaderStyle"
             android:text="@string/detail_ranking" />
 
     </LinearLayout>
 
     <!-- Value -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:id="@+id/book_current_rank"
         style="@style/BookDetailValueStyle"
         tools:text="Current Rank : 2"/>
 
     <!-- Value -->
-    <com.ronakmanglani.booknerd.view.RobotoLightTextView
+    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
         android:id="@+id/book_weeks_list"
         style="@style/BookDetailValueStyle"
         tools:text="Weeks on List : 7"/>
