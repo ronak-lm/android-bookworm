@@ -5,7 +5,7 @@
     android:id="@+id/book_detail_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/dist_medium"
+    android:paddingBottom="@dimen/dist_xxlarge"
     android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/fragment_book">

@@ -4,6 +4,7 @@
     <bool name="is_tablet">false</bool>
 
     <!-- General Margin/Padding -->
+    <dimen name="dist_xxlarge">64dp</dimen>
     <dimen name="dist_xlarge">32dp</dimen>
     <dimen name="dist_large">16dp</dimen>
     <dimen name="dist_medium">8dp</dimen>
