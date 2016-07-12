@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
 import com.ronakmanglani.booknerd.model.Book;
@@ -36,7 +39,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     @BindView(R.id.toolbar_subtitle)        TextView toolbarSubtitle;
 
     @BindView(R.id.book_message_holder)     View bookMessageHolder;
-    @BindView(R.id.book_detail_holder)      View bookDetailHolder;
+    @BindView(R.id.book_detail_holder)      NestedScrollView bookDetailHolder;
 
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
@@ -57,6 +60,11 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
     @BindView(R.id.book_description_holder) View bookDescriptionHolder;
     @BindView(R.id.book_description)        TextView bookDescription;
 
+    @BindView(R.id.fab_menu)                FloatingActionMenu fabMenu;
+    @BindView(R.id.fab_to_read)             FloatingActionButton fabToRead;
+    @BindView(R.id.fab_reading)             FloatingActionButton fabReading;
+    @BindView(R.id.fab_finished)            FloatingActionButton fabFinished;
+
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +80,18 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
             }
             return v;
         }
+
+        // Setup FAB
+        bookDetailHolder.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (oldScrollY < scrollY) {
+                    fabMenu.hideMenuButton(true);
+                } else {
+                    fabMenu.showMenuButton(true);
+                }
+            }
+        });
 
         // Setup toolbar
         if (book.getSubtitle().length() == 0) {

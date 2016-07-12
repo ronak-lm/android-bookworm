@@ -43,5 +43,11 @@
     <string name="detail_publication_name">Publisher : %1$s</string>
     <string name="detail_publication_date">Published : %1$s</string>
     <string name="detail_publication_isbn">ISBN : %1$s</string>
+    <string name="detail_fab_to_read">Want to Read</string>
+    <string name="detail_fab_to_read_remove">Remove from \"To Read\"</string>
+    <string name="detail_fab_reading">Currently Reading</string>
+    <string name="detail_fab_reading_remove">Remove from \"Reading\"</string>
+    <string name="detail_fab_finished">Mark as Finished</string>
+    <string name="detail_fab_finished_remove">Remove from \"Finished\"</string>
 
 </resources>

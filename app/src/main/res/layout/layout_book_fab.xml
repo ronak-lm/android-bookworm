@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fab_menu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_marginBottom="@dimen/detail_fab_margin"
+    android:layout_marginRight="@dimen/detail_fab_margin"
+    android:layout_marginEnd="@dimen/detail_fab_margin"
+    app:menu_colorNormal="@color/accent"
+    app:menu_colorPressed="@color/accent_dark"
+    app:menu_icon="@drawable/fab_add">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_to_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drawer_to_read"
+        app:fab_size="mini"
+        app:fab_label="@string/detail_fab_to_read"
+        app:fab_colorNormal="@color/fab_yellow"
+        app:fab_colorPressed="@color/fab_yellow_dark" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_reading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drawer_reading"
+        app:fab_size="mini"
+        app:fab_label="@string/detail_fab_reading"
+        app:fab_colorNormal="@color/fab_blue"
+        app:fab_colorPressed="@color/fab_blue_dark" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_finished"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drawer_finished"
+        app:fab_size="mini"
+        app:fab_label="@string/detail_fab_finished"
+        app:fab_colorNormal="@color/fab_purple"
+        app:fab_colorPressed="@color/fab_purple_dark" />
+
+</com.github.clans.fab.FloatingActionMenu>

@@ -27,4 +27,6 @@
 
     <include layout="@layout/layout_book_message" />
 
+    <include layout="@layout/layout_book_fab" />
+
 </android.support.design.widget.CoordinatorLayout>
