@@ -8,7 +8,6 @@
     <string name="drawer_to_read">To Read</string>
     <string name="drawer_reading">Reading</string>
     <string name="drawer_finished">Finished</string>
-    <string name="drawer_settings">Settings</string>
     <string name="drawer_about">About</string>
 
     <!-- Toolbar Actions -->
@@ -49,5 +48,8 @@
     <string name="detail_fab_reading_remove">Remove from \"Reading\"</string>
     <string name="detail_fab_finished">Mark as Finished</string>
     <string name="detail_fab_finished_remove">Remove from \"Finished\"</string>
+
+    <!-- Other Strings -->
+    <string name="about_toast">Made by Ronak Manglani</string>
 
 </resources>

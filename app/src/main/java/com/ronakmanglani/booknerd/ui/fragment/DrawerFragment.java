@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
@@ -84,8 +85,7 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         } else if (id == R.id.drawer_barcode) {
             startActivity(new Intent(getContext(), BarcodeActivity.class));
             return false;
-        }
-        else if (id == R.id.drawer_bestseller) {
+        } else if (id == R.id.drawer_bestseller) {
             BestsellerFragment fragment = new BestsellerFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER)
@@ -94,6 +94,8 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
                 ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
             }
             return true;
+        } else if (id == R.id.drawer_about) {
+            Toast.makeText(getContext(), R.string.about_toast, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
