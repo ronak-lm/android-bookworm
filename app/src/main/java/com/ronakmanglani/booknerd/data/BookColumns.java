@@ -28,8 +28,9 @@ public interface BookColumns {
     @DataType(INTEGER) @NotNull String SHELF = "shelf";
 
     // Constants for book shelf
-    public static final int SHELF_TO_READ = 1;
-    public static final int SHELF_READING = 2;
-    public static final int SHELF_FINISHED = 3;
+    int SHELF_NONE = 0;
+    int SHELF_TO_READ = 1;
+    int SHELF_READING = 2;
+    int SHELF_FINISHED = 3;
 
 }
