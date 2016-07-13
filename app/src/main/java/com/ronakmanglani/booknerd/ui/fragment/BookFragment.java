@@ -49,7 +49,8 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
 
     @BindView(R.id.book_cover)              NetworkImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
-    @BindView(R.id.book_author_page)        TextView bookAuthorAndPage;
+    @BindView(R.id.book_author)             TextView bookAuthors;
+    @BindView(R.id.book_page)               TextView bookPageCount;
     @BindView(R.id.book_rating_holder)      View bookRatingHolder;
     @BindView(R.id.book_rating)             TextView bookRating;
     @BindView(R.id.book_vote_count)         TextView bookVoteCount;
@@ -130,14 +131,15 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
 
         // Title, author and page count
         bookTitle.setText(book.getTitle());
-        if (book.getAuthors().length() == 0 && book.getPageCount().length() == 0) {
-            bookAuthorAndPage.setVisibility(View.GONE);
-        } else if (book.getPageCount().length() == 0) {
-            bookAuthorAndPage.setText(getString(R.string.detail_subtitle_by, book.getAuthors()));
-        } else if (book.getAuthors().length() == 0) {
-            bookAuthorAndPage.setText(getString(R.string.detail_subtitle_page, book.getPageCount()));
+        if (book.getAuthors().length() == 0) {
+            bookAuthors.setVisibility(GONE);
         } else {
-            bookAuthorAndPage.setText(getString(R.string.detail_subtitle, book.getAuthors(), book.getPageCount()));
+            bookAuthors.setText(getString(R.string.detail_subtitle_by, book.getAuthors()));
+        }
+        if (book.getPageCount().length() == 0) {
+            bookPageCount.setVisibility(GONE);
+        } else {
+            bookPageCount.setText(getString(R.string.detail_subtitle_page, book.getPageCount()));
         }
 
         // Rating

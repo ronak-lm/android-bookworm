@@ -37,15 +37,25 @@
             android:textSize="@dimen/text_xxlarge"
             tools:text="Ender's Game"/>
 
-        <!-- Author and Page Count -->
+        <!-- Author -->
         <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
-            android:id="@+id/book_author_page"
+            android:id="@+id/book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/text_primary"
-            tools:text="by Orson Scott Card\n352 pages"/>
+            tools:text="by Orson Scott Card"/>
+
+        <!-- Page Count -->
+        <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
+            android:id="@+id/book_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/text_primary"
+            tools:text="352 pages"/>
 
         <!-- Rating Area -->
         <LinearLayout android:id="@+id/book_rating_holder"
