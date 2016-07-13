@@ -41,7 +41,7 @@
     <dimen name="book_rating_icon_size">16dp</dimen>
 
     <!-- Book Details Page -->
-    <dimen name="detail_cover_height">150dp</dimen>
+    <dimen name="detail_cover_height">160dp</dimen>
     <dimen name="detail_cover_width">100dp</dimen>
     <dimen name="detail_icon_size">16dp</dimen>
     <dimen name="detail_fab_margin">12dp</dimen>
