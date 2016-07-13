@@ -7,6 +7,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Set screen size support -->
+    <supports-screens
+        android:largeScreens="true"
+        android:xlargeScreens="true" />
+
     <application
         android:name=".BookNerdApp"
         android:allowBackup="true"
@@ -30,6 +35,12 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.activity.BarcodeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!-- Content Provider -->
+        <provider
+            android:name=".data.generated.BookProvider"
+            android:authorities="com.ronakmanglani.booknerd.data.BookProvider"
+            android:exported="false" />
 
     </application>
 
