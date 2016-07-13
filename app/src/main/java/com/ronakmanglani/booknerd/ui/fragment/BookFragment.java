@@ -1,12 +1,19 @@
 package com.ronakmanglani.booknerd.ui.fragment;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,20 +25,24 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
+import com.ronakmanglani.booknerd.data.BookColumns;
+import com.ronakmanglani.booknerd.data.BookProvider;
 import com.ronakmanglani.booknerd.model.Book;
 import com.ronakmanglani.booknerd.util.DimenUtil;
 import com.ronakmanglani.booknerd.api.VolleySingleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static android.support.v7.widget.Toolbar.*;
 
 public class BookFragment extends Fragment implements OnMenuItemClickListener {
 
-    private Unbinder unbinder;
     private Book book;
+    private int currentShelf;
+    private Unbinder unbinder;
 
     @BindView(R.id.toolbar)                 Toolbar toolbar;
     @BindView(R.id.toolbar_text_holder)     View toolbarTextHolder;
@@ -74,6 +85,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         // Get the book
         book = getArguments().getParcelable(BookNerdApp.KEY_BOOK);
         if (book == null) {
+            fabMenu.setVisibility(GONE);
             bookDetailHolder.setVisibility(GONE);
             if (getArguments().getBoolean(BookNerdApp.KEY_VISIBILITY, false)) {
                 bookMessageHolder.setVisibility(VISIBLE);
@@ -81,7 +93,8 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
             return v;
         }
 
-        // Setup FAB
+        // Floating Action Buttons
+        updateFABs();
         bookDetailHolder.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -194,7 +207,78 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         unbinder.unbind();
     }
 
-    // Click Events
+    // Helper methods
+    private void updateFABs() {
+        // Check if book is already in the database
+        Cursor data = getContext().getContentResolver().
+                query(BookProvider.Books.CONTENT_URI,
+                        new String[] { BookColumns.SHELF },
+                        BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
+                        null, null);
+        if (data != null && data.getCount() > 0) {
+            // If book already exists in database
+            data.moveToFirst();
+            currentShelf = data.getInt(data.getColumnIndex(BookColumns.SHELF));
+            switch (currentShelf) {
+
+                case BookColumns.SHELF_TO_READ:
+                    fabToRead.setVisibility(VISIBLE);
+                    fabReading.setVisibility(VISIBLE);
+                    fabFinished.setVisibility(VISIBLE);
+                    fabToRead.setLabelText(getString(R.string.detail_fab_to_read_remove));
+                    fabReading.setLabelText(getString(R.string.detail_fab_reading));
+                    fabFinished.setLabelText(getString(R.string.detail_fab_finished));
+                    break;
+
+                case BookColumns.SHELF_READING:
+                    fabToRead.setVisibility(GONE);
+                    fabReading.setVisibility(VISIBLE);
+                    fabFinished.setVisibility(VISIBLE);
+                    fabReading.setLabelText(getString(R.string.detail_fab_reading_remove));
+                    fabFinished.setLabelText(getString(R.string.detail_fab_finished));
+                    break;
+
+                case BookColumns.SHELF_FINISHED:
+                    fabToRead.setVisibility(GONE);
+                    fabReading.setVisibility(GONE);
+                    fabFinished.setVisibility(VISIBLE);
+                    fabFinished.setLabelText(getString(R.string.detail_fab_finished_remove));
+                    break;
+
+            }
+            data.close();   // Close query cursor
+        } else {
+            // Book not in database
+            currentShelf = BookColumns.SHELF_NONE;
+            fabToRead.setVisibility(VISIBLE);
+            fabReading.setVisibility(VISIBLE);
+            fabFinished.setVisibility(VISIBLE);
+            fabToRead.setLabelText(getString(R.string.detail_fab_to_read));
+            fabReading.setLabelText(getString(R.string.detail_fab_reading));
+            fabFinished.setLabelText(getString(R.string.detail_fab_finished));
+        }
+    }
+    private ContentValues getContentValues(int shelf) {
+        ContentValues values = new ContentValues();
+        values.put(BookColumns.BOOK_ID, book.getUniqueId());
+        values.put(BookColumns.ISBN_10, book.getIsbn10());
+        values.put(BookColumns.ISBN_13, book.getIsbn13());
+        values.put(BookColumns.TITLE, book.getTitle());
+        values.put(BookColumns.SUBTITLE, book.getSubtitle());
+        values.put(BookColumns.AUTHORS, book.getAuthors());
+        values.put(BookColumns.PAGE_COUNT, book.getPageCount());
+        values.put(BookColumns.AVG_RATING, book.getAverageRating());
+        values.put(BookColumns.RATING_COUNT, book.getRatingCount());
+        values.put(BookColumns.IMAGE_URL, book.getImageUrl());
+        values.put(BookColumns.PUBLISHER, book.getPublisher());
+        values.put(BookColumns.PUBLISH_DATE, book.getPublishDate());
+        values.put(BookColumns.DESCRIPTION, book.getDescription());
+        values.put(BookColumns.ITEM_URL, book.getItemUrl());
+        values.put(BookColumns.SHELF, shelf);
+        return values;
+    }
+
+    // Click events
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
@@ -218,5 +302,69 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
             default:
                 return false;
         }
+    }
+    @OnClick(R.id.fab_to_read)
+    public void onToReadButtonClicked() {
+        if (currentShelf == BookColumns.SHELF_TO_READ) {
+            // Remove from "To Read"
+            getContext().getContentResolver().
+                    delete(BookProvider.Books.CONTENT_URI,
+                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
+                            null);
+        } else {
+            // Insert into "To Read"
+            getContext().getContentResolver().
+                    insert(BookProvider.Books.CONTENT_URI,
+                            getContentValues(BookColumns.SHELF_TO_READ));
+        }
+        updateFABs();
+    }
+    @OnClick(R.id.fab_reading)
+    public void onReadingButtonClicked() {
+        if (currentShelf == BookColumns.SHELF_TO_READ) {
+            // Move from "To Read" to "Reading"
+            ContentValues values = new ContentValues();
+            values.put(BookColumns.SHELF, BookColumns.SHELF_READING);
+            getContext().getContentResolver().
+                    update(BookProvider.Books.CONTENT_URI, values,
+                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
+                            new String[]{});
+        } else if (currentShelf == BookColumns.SHELF_READING) {
+            // Remove from "Reading"
+            getContext().getContentResolver().
+                    delete(BookProvider.Books.CONTENT_URI,
+                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
+                            null);
+        } else {
+            // Insert into "Reading"
+            getContext().getContentResolver().
+                    insert(BookProvider.Books.CONTENT_URI,
+                            getContentValues(BookColumns.SHELF_READING));
+        }
+        updateFABs();
+    }
+    @OnClick(R.id.fab_finished)
+    public void onFinishedButtonClicked() {
+        if (currentShelf == BookColumns.SHELF_TO_READ || currentShelf == BookColumns.SHELF_READING) {
+            // Move from "To Read" or "Reading" to "Finished"
+            ContentValues values = new ContentValues();
+            values.put(BookColumns.SHELF, BookColumns.SHELF_FINISHED);
+            getContext().getContentResolver().
+                    update(BookProvider.Books.CONTENT_URI, values,
+                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
+                            new String[]{});
+        } else if (currentShelf == BookColumns.SHELF_FINISHED) {
+            // Remove from "Finished"
+            getContext().getContentResolver().
+                    delete(BookProvider.Books.CONTENT_URI,
+                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
+                            null);
+        } else {
+            // Insert into "Finished"
+            getContext().getContentResolver().
+                    insert(BookProvider.Books.CONTENT_URI,
+                            getContentValues(BookColumns.SHELF_FINISHED));
+        }
+        updateFABs();
     }
 }
