@@ -29,6 +29,12 @@ public class Book implements Parcelable {
     public String getUniqueId() {
         return uniqueId;
     }
+    public String getIsbn10() {
+        return isbn10;
+    }
+    public String getIsbn13() {
+        return isbn13;
+    }
     public String getIdentifier() {
         if (StringUtil.isNullOrEmpty(isbn10) && StringUtil.isNullOrEmpty(isbn13)) {
             return "";
