@@ -35,13 +35,15 @@ public class Book implements Parcelable {
     public String getIsbn13() {
         return isbn13;
     }
-    public String getIdentifier() {
+    public String getIdentifiers() {
         if (StringUtil.isNullOrEmpty(isbn10) && StringUtil.isNullOrEmpty(isbn13)) {
             return "";
         } else if (StringUtil.isNullOrEmpty(isbn10)) {
             return isbn13;
-        } else {
+        } else if (StringUtil.isNullOrEmpty(isbn13)) {
             return isbn10;
+        } else {
+            return isbn10 + ", " + isbn13;
         }
     }
     public String getTitle() {

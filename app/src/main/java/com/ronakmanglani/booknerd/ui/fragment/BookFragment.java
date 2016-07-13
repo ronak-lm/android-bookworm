@@ -6,14 +6,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -168,7 +163,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         // Publication info
         String publisher = book.getPublisher();
         String publishDate = book.getPublishDate();
-        String identifiers = book.getIdentifier();
+        String identifiers = book.getIdentifiers();
         if (publisher.length() == 0 && publishDate.length() == 0 && identifiers.length() == 0) {
             bookPublisherHolder.setVisibility(View.GONE);
         } else {
