@@ -20,6 +20,7 @@
     <string name="action_search">Search for books&#8230;</string>
 
     <!-- Content Descriptions for ImageViews -->
+    <string name="description_app_icon">App Icon</string>
     <string name="description_book_cover">Book Cover</string>
     <string name="description_error_icon">Error Icon</string>
     <string name="description_no_results">No Results Icon</string>

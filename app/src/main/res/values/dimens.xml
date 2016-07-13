@@ -19,8 +19,11 @@
     <dimen name="text_medium">14sp</dimen>
     <dimen name="text_small">12sp</dimen>
 
-    <!-- Other Dimensions -->
-    <dimen name="drawer_header_height">132dp</dimen>
+    <!-- Navigation Drawer -->
+    <dimen name="drawer_header_height">145dp</dimen>
+    <dimen name="drawer_header_icon_size">40dp</dimen>
+
+    <!-- RecyclerView -->
     <dimen name="recycler_view_padding">6dp</dimen>
     <dimen name="recycler_item_padding">2dp</dimen>
 
