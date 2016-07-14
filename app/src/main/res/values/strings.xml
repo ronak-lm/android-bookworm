@@ -19,6 +19,7 @@
     <string name="action_search">Search for books&#8230;</string>
 
     <!-- Content Descriptions for ImageViews -->
+    <string name="description_books">Books</string>
     <string name="description_app_icon">App Icon</string>
     <string name="description_book_cover">Book Cover</string>
     <string name="description_error_icon">Error Icon</string>
@@ -48,6 +49,9 @@
     <string name="detail_fab_reading_remove">Remove from \"Reading\"</string>
     <string name="detail_fab_finished">Mark as Finished</string>
     <string name="detail_fab_finished_remove">Remove from \"Finished\"</string>
+
+    <!-- Books List Page -->
+    <string name="list_placeholder_text">You haven\'t added any books\nto this list</string>
 
     <!-- Other Strings -->
     <string name="about_toast">Made by Ronak Manglani</string>
