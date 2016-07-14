@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.ronakmanglani.booknerd.BookNerdApp;
 import com.ronakmanglani.booknerd.R;
+import com.ronakmanglani.booknerd.data.BookColumns;
 import com.ronakmanglani.booknerd.ui.activity.BarcodeActivity;
 import com.ronakmanglani.booknerd.ui.activity.MainActivity;
 import com.ronakmanglani.booknerd.ui.activity.SearchActivity;
@@ -79,23 +80,66 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
     public boolean onNavigationItemSelected(MenuItem item) {
         drawerLayout.closeDrawers();
         int id = item.getItemId();
-        if (id == R.id.drawer_search) {
-            startActivity(new Intent(getContext(), SearchActivity.class));
-            return false;
-        } else if (id == R.id.drawer_barcode) {
-            startActivity(new Intent(getContext(), BarcodeActivity.class));
-            return false;
-        } else if (id == R.id.drawer_bestseller) {
-            BestsellerFragment fragment = new BestsellerFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, fragment, BookNerdApp.TAG_BESTSELLER)
-                    .commit();
-            if (DimenUtil.isTablet()) {
-                ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
-            }
-            return true;
-        } else if (id == R.id.drawer_about) {
-            Toast.makeText(getContext(), R.string.about_toast, Toast.LENGTH_SHORT).show();
+        switch (id) {
+
+            case R.id.drawer_search:
+                startActivity(new Intent(getContext(), SearchActivity.class));
+                return false;
+
+            case R.id.drawer_barcode:
+                startActivity(new Intent(getContext(), BarcodeActivity.class));
+                return false;
+
+            case R.id.drawer_bestseller:
+                toolbar.setTitle(R.string.drawer_bestseller);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, new BestsellerFragment(), BookNerdApp.TAG_BESTSELLER)
+                        .commit();
+                if (DimenUtil.isTablet()) {
+                    ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
+                }
+                return true;
+
+            case R.id.drawer_to_read:
+                toolbar.setTitle(R.string.drawer_to_read);
+                ListFragment toReadFragment = new ListFragment();
+                Bundle args1 = new Bundle();
+                args1.putInt(BookNerdApp.KEY_SHELF, BookColumns.SHELF_TO_READ);
+                toReadFragment.setArguments(args1);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, toReadFragment)
+                        .commit();
+                return true;
+
+            case R.id.drawer_reading:
+                toolbar.setTitle(R.string.drawer_reading);
+                ListFragment readingFragment = new ListFragment();
+                Bundle args2 = new Bundle();
+                args2.putInt(BookNerdApp.KEY_SHELF, BookColumns.SHELF_READING);
+                readingFragment.setArguments(args2);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, readingFragment)
+                        .commit();
+                return true;
+
+            case R.id.drawer_finished:
+                toolbar.setTitle(R.string.drawer_finished);
+                ListFragment finishedFragment = new ListFragment();
+                Bundle args3 = new Bundle();
+                args3.putInt(BookNerdApp.KEY_SHELF, BookColumns.SHELF_FINISHED);
+                finishedFragment.setArguments(args3);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, finishedFragment)
+                        .commit();
+                return true;
+
+            case R.id.drawer_about:
+                Toast.makeText(getContext(), R.string.about_toast, Toast.LENGTH_SHORT).show();
+                break;
         }
         return false;
     }
