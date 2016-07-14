@@ -14,6 +14,7 @@ public class BookNerdApp extends Application {
     public static final String KEY_SEARCH = "search_list";
     public static final String KEY_BOOK = "book_object";
     public static final String KEY_VISIBILITY = "message_visibility";
+    public static final String KEY_SHELF = "book_shelf";
     public static final String KEY_STATE = "current_state";
     public static final int STATE_LOADING = 1;
     public static final int STATE_FAILED = 2;
