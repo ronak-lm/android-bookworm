@@ -58,7 +58,16 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         actionBarDrawerToggle.syncState();
 
         // Restore toolbar title
-        if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.KEY_TITLE)) {
+        if (savedInstanceState == null) {
+            toolbar.setTitle(R.string.drawer_bestseller);
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_frame, new BestsellerFragment(), BookNerdApp.TAG_BESTSELLER)
+                    .commit();
+            if (DimenUtil.isTablet()) {
+                ((MainActivity) getActivity()).loadDetailFragmentWith(null, true);
+            }
+        } else if (savedInstanceState.containsKey(BookNerdApp.KEY_TITLE)) {
             toolbar.setTitle(savedInstanceState.getString(BookNerdApp.KEY_TITLE));
         }
 
