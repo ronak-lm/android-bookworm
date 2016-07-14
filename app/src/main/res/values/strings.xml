@@ -50,10 +50,9 @@
     <string name="detail_fab_finished">Mark as Finished</string>
     <string name="detail_fab_finished_remove">Remove from \"Finished\"</string>
 
-    <!-- Books List Page -->
-    <string name="list_placeholder_text">You haven\'t added any books\nto this list</string>
-
     <!-- Other Strings -->
+    <string name="list_placeholder_text">You haven\'t added any books\nto this list</string>
+    <string name="camera_permission_denied">Unable to open camera</string>
     <string name="about_toast">Made by Ronak Manglani</string>
 
 </resources>
