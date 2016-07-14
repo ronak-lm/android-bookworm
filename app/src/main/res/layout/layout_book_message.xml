@@ -18,7 +18,7 @@
             android:layout_height="@dimen/error_icon_size"
             android:layout_gravity="center"
             android:src="@drawable/icon_booknerd"
-            android:contentDescription="@string/description_no_results"/>
+            android:contentDescription="@string/description_app_icon"/>
 
         <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
             android:layout_width="wrap_content"

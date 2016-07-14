@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/drawer_header_height"
     android:background="@color/primary">
@@ -8,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/drawer_header_background"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="wrap_content"
