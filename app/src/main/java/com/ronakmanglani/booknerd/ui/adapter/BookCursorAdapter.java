@@ -22,24 +22,23 @@ import butterknife.ButterKnife;
 
 public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
 
-    public BookCursorAdapter(OnBookClickListener onBookClickListener, Cursor cursor) {
-        super(BookNerdApp.getAppContext(), cursor);
+    // Constructor
+    public BookCursorAdapter(OnBookClickListener onBookClickListener) {
+        super(BookNerdApp.getAppContext(), null);
         this.onBookClickListener = onBookClickListener;
     }
 
-    // RecyclerView methods
-    @Override
-    public int getItemCount() {
-        return super.getItemCount();
+    // Helper methods
+    public Book getItemAt(int position) {
+        Cursor cursor = getCursor();
+        if (cursor == null || cursor.isClosed() || cursor.getCount() == 0) {
+            return null;
+        } else {
+            cursor.moveToPosition(position);
+            return getBookFromCursor(cursor);
+        }
     }
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
-        return new BookViewHolder(v, onBookClickListener);
-    }
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
-        // Get data from cursor
+    public Book getBookFromCursor(Cursor cursor) {
         String uniqueId = cursor.getString(cursor.getColumnIndex(BookColumns.BOOK_ID));
         String isbn10 = cursor.getString(cursor.getColumnIndex(BookColumns.ISBN_10));
         String isbn13 = cursor.getString(cursor.getColumnIndex(BookColumns.ISBN_13));
@@ -54,10 +53,25 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
         String publishDate = cursor.getString(cursor.getColumnIndex(BookColumns.PUBLISH_DATE));
         String description = cursor.getString(cursor.getColumnIndex(BookColumns.DESCRIPTION));
         String itemUrl = cursor.getString(cursor.getColumnIndex(BookColumns.ITEM_URL));
-        Book book = new Book(uniqueId, isbn10, isbn13, title, subtitle,
+        return new Book(uniqueId, isbn10, isbn13, title, subtitle,
                 authors, pageCount, avgRating, ratingCount, imageUrl,
                 publisher, publishDate, description, itemUrl);
-        // Bind data to layout
+    }
+
+    // RecyclerView methods
+    @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
+        return new BookViewHolder(v, onBookClickListener);
+    }
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
+        // Get book from database
+        Book book = getBookFromCursor(cursor);
         BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
         if (book.getImageUrl().length() == 0) {
