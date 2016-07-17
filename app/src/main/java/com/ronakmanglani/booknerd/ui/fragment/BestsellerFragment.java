@@ -133,6 +133,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         // Cancel any pending network requests
         VolleySingleton.getInstance().requestQueue.cancelAll(getClass().getName());
         // Reset objects/flags
+        currentState = 0;
         layoutManager = null;
         adapter = null;
         updateToolbarTitle(getString(R.string.drawer_bestseller));
