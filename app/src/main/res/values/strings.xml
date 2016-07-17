@@ -17,6 +17,10 @@
     <string name="action_share_title">Share book&#8230;</string>
     <string name="action_open">Open in Browser</string>
     <string name="action_search">Search for books&#8230;</string>
+    <string name="action_twitter">Follow on Twitter</string>
+    <string name="action_email">Send Feedback</string>
+    <string name="action_email_using">Send email&#8230;</string>
+    <string name="action_email_error">There are no email clients installed!</string>
 
     <!-- Content Descriptions for ImageViews -->
     <string name="description_books">Books</string>

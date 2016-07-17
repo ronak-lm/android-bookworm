@@ -3,6 +3,7 @@ package com.ronakmanglani.bookworm.ui.fragment;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class DrawerFragment extends Fragment implements OnNavigationItemSelectedListener {
+public class DrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
 
     private static final int CAMERA_REQUEST_CODE = 42;
 
@@ -47,7 +49,11 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_drawer, container, false);
         unbinder = ButterKnife.bind(this, v);
+
+        // Setup toolbar
         toolbar.setTitle(R.string.app_name);
+        toolbar.inflateMenu(R.menu.menu_drawer);
+        toolbar.setOnMenuItemClickListener(this);
 
         // Setup navigation drawer
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.app_name, R.string.app_name) {
@@ -105,7 +111,32 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
         }
     }
 
-    // Navigation drawer
+    // Toolbar/Navigation drawer item select
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+
+            case R.id.action_twitter:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/Ronak_LM"));
+                startActivity(browserIntent);
+                return true;
+
+            case R.id.action_email:
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "ronak_lm@outlook.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                try {
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.action_email_using)));
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), R.string.action_email_error, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+
+            default:
+                return false;
+
+        }
+    }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         drawerLayout.closeDrawers();
