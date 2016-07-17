@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loading_more"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
+        android:layout_width="@dimen/progress_circle_small_width"
+        android:layout_height="@dimen/progress_circle_small_height"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/dist_xlarge"
+        app:mlpb_progress_stoke_width="@dimen/progress_circle_small_stroke"
+        app:mlpb_show_arrow="false"
+        app:mlpb_enable_circle_background="true"
+        app:mlpb_progress_color="@color/accent"
+        app:mlpb_progress_text_visibility="invisible" />
+
+</FrameLayout>

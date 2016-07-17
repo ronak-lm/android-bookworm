@@ -7,18 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/fragment_search">
 
-    <!-- To show when unable to load data -->
-    <include layout="@layout/layout_error_message"
-        android:visibility="gone"/>
-
-    <!-- Progress Circle -->
-    <include layout="@layout/layout_progress_circle"
-        android:visibility="gone"/>
-
-    <!-- To show when no results are found -->
-    <include layout="@layout/layout_no_results"
-        android:visibility="gone"/>
-
     <!-- Recycler View -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list"
@@ -26,6 +14,22 @@
         android:layout_height="match_parent"
         android:padding="@dimen/recycler_view_padding"
         android:clipToPadding="false"
+        android:visibility="gone"/>
+
+    <!-- No Results -->
+    <include layout="@layout/layout_no_results"
+        android:visibility="gone"/>
+
+    <!-- Error Message -->
+    <include layout="@layout/layout_error_message"
+        android:visibility="gone"/>
+
+    <!-- Progress Circle -->
+    <include layout="@layout/layout_progress_circle"
+        android:visibility="gone"/>
+
+    <!-- Loading More -->
+    <include layout="@layout/layout_progress_circle_small"
         android:visibility="gone"/>
 
 </RelativeLayout>
