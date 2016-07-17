@@ -6,7 +6,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/category_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="@dimen/recycler_view_padding"
+        android:clipToPadding="false" />
 
     <include layout="@layout/layout_error_message"
         android:visibility="gone"/>
