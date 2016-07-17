@@ -296,7 +296,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             searchList.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
 
-            if (DimenUtil.isTablet() && startIndex == 0) {
+            if (DimenUtil.isTablet() && startIndex == 10) {
                 ((SearchActivity) getActivity()).loadDetailFragmentWith(adapter.getList().get(0));
             }
         }
