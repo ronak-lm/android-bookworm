@@ -44,21 +44,27 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     private Unbinder unbinder;
 
     private int currentState;
+    private int startIndex;
+    private int totalItems;
     private String searchQuery;
     private SearchAdapter adapter;
+    private GridLayoutManager layoutManager;
 
     @BindView(R.id.toolbar)             Toolbar toolbar;
     @BindView(R.id.search_bar)          EditText searchBar;
+    @BindView(R.id.search_list)         RecyclerView searchList;
+    @BindView(R.id.no_results)          View noResults;
     @BindView(R.id.error_message)       View errorMessage;
     @BindView(R.id.progress_circle)     View progressCircle;
-    @BindView(R.id.no_results)          View noResults;
-    @BindView(R.id.search_list)         RecyclerView searchList;
+    @BindView(R.id.loading_more)        View loadingMore;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         unbinder = ButterKnife.bind(this, v);
+        startIndex = 0;
+        totalItems = 0;
 
         // Setup toolbar
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
@@ -76,7 +82,9 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                 if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     String query = searchBar.getText().toString().trim();
                     if (query.length() > 0) {
-                        // Set query string
+                        // Initialize
+                        startIndex = 0;
+                        totalItems = 0;
                         searchQuery = query;
                         // Toggle visibility
                         searchList.setVisibility(View.GONE);
@@ -94,26 +102,47 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         });
 
         // Setup RecyclerView
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_card_width, 1));
+        layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_card_width, 1));
         searchList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
         searchList.setHasFixedSize(true);
         searchList.setLayoutManager(layoutManager);
+        searchList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                // Load more if RecyclerView has reached the end and isn't already loading
+                if (adapter.getList().size() > 0 &&
+                        layoutManager.findLastVisibleItemPosition() == adapter.getList().size() - 1 &&
+                        currentState != BookNerdApp.STATE_LOADING &&
+                        currentState != BookNerdApp.STATE_LOCKED) {
+                    if (startIndex < totalItems) {
+                        loadingMore.setVisibility(View.VISIBLE);
+                        searchBooksList();
+                    }
+                }
+            }
+        });
 
         // Restore state
         if (savedInstanceState != null && savedInstanceState.containsKey(BookNerdApp.KEY_STATE)) {
+            searchQuery = savedInstanceState.getString(BookNerdApp.KEY_QUERY);
+            startIndex = savedInstanceState.getInt(BookNerdApp.KEY_INDEX, 0);
+            totalItems = savedInstanceState.getInt(BookNerdApp.KEY_TOTAL, 0);
             currentState = savedInstanceState.getInt(BookNerdApp.KEY_STATE);
             // Data had already been loaded: Display the data again
-            if (currentState == BookNerdApp.STATE_LOADED) {
-                searchQuery = savedInstanceState.getString(BookNerdApp.KEY_QUERY);
+            if (currentState == BookNerdApp.STATE_LOADED || currentState == BookNerdApp.STATE_LOCKED ||
+                    (currentState == BookNerdApp.STATE_LOADING && savedInstanceState.containsKey(BookNerdApp.KEY_SEARCH))) {
                 ArrayList<Book> booksList = savedInstanceState.getParcelableArrayList(BookNerdApp.KEY_SEARCH);
                 adapter = new SearchAdapter(this);
                 adapter.setList(booksList);
                 searchList.swapAdapter(adapter, true);
                 onDownloadSuccessful();
+                if (currentState == BookNerdApp.STATE_LOADING) {
+                    loadingMore.setVisibility(View.VISIBLE);
+                    searchBooksList();
+                }
             }
             // Data was still loading when fragment was lost: Load again
             else if (currentState == BookNerdApp.STATE_LOADING) {
-                searchQuery = savedInstanceState.getString(BookNerdApp.KEY_QUERY);
                 progressCircle.setVisibility(View.VISIBLE);
                 searchBooksList();
             }
@@ -129,8 +158,10 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(BookNerdApp.KEY_STATE, currentState);
-        if (searchQuery != null) {
-            outState.putString(BookNerdApp.KEY_QUERY, searchQuery);
+        outState.putInt(BookNerdApp.KEY_INDEX, startIndex);
+        outState.putInt(BookNerdApp.KEY_TOTAL, totalItems);
+        outState.putString(BookNerdApp.KEY_QUERY, searchQuery);
+        if (adapter != null) {
             outState.putParcelableArrayList(BookNerdApp.KEY_SEARCH, adapter.getList());
         }
     }
@@ -154,7 +185,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             adapter = new SearchAdapter(this);
             searchList.swapAdapter(adapter, true);
         }
-        String urlToDownload = ApiHelper.getSearchListUrl(searchQuery);
+        String urlToDownload = ApiHelper.getSearchListUrl(searchQuery, startIndex);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, urlToDownload, null,
                 new Response.Listener<JSONObject>() {
@@ -162,6 +193,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.has("items")) {
+                                totalItems = response.getInt("totalItems");
                                 JSONArray itemsArray = response.getJSONArray("items");
                                 for (int i = 0; i < itemsArray.length(); i++) {
                                     JSONObject bookObject = itemsArray.getJSONObject(i);
@@ -231,6 +263,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                 }
                             }
 
+                            startIndex += 10;
                             onDownloadSuccessful();
 
                         } catch (Exception e) {
@@ -252,6 +285,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         currentState = BookNerdApp.STATE_LOADING;
     }
     private void onDownloadSuccessful() {
+        loadingMore.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         if (adapter.getList().size() == 0) {
@@ -262,7 +296,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             searchList.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
 
-            if (DimenUtil.isTablet()) {
+            if (DimenUtil.isTablet() && startIndex == 0) {
                 ((SearchActivity) getActivity()).loadDetailFragmentWith(adapter.getList().get(0));
             }
         }
@@ -271,15 +305,23 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     }
     private void onDownloadFailed() {
         progressCircle.setVisibility(View.GONE);
+        loadingMore.setVisibility(View.GONE);
         noResults.setVisibility(View.GONE);
-        searchList.setVisibility(View.GONE);
-        errorMessage.setVisibility(View.VISIBLE);
-
-        currentState = BookNerdApp.STATE_FAILED;
+        if (startIndex == 0) {
+            searchList.setVisibility(View.GONE);
+            errorMessage.setVisibility(View.VISIBLE);
+            currentState = BookNerdApp.STATE_FAILED;
+        } else {
+            errorMessage.setVisibility(View.GONE);
+            searchList.setVisibility(View.VISIBLE);
+            currentState = BookNerdApp.STATE_LOCKED;
+        }
     }
 
     // Helper methods
     public void performSearchFor(String searchQuery) {
+        startIndex = 0;
+        totalItems = 0;
         this.searchQuery = searchQuery;
         searchBar.setText(searchQuery);
 

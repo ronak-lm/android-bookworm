@@ -23,10 +23,11 @@ public class ApiHelper {
     public static String getBestsellerListUrl(String listName) {
         return "https://api.nytimes.com/svc/books/v3/lists//" + listName + ".json?api-key=" + getNewYorkTimesBestsellerApiKey();
     }
-    public static String getSearchListUrl(String query) {
+    public static String getSearchListUrl(String query, int startIndex) {
         return Uri.parse("https://www.googleapis.com/books/v1/volumes").buildUpon()
                 .appendQueryParameter("q", query)
                 .appendQueryParameter("key", getGoogleBooksApiKey())
+                .appendQueryParameter("startIndex", startIndex + "")
                 .build().toString();
     }
 }
