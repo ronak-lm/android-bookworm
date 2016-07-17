@@ -4,24 +4,30 @@
     android:id="@+id/category_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:padding="10dp"
+    android:orientation="horizontal"
     android:background="?attr/selectableItemBackground"
     android:clickable="true">
 
-    <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
+    <ImageView
+        android:id="@+id/category_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/icon_category_business"
+        tools:ignore="ContentDescription" />
+
+    <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
         android:id="@+id/category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dist_large"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/dist_large"
+        android:layout_marginStart="@dimen/dist_large"
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="@dimen/text_large"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_primary"
         tools:text="Category Name" />
-
-    <View
-        android:background="@color/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
 
 </LinearLayout>
