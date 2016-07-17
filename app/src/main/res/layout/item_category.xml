@@ -17,7 +17,7 @@
         tools:src="@drawable/icon_category_business"
         tools:ignore="ContentDescription" />
 
-    <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+    <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
         android:id="@+id/category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

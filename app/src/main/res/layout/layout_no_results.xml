@@ -19,7 +19,7 @@
             android:src="@drawable/error_dobby"
             android:contentDescription="@string/description_no_results"/>
 
-        <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dist_large"

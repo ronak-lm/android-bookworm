@@ -26,7 +26,7 @@
             android:src="@drawable/drawer_header_icon"
             android:contentDescription="@string/description_app_icon"/>
 
-        <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoBoldTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"

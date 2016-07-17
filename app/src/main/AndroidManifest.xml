@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ronakmanglani.booknerd">
+    package="com.ronakmanglani.bookworm">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -13,14 +13,14 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name=".BookNerdApp"
+        android:name=".BookWormApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name="com.ronakmanglani.bookworm.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,17 +29,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.BookActivity"
+        <activity android:name="com.ronakmanglani.bookworm.ui.activity.BookActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.activity.SearchActivity"
+        <activity android:name="com.ronakmanglani.bookworm.ui.activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ui.activity.BarcodeActivity"
+        <activity android:name="com.ronakmanglani.bookworm.ui.activity.BarcodeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <!-- Content Provider -->
         <provider
-            android:name=".data.generated.BookProvider"
-            android:authorities="com.ronakmanglani.booknerd.data.BookProvider"
+            android:name="com.ronakmanglani.bookworm.data.generated.BookProvider"
+            android:authorities="com.ronakmanglani.bookworm.data.BookProvider"
             android:exported="false" />
 
     </application>

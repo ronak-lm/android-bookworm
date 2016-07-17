@@ -27,7 +27,7 @@
         android:orientation="vertical">
 
         <!-- Book Title -->
-        <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoBoldTextView
             android:id="@+id/book_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             tools:text="Ender's Game"/>
 
         <!-- Author -->
-        <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoLightTextView
             android:id="@+id/book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             tools:text="by Orson Scott Card"/>
 
         <!-- Page Count -->
-        <com.ronakmanglani.booknerd.ui.view.RobotoLightTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoLightTextView
             android:id="@+id/book_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:orientation="horizontal">
 
             <!-- Average Rating -->
-            <com.ronakmanglani.booknerd.ui.view.RobotoBoldTextView
+            <com.ronakmanglani.bookworm.ui.view.RobotoBoldTextView
                 android:id="@+id/book_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 tools:text="4.0"/>
 
             <!-- Vote Count -->
-            <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+            <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
                 android:id="@+id/book_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

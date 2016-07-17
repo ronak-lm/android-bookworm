@@ -20,7 +20,7 @@
             android:src="@drawable/icon_booknerd"
             android:contentDescription="@string/description_app_icon"/>
 
-        <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dist_large"

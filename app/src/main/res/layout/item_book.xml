@@ -27,7 +27,7 @@
             android:contentDescription="@string/description_book_cover" />
 
         <!-- Book title -->
-        <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+        <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
             android:id="@+id/book_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_marginBottom="@dimen/dist_medium"
             android:orientation="vertical">
 
-            <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+            <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
                 android:id="@+id/book_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:textSize="@dimen/text_medium"
                 tools:text="by Issac Asimov"/>
 
-            <com.ronakmanglani.booknerd.ui.view.AutoResizeTextView
+            <com.ronakmanglani.bookworm.ui.view.AutoResizeTextView
                 android:id="@+id/book_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -88,7 +88,7 @@
             android:layout_marginRight="@dimen/dist_medium"
             android:layout_marginBottom="@dimen/dist_medium">
 
-            <com.ronakmanglani.booknerd.ui.view.RobotoRegularTextView
+            <com.ronakmanglani.bookworm.ui.view.RobotoRegularTextView
                 android:id="@+id/book_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

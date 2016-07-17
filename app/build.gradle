@@ -11,7 +11,7 @@ android {
     buildToolsVersion "24.0.0"
 
     signingConfigs {
-        release  {
+        release {
             storeFile file(keystoreProperties['storeFile'])
             keyAlias keystoreProperties['keyAlias']
             storePassword keystoreProperties['storePassword']
@@ -19,7 +19,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.ronakmanglani.booknerd"
+        applicationId "com.ronakmanglani.bookworm"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1

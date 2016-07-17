@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">BookNerd</string>
+    <string name="app_name" translatable="false">Book Worm</string>
 
     <!-- Navigation Drawer Options -->
     <string name="drawer_search">Search Books</string>

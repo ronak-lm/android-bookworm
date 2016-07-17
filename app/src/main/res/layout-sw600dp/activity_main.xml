@@ -6,7 +6,7 @@
     android:baselineAligned="false">
 
     <fragment android:id="@+id/main_fragment"
-        android:name="com.ronakmanglani.booknerd.ui.fragment.DrawerFragment"
+        android:name="com.ronakmanglani.bookworm.ui.fragment.DrawerFragment"
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
