@@ -26,8 +26,9 @@ public class ApiHelper {
     public static String getSearchListUrl(String query, int startIndex) {
         return Uri.parse("https://www.googleapis.com/books/v1/volumes").buildUpon()
                 .appendQueryParameter("q", query)
-                .appendQueryParameter("key", getGoogleBooksApiKey())
                 .appendQueryParameter("startIndex", startIndex + "")
+                .appendQueryParameter("fields", "totalItems,items(id,volumeInfo)")
+                .appendQueryParameter("key", getGoogleBooksApiKey())
                 .build().toString();
     }
 }
