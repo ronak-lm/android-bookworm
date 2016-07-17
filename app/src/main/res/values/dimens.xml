@@ -56,4 +56,7 @@
     <dimen name="detail_icon_size">16dp</dimen>
     <dimen name="detail_fab_margin">12dp</dimen>
 
+    <!-- About Page -->
+    <dimen name="about_icon_size">120dp</dimen>
+
 </resources>

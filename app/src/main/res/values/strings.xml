@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookNerd</string>
+    <string name="app_name" translatable="false">BookNerd</string>
 
     <!-- Navigation Drawer Options -->
     <string name="drawer_search">Search Books</string>
@@ -50,9 +50,15 @@
     <string name="detail_fab_finished">Mark as Finished</string>
     <string name="detail_fab_finished_remove">Remove from \"Finished\"</string>
 
+    <!-- About Dialog -->
+    <string name="about_version">Version 1.0</string>
+    <string name="about_made_by">Made By</string>
+    <string name="about_name" translatable="false">Ronak Manglani</string>
+    <string name="about_powered_by">Powered By</string>
+    <string name="about_api">NY Times and Google Books</string>
+
     <!-- Other Strings -->
     <string name="list_placeholder_text">You haven\'t added any books\nto this list</string>
     <string name="camera_permission_denied">Unable to open camera</string>
-    <string name="about_toast">Made by Ronak Manglani</string>
 
 </resources>

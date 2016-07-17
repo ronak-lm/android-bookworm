@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -171,7 +172,10 @@ public class DrawerFragment extends Fragment implements OnNavigationItemSelected
                 return true;
 
             case R.id.drawer_about:
-                Toast.makeText(getContext(), R.string.about_toast, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_about, null);
+                builder.setView(view);
+                builder.show();
                 break;
         }
         return false;
