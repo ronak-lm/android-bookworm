@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -33,7 +36,9 @@ import butterknife.Unbinder;
 
 import static android.support.v7.widget.Toolbar.*;
 
-public class BookFragment extends Fragment implements OnMenuItemClickListener {
+public class BookFragment extends Fragment implements OnMenuItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final int SHELF_LOADER = 42;
 
     private Book book;
     private int currentShelf;
@@ -90,7 +95,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         }
 
         // Floating Action Buttons
-        updateFABs();
+        getLoaderManager().restartLoader(SHELF_LOADER, null, this);
         bookDetailHolder.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -204,14 +209,44 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
         unbinder.unbind();
     }
 
-    // Helper methods
-    private void updateFABs() {
-        // Check if book is already in the database
-        Cursor data = getContext().getContentResolver().
-                query(BookProvider.Books.CONTENT_URI,
-                        new String[] { BookColumns.SHELF },
-                        BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
-                        null, null);
+    // Database functions
+    private ContentValues getContentValues(int shelf) {
+        ContentValues values = new ContentValues();
+        values.put(BookColumns.BOOK_ID, book.getUniqueId());
+        values.put(BookColumns.ISBN_10, book.getIsbn10());
+        values.put(BookColumns.ISBN_13, book.getIsbn13());
+        values.put(BookColumns.TITLE, book.getTitle());
+        values.put(BookColumns.SUBTITLE, book.getSubtitle());
+        values.put(BookColumns.AUTHORS, book.getAuthors());
+        values.put(BookColumns.PAGE_COUNT, book.getPageCount());
+        values.put(BookColumns.AVG_RATING, book.getAverageRating());
+        values.put(BookColumns.RATING_COUNT, book.getRatingCount());
+        values.put(BookColumns.IMAGE_URL, book.getImageUrl());
+        values.put(BookColumns.PUBLISHER, book.getPublisher());
+        values.put(BookColumns.PUBLISH_DATE, book.getPublishDate());
+        values.put(BookColumns.DESCRIPTION, book.getDescription());
+        values.put(BookColumns.ITEM_URL, book.getItemUrl());
+        values.put(BookColumns.SHELF, shelf);
+        return values;
+    }
+    @Override
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle args) {
+        switch (loaderId) {
+            case SHELF_LOADER:
+                return new CursorLoader(
+                        getActivity(),                                              // Parent activity context
+                        BookProvider.Books.CONTENT_URI,                             // Table to query
+                        new String[] { BookColumns.SHELF },                         // Projection to return
+                        BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",    // Selection clause
+                        null,                                                       // No selection arguments
+                        null);                                                      // Default sort order
+
+            default:
+                return null;
+        }
+    }
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.getCount() > 0) {
             // If book already exists in database
             data.moveToFirst();
@@ -255,24 +290,8 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
             fabFinished.setLabelText(getString(R.string.detail_fab_finished));
         }
     }
-    private ContentValues getContentValues(int shelf) {
-        ContentValues values = new ContentValues();
-        values.put(BookColumns.BOOK_ID, book.getUniqueId());
-        values.put(BookColumns.ISBN_10, book.getIsbn10());
-        values.put(BookColumns.ISBN_13, book.getIsbn13());
-        values.put(BookColumns.TITLE, book.getTitle());
-        values.put(BookColumns.SUBTITLE, book.getSubtitle());
-        values.put(BookColumns.AUTHORS, book.getAuthors());
-        values.put(BookColumns.PAGE_COUNT, book.getPageCount());
-        values.put(BookColumns.AVG_RATING, book.getAverageRating());
-        values.put(BookColumns.RATING_COUNT, book.getRatingCount());
-        values.put(BookColumns.IMAGE_URL, book.getImageUrl());
-        values.put(BookColumns.PUBLISHER, book.getPublisher());
-        values.put(BookColumns.PUBLISH_DATE, book.getPublishDate());
-        values.put(BookColumns.DESCRIPTION, book.getDescription());
-        values.put(BookColumns.ITEM_URL, book.getItemUrl());
-        values.put(BookColumns.SHELF, shelf);
-        return values;
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
     }
 
     // Click events
@@ -314,7 +333,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
                     insert(BookProvider.Books.CONTENT_URI,
                             getContentValues(BookColumns.SHELF_TO_READ));
         }
-        updateFABs();
+        getLoaderManager().restartLoader(SHELF_LOADER, null, this);
     }
     @OnClick(R.id.fab_reading)
     public void onReadingButtonClicked() {
@@ -338,7 +357,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
                     insert(BookProvider.Books.CONTENT_URI,
                             getContentValues(BookColumns.SHELF_READING));
         }
-        updateFABs();
+        getLoaderManager().restartLoader(SHELF_LOADER, null, this);
     }
     @OnClick(R.id.fab_finished)
     public void onFinishedButtonClicked() {
@@ -362,6 +381,6 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener {
                     insert(BookProvider.Books.CONTENT_URI,
                             getContentValues(BookColumns.SHELF_FINISHED));
         }
-        updateFABs();
+        getLoaderManager().restartLoader(SHELF_LOADER, null, this);
     }
 }
