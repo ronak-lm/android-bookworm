@@ -26,6 +26,7 @@
     <string name="description_books">Books</string>
     <string name="description_app_icon">App Icon</string>
     <string name="description_book_cover">Book Cover</string>
+    <string name="description_menu">Options</string>
     <string name="description_error_icon">Error Icon</string>
     <string name="description_no_results">No Results Icon</string>
 
