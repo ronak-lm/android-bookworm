@@ -2,18 +2,16 @@ package com.ronakmanglani.bookworm.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.model.Category;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.ronakmanglani.bookworm.ui.adapter.listener.OnCategoryClickListener;
+import com.ronakmanglani.bookworm.ui.adapter.viewholder.CategoryViewHolder;
 
 public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private OnCategoryClickListener onCategoryClickListener;
 
     // Constructor
     public CategoryAdapter(OnCategoryClickListener onCategoryClickListener) {
@@ -36,29 +34,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Category category = Category.getCategoryList().get(position);
         holder.categoryIcon.setImageResource(category.getIconId());
         holder.categoryName.setText(category.getDisplayName());
-    }
-
-    // ViewHolder
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.category_item) View categoryItem;
-        @BindView(R.id.category_icon) ImageView categoryIcon;
-        @BindView(R.id.category_name) TextView categoryName;
-
-        public CategoryViewHolder(final ViewGroup itemView, final OnCategoryClickListener onCategoryClickListener) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            categoryItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onCategoryClickListener.onCategoryClicked(getAdapterPosition());
-                }
-            });
-        }
-    }
-
-    // Click listener interface
-    private OnCategoryClickListener onCategoryClickListener;
-    public interface OnCategoryClickListener {
-        void onCategoryClicked(final int position);
     }
 }

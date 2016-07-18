@@ -1,14 +1,14 @@
 package com.ronakmanglani.bookworm.ui.activity;
 
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
+import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.fragment.BookFragment;
 import com.ronakmanglani.bookworm.ui.fragment.SearchFragment;
-import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 
 public class SearchActivity extends AppCompatActivity {

@@ -23,18 +23,20 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
+import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.data.BookProvider;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.util.DimenUtil;
-import com.ronakmanglani.bookworm.api.VolleySingleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static android.support.v7.widget.Toolbar.*;
+import static android.support.v7.widget.Toolbar.GONE;
+import static android.support.v7.widget.Toolbar.OnMenuItemClickListener;
+import static android.support.v7.widget.Toolbar.VISIBLE;
 
 public class BookFragment extends Fragment implements OnMenuItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 

@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
+import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.fragment.BestsellerFragment;
 import com.ronakmanglani.bookworm.ui.fragment.BookFragment;
-import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 
 public class MainActivity extends AppCompatActivity {

@@ -19,15 +19,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
+import com.ronakmanglani.bookworm.api.ApiHelper;
+import com.ronakmanglani.bookworm.api.VolleySingleton;
+import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.activity.BookActivity;
 import com.ronakmanglani.bookworm.ui.activity.SearchActivity;
 import com.ronakmanglani.bookworm.ui.adapter.SearchAdapter;
-import com.ronakmanglani.bookworm.ui.adapter.SearchAdapter.OnBookClickListener;
-import com.ronakmanglani.bookworm.model.Book;
-import com.ronakmanglani.bookworm.api.ApiHelper;
-import com.ronakmanglani.bookworm.util.DimenUtil;
-import com.ronakmanglani.bookworm.api.VolleySingleton;
+import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
+import com.ronakmanglani.bookworm.util.DimenUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -347,7 +347,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         searchBooksList();
     }
     @Override
-    public void onBookClicked(int position) {
+    public void onBookCardClicked(int position) {
         Book book = adapter.getList().get(position);
         if (DimenUtil.isTablet()) {
             ((SearchActivity) getActivity()).loadDetailFragmentWith(book);
@@ -356,5 +356,10 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             intent.putExtra(BookWormApp.KEY_BOOK, book);
             startActivity(intent);
         }
+
+    }
+    @Override
+    public void onBookMenuClicked(int position) {
+        // TODO: Implement menu
     }
 }

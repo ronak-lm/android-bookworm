@@ -21,7 +21,7 @@ import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.activity.BookActivity;
 import com.ronakmanglani.bookworm.ui.activity.MainActivity;
 import com.ronakmanglani.bookworm.ui.adapter.BookCursorAdapter;
-import com.ronakmanglani.bookworm.ui.adapter.BookCursorAdapter.OnBookClickListener;
+import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 
@@ -115,7 +115,7 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
 
     // Click events
     @Override
-    public void onBookClicked(int position) {
+    public void onBookCardClicked(int position) {
         Book book = adapter.getItemAt(position);
         if (DimenUtil.isTablet()) {
             ((MainActivity) getActivity()).loadDetailFragmentWith(book, false);
@@ -124,5 +124,9 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
             intent.putExtra(BookWormApp.KEY_BOOK, book);
             startActivity(intent);
         }
+    }
+    @Override
+    public void onBookMenuClicked(int position) {
+        // TODO: Implement menu
     }
 }

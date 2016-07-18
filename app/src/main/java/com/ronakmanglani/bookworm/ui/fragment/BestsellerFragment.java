@@ -18,19 +18,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
+import com.ronakmanglani.bookworm.api.ApiHelper;
+import com.ronakmanglani.bookworm.api.VolleySingleton;
+import com.ronakmanglani.bookworm.model.Bestseller;
+import com.ronakmanglani.bookworm.model.Book;
+import com.ronakmanglani.bookworm.model.Category;
 import com.ronakmanglani.bookworm.ui.activity.BookActivity;
 import com.ronakmanglani.bookworm.ui.activity.MainActivity;
 import com.ronakmanglani.bookworm.ui.adapter.BestsellerAdapter;
 import com.ronakmanglani.bookworm.ui.adapter.CategoryAdapter;
-import com.ronakmanglani.bookworm.ui.adapter.CategoryAdapter.OnCategoryClickListener;
-import com.ronakmanglani.bookworm.model.Bestseller;
-import com.ronakmanglani.bookworm.model.Book;
-import com.ronakmanglani.bookworm.model.Category;
-import com.ronakmanglani.bookworm.api.ApiHelper;
+import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
+import com.ronakmanglani.bookworm.ui.adapter.listener.OnCategoryClickListener;
+import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 import com.ronakmanglani.bookworm.util.StringUtil;
-import com.ronakmanglani.bookworm.api.VolleySingleton;
-import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,9 +43,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.ronakmanglani.bookworm.ui.adapter.BestsellerAdapter.*;
-
-public class BestsellerFragment extends Fragment implements OnBestsellerClickListener, OnCategoryClickListener {
+public class BestsellerFragment extends Fragment implements OnBookClickListener, OnCategoryClickListener {
 
     private Unbinder unbinder;
 
@@ -253,7 +252,7 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
         }
     }
     @Override
-    public void onBestsellerClicked(int position) {
+    public void onBookCardClicked(int position) {
         Book book = new Book(adapter.getList().get(position));
         if (DimenUtil.isTablet()) {
             ((MainActivity) getActivity()).loadDetailFragmentWith(book, false);
@@ -262,6 +261,10 @@ public class BestsellerFragment extends Fragment implements OnBestsellerClickLis
             intent.putExtra(BookWormApp.KEY_BOOK, book);
             startActivity(intent);
         }
+    }
+    @Override
+    public void onBookMenuClicked(int position) {
+        // TODO: Implement menu
     }
 }
 

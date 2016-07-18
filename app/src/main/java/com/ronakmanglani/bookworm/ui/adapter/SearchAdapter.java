@@ -1,28 +1,24 @@
 package com.ronakmanglani.bookworm.ui.adapter;
 
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
-import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.api.VolleySingleton;
+import com.ronakmanglani.bookworm.model.Book;
+import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
+import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    // ArrayList of books to display
     private ArrayList<Book> booksList;
+    private OnBookClickListener onBookClickListener;
 
     // Constructor
     public SearchAdapter(OnBookClickListener onBookClickListener) {
@@ -76,33 +72,5 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.bookRatingHolder.setVisibility(View.VISIBLE);
             holder.bookRating.setText(book.getAverageRating());
         }
-    }
-
-    // ViewHolder
-    public class BookViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.book_card)           CardView cardView;
-        @BindView(R.id.book_title)          TextView title;
-        @BindView(R.id.book_author)         TextView author;
-        @BindView(R.id.book_description)    TextView description;
-        @BindView(R.id.book_cover)          NetworkImageView coverImage;
-        @BindView(R.id.book_rating_holder)  View bookRatingHolder;
-        @BindView(R.id.book_rating)         TextView bookRating;
-
-        public BookViewHolder(final ViewGroup itemView, final OnBookClickListener onBookClickListener) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBookClickListener.onBookClicked(getAdapterPosition());
-                }
-            });
-        }
-    }
-
-    // Click listener interface
-    private OnBookClickListener onBookClickListener;
-    public interface OnBookClickListener {
-        void onBookClicked(final int position);
     }
 }
