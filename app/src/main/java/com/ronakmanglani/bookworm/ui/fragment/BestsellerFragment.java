@@ -30,6 +30,7 @@ import com.ronakmanglani.bookworm.ui.adapter.CategoryAdapter;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnCategoryClickListener;
 import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
+import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 import com.ronakmanglani.bookworm.util.StringUtil;
 
@@ -43,7 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class BestsellerFragment extends Fragment implements OnBookClickListener, OnCategoryClickListener {
+public class BestsellerFragment extends Fragment implements OnCategoryClickListener, OnBookClickListener {
 
     private Unbinder unbinder;
 
@@ -263,8 +264,10 @@ public class BestsellerFragment extends Fragment implements OnBookClickListener,
         }
     }
     @Override
-    public void onBookMenuClicked(int position) {
-        // TODO: Implement menu
+    public void onBookMenuClicked(int position, View view) {
+        Book book = new Book(adapter.getList().get(position));
+        int currentShelf = DatabaseUtil.getCurrentShelf(book.getUniqueId());
+        DatabaseUtil.getPopupMenu(getActivity(), book, currentShelf, view).show();
     }
 }
 

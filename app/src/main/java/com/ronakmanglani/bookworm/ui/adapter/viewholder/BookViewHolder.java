@@ -37,7 +37,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
         bookMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBookClickListener.onBookMenuClicked(getAdapterPosition());
+                onBookClickListener.onBookMenuClicked(getAdapterPosition(), bookMenu);
             }
         });
     }

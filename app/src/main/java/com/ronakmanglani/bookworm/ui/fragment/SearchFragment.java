@@ -27,6 +27,7 @@ import com.ronakmanglani.bookworm.ui.activity.SearchActivity;
 import com.ronakmanglani.bookworm.ui.adapter.SearchAdapter;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
+import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 
 import org.json.JSONArray;
@@ -359,7 +360,9 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
 
     }
     @Override
-    public void onBookMenuClicked(int position) {
-        // TODO: Implement menu
+    public void onBookMenuClicked(int position, View view) {
+        Book book = adapter.getList().get(position);
+        int currentShelf = DatabaseUtil.getCurrentShelf(book.getUniqueId());
+        DatabaseUtil.getPopupMenu(getActivity(), book, currentShelf, view).show();
     }
 }

@@ -23,6 +23,7 @@ import com.ronakmanglani.bookworm.ui.activity.MainActivity;
 import com.ronakmanglani.bookworm.ui.adapter.BookCursorAdapter;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
+import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 
 import butterknife.BindView;
@@ -126,7 +127,9 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
         }
     }
     @Override
-    public void onBookMenuClicked(int position) {
-        // TODO: Implement menu
+    public void onBookMenuClicked(int position, View view) {
+        Book book = adapter.getItemAt(position);
+        int currentShelf = DatabaseUtil.getCurrentShelf(book.getUniqueId());
+        DatabaseUtil.getPopupMenu(getActivity(), book, currentShelf, view).show();
     }
 }

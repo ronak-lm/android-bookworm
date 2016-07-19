@@ -1,6 +1,5 @@
 package com.ronakmanglani.bookworm.ui.fragment;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -27,6 +26,7 @@ import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.data.BookProvider;
 import com.ronakmanglani.bookworm.model.Book;
+import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 
 import butterknife.BindView;
@@ -212,25 +212,6 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
     }
 
     // Database functions
-    private ContentValues getContentValues(int shelf) {
-        ContentValues values = new ContentValues();
-        values.put(BookColumns.BOOK_ID, book.getUniqueId());
-        values.put(BookColumns.ISBN_10, book.getIsbn10());
-        values.put(BookColumns.ISBN_13, book.getIsbn13());
-        values.put(BookColumns.TITLE, book.getTitle());
-        values.put(BookColumns.SUBTITLE, book.getSubtitle());
-        values.put(BookColumns.AUTHORS, book.getAuthors());
-        values.put(BookColumns.PAGE_COUNT, book.getPageCount());
-        values.put(BookColumns.AVG_RATING, book.getAverageRating());
-        values.put(BookColumns.RATING_COUNT, book.getRatingCount());
-        values.put(BookColumns.IMAGE_URL, book.getImageUrl());
-        values.put(BookColumns.PUBLISHER, book.getPublisher());
-        values.put(BookColumns.PUBLISH_DATE, book.getPublishDate());
-        values.put(BookColumns.DESCRIPTION, book.getDescription());
-        values.put(BookColumns.ITEM_URL, book.getItemUrl());
-        values.put(BookColumns.SHELF, shelf);
-        return values;
-    }
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle args) {
         switch (loaderId) {
@@ -323,66 +304,17 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
     }
     @OnClick(R.id.fab_to_read)
     public void onToReadButtonClicked() {
-        if (currentShelf == BookColumns.SHELF_TO_READ) {
-            // Remove from "To Read"
-            getContext().getContentResolver().
-                    delete(BookProvider.Books.CONTENT_URI,
-                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
-                            null);
-        } else {
-            // Insert into "To Read"
-            getContext().getContentResolver().
-                    insert(BookProvider.Books.CONTENT_URI,
-                            getContentValues(BookColumns.SHELF_TO_READ));
-        }
+        DatabaseUtil.onToReadClicked(book, currentShelf);
         getLoaderManager().restartLoader(SHELF_LOADER, null, this);
     }
     @OnClick(R.id.fab_reading)
     public void onReadingButtonClicked() {
-        if (currentShelf == BookColumns.SHELF_TO_READ) {
-            // Move from "To Read" to "Reading"
-            ContentValues values = new ContentValues();
-            values.put(BookColumns.SHELF, BookColumns.SHELF_READING);
-            getContext().getContentResolver().
-                    update(BookProvider.Books.CONTENT_URI, values,
-                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
-                            new String[]{});
-        } else if (currentShelf == BookColumns.SHELF_READING) {
-            // Remove from "Reading"
-            getContext().getContentResolver().
-                    delete(BookProvider.Books.CONTENT_URI,
-                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
-                            null);
-        } else {
-            // Insert into "Reading"
-            getContext().getContentResolver().
-                    insert(BookProvider.Books.CONTENT_URI,
-                            getContentValues(BookColumns.SHELF_READING));
-        }
+        DatabaseUtil.onReadingClicked(book, currentShelf);
         getLoaderManager().restartLoader(SHELF_LOADER, null, this);
     }
     @OnClick(R.id.fab_finished)
     public void onFinishedButtonClicked() {
-        if (currentShelf == BookColumns.SHELF_TO_READ || currentShelf == BookColumns.SHELF_READING) {
-            // Move from "To Read" or "Reading" to "Finished"
-            ContentValues values = new ContentValues();
-            values.put(BookColumns.SHELF, BookColumns.SHELF_FINISHED);
-            getContext().getContentResolver().
-                    update(BookProvider.Books.CONTENT_URI, values,
-                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
-                            new String[]{});
-        } else if (currentShelf == BookColumns.SHELF_FINISHED) {
-            // Remove from "Finished"
-            getContext().getContentResolver().
-                    delete(BookProvider.Books.CONTENT_URI,
-                            BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
-                            null);
-        } else {
-            // Insert into "Finished"
-            getContext().getContentResolver().
-                    insert(BookProvider.Books.CONTENT_URI,
-                            getContentValues(BookColumns.SHELF_FINISHED));
-        }
+        DatabaseUtil.onFinishedClicked(book, currentShelf);
         getLoaderManager().restartLoader(SHELF_LOADER, null, this);
     }
 }
