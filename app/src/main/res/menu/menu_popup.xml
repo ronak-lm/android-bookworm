@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_to_read"
+        android:title="@string/detail_fab_to_read"/>
+
+    <item android:id="@+id/action_reading"
+        android:title="@string/detail_fab_reading"/>
+
+    <item android:id="@+id/action_finished"
+        android:title="@string/detail_fab_finished"/>
+
+</menu>
