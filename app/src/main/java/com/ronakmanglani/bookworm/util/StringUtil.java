@@ -2,9 +2,7 @@ package com.ronakmanglani.bookworm.util;
 
 public class StringUtil {
 
-    // Private constructor to prevent instantiation
-    private StringUtil() {
-    }
+    private StringUtil() { }
 
     public static boolean isNullOrEmpty(String s) {
         return (s == null || s.length() == 0 ||

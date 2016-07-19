@@ -7,9 +7,7 @@ import com.ronakmanglani.bookworm.R;
 
 public class DimenUtil {
 
-    // Private constructor to prevent instantiation
-    private DimenUtil() {
-    }
+    private DimenUtil() { }
 
     // Check if device is a tablet
     public static boolean isTablet() {
