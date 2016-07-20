@@ -50,6 +50,14 @@
     <dimen name="book_cover_width">110dp</dimen>
     <dimen name="book_rating_icon_size">16dp</dimen>
 
+    <!-- Book Grid Item  -->
+    <dimen name="book_grid_card_width">120dp</dimen>
+    <dimen name="book_grid_cover_height">150dp</dimen>
+    <dimen name="book_grid_menu_size">50dp</dimen>
+    <dimen name="book_grid_menu_icon_size">20dp</dimen>
+    <dimen name="book_grid_menu_icon_margin">3dp</dimen>
+    <dimen name="book_grid_text_margin">5dp</dimen>
+
     <!-- Book Details Page -->
     <dimen name="detail_cover_height">160dp</dimen>
     <dimen name="detail_cover_width">100dp</dimen>
