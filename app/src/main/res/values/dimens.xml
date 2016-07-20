@@ -44,12 +44,6 @@
     <dimen name="category_item_padding">10dp</dimen>
     <dimen name="category_icon_size">32dp</dimen>
 
-    <!-- Book Item -->
-    <dimen name="book_card_height">180dp</dimen>
-    <dimen name="book_card_width">380dp</dimen>
-    <dimen name="book_cover_width">110dp</dimen>
-    <dimen name="book_rating_icon_size">16dp</dimen>
-
     <!-- Book Grid Item  -->
     <dimen name="book_grid_card_width">120dp</dimen>
     <dimen name="book_grid_cover_height">150dp</dimen>

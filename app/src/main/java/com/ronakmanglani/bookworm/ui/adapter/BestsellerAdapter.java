@@ -1,5 +1,6 @@
 package com.ronakmanglani.bookworm.ui.adapter;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.model.Bestseller;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
-import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
+import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookGridViewHolder;
 
 import java.util.ArrayList;
 
@@ -44,17 +45,32 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
-        return new BookViewHolder(v, onBookClickListener);
+        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_grid, parent, false);
+        return new BookGridViewHolder(v, onBookClickListener);
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         Bestseller book = bestsellerBooks.get(position);
-        final BookViewHolder holder = (BookViewHolder) viewHolder;
+        final BookGridViewHolder holder = (BookGridViewHolder) viewHolder;
+        // Cover image
+        if (book.getImageUrl().length() == 0) {
+            holder.coverImage.setImageDrawable(ContextCompat.getDrawable(
+                    BookWormApp.getAppContext(), R.drawable.default_cover_big));
+        } else {
+            holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
+        }
+        // TextViews
         holder.title.setText(book.getTitle());
-        holder.author.setText(BookWormApp.getAppContext().getString(R.string.detail_subtitle_by, book.getAuthor()));
-        holder.description.setText(book.getDescription());
-        holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
-        holder.bookRatingHolder.setVisibility(View.GONE);
+        holder.title.post(new Runnable() {
+            @Override
+            public void run() {
+                if (holder.title.getLineCount() == 1) {
+                    holder.author.setMaxLines(2);
+                } else {
+                    holder.author.setMaxLines(1);
+                }
+            }
+        });
+        holder.author.setText(book.getAuthor());
     }
 }

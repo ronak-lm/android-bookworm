@@ -103,7 +103,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         });
 
         // Setup RecyclerView
-        layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_card_width, 1));
+        layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 1));
         searchList.addItemDecoration(new PaddingDecorationView(getContext(), R.dimen.recycler_item_padding));
         searchList.setHasFixedSize(true);
         searchList.setLayoutManager(layoutManager);

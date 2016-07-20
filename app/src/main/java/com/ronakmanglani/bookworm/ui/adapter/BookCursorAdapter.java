@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ronakmanglani.bookworm.BookWormApp;
@@ -13,7 +12,7 @@ import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
-import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
+import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookGridViewHolder;
 
 public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
 
@@ -62,14 +61,14 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
-        return new BookViewHolder(v, onBookClickListener);
+        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_grid, parent, false);
+        return new BookGridViewHolder(v, onBookClickListener);
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
         // Get book from database
         Book book = getBookFromCursor(cursor);
-        BookViewHolder holder = (BookViewHolder) viewHolder;
+        final BookGridViewHolder holder = (BookGridViewHolder) viewHolder;
         // Cover image
         if (book.getImageUrl().length() == 0) {
             holder.coverImage.setImageDrawable(ContextCompat.getDrawable(
@@ -79,17 +78,16 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
         }
         // TextViews
         holder.title.setText(book.getTitle());
-        if (book.getAuthors().length() > 0) {
-            holder.author.setText(BookWormApp.getAppContext().getString(R.string.detail_subtitle_by, book.getAuthors()));
-        } else {
-            holder.author.setVisibility(View.GONE);
-        }
-        holder.description.setText(book.getDescription());
-        if (book.getAverageRating().length() == 0) {
-            holder.bookRatingHolder.setVisibility(View.GONE);
-        } else {
-            holder.bookRatingHolder.setVisibility(View.VISIBLE);
-            holder.bookRating.setText(book.getAverageRating());
-        }
+        holder.title.post(new Runnable() {
+            @Override
+            public void run() {
+                if (holder.title.getLineCount() == 1) {
+                    holder.author.setMaxLines(2);
+                } else {
+                    holder.author.setMaxLines(1);
+                }
+            }
+        });
+        holder.author.setText(book.getAuthors());
     }
 }
