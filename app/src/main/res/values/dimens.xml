@@ -53,6 +53,7 @@
     <dimen name="book_grid_text_margin">5dp</dimen>
 
     <!-- Book List Item -->
+    <dimen name="book_list_card_width">380dp</dimen>
     <dimen name="book_list_cover_width">55dp</dimen>
     <dimen name="book_list_cover_height">80dp</dimen>
     <dimen name="book_list_menu_size">50dp</dimen>
