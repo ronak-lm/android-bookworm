@@ -3,7 +3,6 @@ package com.ronakmanglani.bookworm.ui.adapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ronakmanglani.bookworm.BookWormApp;
@@ -11,7 +10,7 @@ import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.model.Bestseller;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
-import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookGridViewHolder;
+import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
 
 import java.util.ArrayList;
 
@@ -46,12 +45,12 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_grid, parent, false);
-        return new BookGridViewHolder(v, onBookClickListener);
+        return new BookViewHolder(v, onBookClickListener);
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         Bestseller book = bestsellerBooks.get(position);
-        final BookGridViewHolder holder = (BookGridViewHolder) viewHolder;
+        final BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
         if (book.getImageUrl().length() == 0) {
             holder.coverImage.setImageDrawable(ContextCompat.getDrawable(

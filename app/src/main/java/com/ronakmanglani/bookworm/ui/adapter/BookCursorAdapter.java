@@ -12,7 +12,7 @@ import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
-import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookGridViewHolder;
+import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
 
 public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
 
@@ -62,13 +62,13 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_grid, parent, false);
-        return new BookGridViewHolder(v, onBookClickListener);
+        return new BookViewHolder(v, onBookClickListener);
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
         // Get book from database
         Book book = getBookFromCursor(cursor);
-        final BookGridViewHolder holder = (BookGridViewHolder) viewHolder;
+        final BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
         if (book.getImageUrl().length() == 0) {
             holder.coverImage.setImageDrawable(ContextCompat.getDrawable(

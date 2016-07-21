@@ -14,7 +14,7 @@ import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BookGridViewHolder extends RecyclerView.ViewHolder {
+public class BookViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.book_card)           public CardView cardView;
     @BindView(R.id.book_cover)          public NetworkImageView coverImage;
@@ -22,7 +22,7 @@ public class BookGridViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.book_author)         public TextView author;
     @BindView(R.id.book_menu)           public View bookMenu;
 
-    public BookGridViewHolder(final ViewGroup itemView, final OnBookClickListener onBookClickListener) {
+    public BookViewHolder(final ViewGroup itemView, final OnBookClickListener onBookClickListener) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         cardView.setOnClickListener(new View.OnClickListener() {
