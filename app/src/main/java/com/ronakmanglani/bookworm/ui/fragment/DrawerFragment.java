@@ -132,6 +132,13 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 }
                 return true;
 
+            case R.id.action_about:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_about, null);
+                builder.setView(view);
+                builder.show();
+                return true;
+
             default:
                 return false;
 
