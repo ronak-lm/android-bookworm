@@ -107,11 +107,13 @@ public class DatabaseUtil {
                     delete(BookProvider.Books.CONTENT_URI,
                             BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
                             null);
+            BitmapUtil.deleteImageFromStorage(book.getUniqueId());
         } else {
             // Insert into "To Read"
             BookWormApp.getAppContext().getContentResolver().
                     insert(BookProvider.Books.CONTENT_URI,
                             getContentValues(book, BookColumns.SHELF_TO_READ));
+            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
         }
     }
     public static void onReadingClicked(Book book, int currentShelf) {
@@ -129,11 +131,13 @@ public class DatabaseUtil {
                     delete(BookProvider.Books.CONTENT_URI,
                             BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
                             null);
+            BitmapUtil.deleteImageFromStorage(book.getUniqueId());
         } else {
             // Insert into "Reading"
             BookWormApp.getAppContext().getContentResolver().
                     insert(BookProvider.Books.CONTENT_URI,
                             getContentValues(book, BookColumns.SHELF_READING));
+            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
         }
     }
     public static void onFinishedClicked(Book book, int currentShelf) {
@@ -151,11 +155,13 @@ public class DatabaseUtil {
                     delete(BookProvider.Books.CONTENT_URI,
                             BookColumns.BOOK_ID + " = '" + book.getUniqueId() + "'",
                             null);
+            BitmapUtil.deleteImageFromStorage(book.getUniqueId());
         } else {
             // Insert into "Finished"
             BookWormApp.getAppContext().getContentResolver().
                     insert(BookProvider.Books.CONTENT_URI,
                             getContentValues(book, BookColumns.SHELF_FINISHED));
+            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
         }
     }
 }
