@@ -198,7 +198,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                                 JSONArray itemsArray = response.getJSONArray("items");
                                 for (int i = 0; i < itemsArray.length(); i++) {
                                     JSONObject bookObject = itemsArray.getJSONObject(i);
-                                    String uniqueId = "gbid:" + bookObject.getString("id");
+                                    String uniqueId = "gbid_" + bookObject.getString("id");
                                     JSONObject volumeInfo = bookObject.getJSONObject("volumeInfo");
 
                                     // Title, subtitle and author

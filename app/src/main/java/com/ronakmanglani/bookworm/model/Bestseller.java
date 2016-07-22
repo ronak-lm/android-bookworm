@@ -23,15 +23,15 @@ public class Bestseller implements Parcelable {
     public String getUniqueId() {
         // If book has ISBN10, use it as ID
         if (!StringUtil.isNullOrEmpty(isbn10)) {
-            return "nyt1:" + isbn10;
+            return "nyt1_" + isbn10;
         }
         // If no ISBN10, use ISBN13
         else if (!StringUtil.isNullOrEmpty(isbn13)) {
-            return "nyt2:" + isbn13;
+            return "nyt2_" + isbn13;
         }
         // If no ISBN numbers, use combination of title and author
         else {
-            return "nyt3:" + title + author;
+            return "nyt3_" + StringUtil.cleanText(title) + StringUtil.cleanText(author);
         }
     }
     public String getIsbn10() {
