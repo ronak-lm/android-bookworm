@@ -10,9 +10,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class BitmapUtil {
+    
+    private BitmapUtil() { }
 
     // Save Bitmap to file
-    private void saveToInternalStorage(final String bookId, final Bitmap bitmapImage){
+    public static void saveImageToStorage(final String bookId, final Bitmap bitmapImage){
         // Save image in background thread
         Runnable imageSaveTask = new Runnable() {
             @Override
@@ -35,7 +37,7 @@ public class BitmapUtil {
     }
 
     // Get image file from book ID
-    private File loadImageFromStorage(String bookId) {
+    public static File loadImageFromStorage(String bookId) {
         ContextWrapper cw = new ContextWrapper(BookWormApp.getAppContext());
         File directory = cw.getDir("images", Context.MODE_PRIVATE);
         return new File(directory, bookId + ".png");
