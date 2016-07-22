@@ -27,10 +27,13 @@ import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.data.BookProvider;
 import com.ronakmanglani.bookworm.model.Book;
+import com.ronakmanglani.bookworm.util.BitmapUtil;
 import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 import com.ronakmanglani.bookworm.util.StringUtil;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,13 +136,24 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
         }
 
         // Cover Image
-        if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+        File bookImageFile = BitmapUtil.loadImageFromStorage(book.getUniqueId());
+        if (bookImageFile.exists()) {
             Picasso.with(getContext())
-                    .load(book.getImageUrl())
+                    .load(bookImageFile)
+                    .fit()
                     .centerCrop()
                     .into(bookCover);
+        } else if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+            Picasso.with(getContext())
+                    .load(book.getImageUrl())
+                    .fit()
+                    .centerCrop()
+                    .into(bookCover);
+            // We have the url but image wasn't saved for some reason: Save image again
+            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
         } else {
-            bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
+            bookCover.setImageDrawable(ContextCompat.
+                    getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
         }
 
         // Title, author and page count

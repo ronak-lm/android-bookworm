@@ -60,6 +60,7 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
             Picasso.with(context)
                     .load(book.getImageUrl())
+                    .fit()
                     .centerCrop()
                     .into(holder.coverImage);
         } else {

@@ -59,6 +59,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
             Picasso.with(context)
                     .load(book.getImageUrl())
+                    .fit()
                     .centerCrop()
                     .into(holder.coverImage);
         } else {

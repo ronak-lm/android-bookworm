@@ -14,8 +14,11 @@ import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
+import com.ronakmanglani.bookworm.util.BitmapUtil;
 import com.ronakmanglani.bookworm.util.StringUtil;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
 
@@ -75,11 +78,21 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
         Book book = getBookFromCursor(cursor);
         final BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
-        if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+        File bookImageFile = BitmapUtil.loadImageFromStorage(book.getUniqueId());
+        if (bookImageFile.exists()) {
             Picasso.with(context)
-                    .load(book.getImageUrl())
+                    .load(bookImageFile)
+                    .fit()
                     .centerCrop()
                     .into(holder.coverImage);
+        } else if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+            Picasso.with(context)
+                    .load(book.getImageUrl())
+                    .fit()
+                    .centerCrop()
+                    .into(holder.coverImage);
+            // We have the url but image wasn't saved for some reason: Save image again
+            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
         } else {
             holder.coverImage.setImageDrawable(ContextCompat.
                     getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
