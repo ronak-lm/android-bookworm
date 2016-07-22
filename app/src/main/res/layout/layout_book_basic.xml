@@ -10,8 +10,7 @@
     tools:showIn="@layout/fragment_book">
 
     <!-- Book Cover -->
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/book_cover"
+    <ImageView android:id="@+id/book_cover"
         android:layout_width="@dimen/detail_cover_width"
         android:layout_height="@dimen/detail_cover_height"
         android:background="@color/image_background"

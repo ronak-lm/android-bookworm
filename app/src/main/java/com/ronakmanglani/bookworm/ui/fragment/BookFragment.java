@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -28,6 +29,8 @@ import com.ronakmanglani.bookworm.data.BookProvider;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
+import com.ronakmanglani.bookworm.util.StringUtil;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +57,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
     @BindView(R.id.book_message_holder)     View bookMessageHolder;
     @BindView(R.id.book_detail_holder)      NestedScrollView bookDetailHolder;
 
-    @BindView(R.id.book_cover)              NetworkImageView bookCover;
+    @BindView(R.id.book_cover)              ImageView bookCover;
     @BindView(R.id.book_title)              TextView bookTitle;
     @BindView(R.id.book_author)             TextView bookAuthors;
     @BindView(R.id.book_page)               TextView bookPageCount;
@@ -130,10 +133,13 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
         }
 
         // Cover Image
-        if (book.getImageUrl().length() == 0) {
-            bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
+        if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+            Picasso.with(getContext())
+                    .load(book.getImageUrl())
+                    .centerCrop()
+                    .into(bookCover);
         } else {
-            bookCover.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
+            bookCover.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.default_cover));
         }
 
         // Title, author and page count

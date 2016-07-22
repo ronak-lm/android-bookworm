@@ -1,5 +1,6 @@
 package com.ronakmanglani.bookworm.ui.adapter;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +14,18 @@ import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
+import com.ronakmanglani.bookworm.util.StringUtil;
+import com.squareup.picasso.Picasso;
 
 public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
 
+    private Context context;
     private OnBookClickListener onBookClickListener;
 
     // Constructor
     public BookCursorAdapter(OnBookClickListener onBookClickListener) {
         super(BookWormApp.getAppContext(), null);
+        this.context = BookWormApp.getAppContext();
         this.onBookClickListener = onBookClickListener;
     }
 
@@ -70,11 +75,14 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
         Book book = getBookFromCursor(cursor);
         final BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
-        if (book.getImageUrl().length() == 0) {
-            holder.coverImage.setImageDrawable(ContextCompat.getDrawable(
-                    BookWormApp.getAppContext(), R.drawable.default_cover_big));
+        if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+            Picasso.with(context)
+                    .load(book.getImageUrl())
+                    .centerCrop()
+                    .into(holder.coverImage);
         } else {
-            holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
+            holder.coverImage.setImageDrawable(ContextCompat.
+                    getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
         }
         // TextViews
         holder.title.setText(book.getTitle());

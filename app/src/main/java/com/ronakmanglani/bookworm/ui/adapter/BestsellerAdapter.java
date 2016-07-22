@@ -1,5 +1,6 @@
 package com.ronakmanglani.bookworm.ui.adapter;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,16 +12,20 @@ import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.model.Bestseller;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
+import com.ronakmanglani.bookworm.util.StringUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private Context context;
     private ArrayList<Bestseller> bestsellerBooks;
     private OnBookClickListener onBookClickListener;
 
     // Constructor
     public BestsellerAdapter(OnBookClickListener onBookClickListener) {
+        this.context = BookWormApp.getAppContext();
         this.bestsellerBooks = new ArrayList<>();
         this.onBookClickListener = onBookClickListener;
     }
@@ -52,11 +57,14 @@ public class BestsellerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Bestseller book = bestsellerBooks.get(position);
         final BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
-        if (book.getImageUrl().length() == 0) {
-            holder.coverImage.setImageDrawable(ContextCompat.getDrawable(
-                    BookWormApp.getAppContext(), R.drawable.default_cover_big));
+        if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
+            Picasso.with(context)
+                    .load(book.getImageUrl())
+                    .centerCrop()
+                    .into(holder.coverImage);
         } else {
-            holder.coverImage.setImageUrl(book.getImageUrl(), VolleySingleton.getInstance().imageLoader);
+            holder.coverImage.setImageDrawable(ContextCompat.
+                    getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
         }
         // TextViews
         holder.title.setText(book.getTitle());
