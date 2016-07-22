@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 
     private Unbinder unbinder;
 
+    private View rootView;
     @BindView(R.id.toolbar)         Toolbar toolbar;
     @BindView(R.id.drawer_layout)   DrawerLayout drawerLayout;
     @BindView(R.id.navigation_view) NavigationView navigationView;
@@ -47,8 +49,8 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_drawer, container, false);
-        unbinder = ButterKnife.bind(this, v);
+        rootView = inflater.inflate(R.layout.fragment_drawer, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
 
         // Setup toolbar
         toolbar.setTitle(R.string.app_name);
@@ -84,7 +86,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
             toolbar.setTitle(savedInstanceState.getString(BookWormApp.KEY_TITLE));
         }
 
-        return v;
+        return rootView;
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -116,6 +118,33 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+
+            case R.id.action_sort:
+                PopupMenu popupMenu = new PopupMenu(getContext(), rootView.findViewById(R.id.action_sort));
+                popupMenu.inflate(R.menu.menu_sort);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int menuId = item.getItemId();
+                        if (menuId == R.id.action_sort_title) {
+                            Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(BookWormApp.TAG_LIST);
+                            if (fragment != null) {
+                                ((ListFragment) fragment).loadBooksFromDatabase(BookWormApp.SORT_TITLE);
+                            }
+                            return true;
+                        }
+                        if (menuId == R.id.action_sort_author) {
+                            Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(BookWormApp.TAG_LIST);
+                            if (fragment != null) {
+                                ((ListFragment) fragment).loadBooksFromDatabase(BookWormApp.SORT_AUTHOR);
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+                return true;
 
             case R.id.action_twitter:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/Ronak_LM"));
@@ -183,7 +212,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 toReadFragment.setArguments(args1);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_frame, toReadFragment)
+                        .replace(R.id.content_frame, toReadFragment, BookWormApp.TAG_LIST)
                         .commit();
                 return true;
 
@@ -196,7 +225,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 readingFragment.setArguments(args2);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_frame, readingFragment)
+                        .replace(R.id.content_frame, readingFragment, BookWormApp.TAG_LIST)
                         .commit();
                 return true;
 
@@ -209,7 +238,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 finishedFragment.setArguments(args3);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_frame, finishedFragment)
+                        .replace(R.id.content_frame, finishedFragment, BookWormApp.TAG_LIST)
                         .commit();
                 return true;
 

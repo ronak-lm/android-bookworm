@@ -62,7 +62,7 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
         bookList.setAdapter(adapter);
 
         // Load books from database
-        getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
+        loadBooksFromDatabase(BookWormApp.SORT_TITLE);
 
         return rootView;
     }
@@ -70,6 +70,17 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    // Helper methods
+    public void loadBooksFromDatabase(int sortOrder) {
+        Bundle args = new Bundle();
+        if (sortOrder == BookWormApp.SORT_AUTHOR) {
+            args.putString(BookWormApp.KEY_SORT, BookColumns.AUTHORS + " ASC");
+        } else if (sortOrder == BookWormApp.SORT_TITLE) {
+            args.putString(BookWormApp.KEY_SORT, BookColumns.TITLE + " ASC");
+        }
+        getLoaderManager().restartLoader(CURSOR_LOADER_ID, args, this);
     }
 
     // Load books from database
@@ -80,8 +91,8 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
                 // Returns a new CursorLoaders
                 return new CursorLoader(getContext(),
                         BookProvider.Books.CONTENT_URI, new String[]{ },
-                        BookColumns.SHELF + " = '" + currentShelf + "'",
-                        null, null);
+                        BookColumns.SHELF + " = '" + currentShelf + "'", null,
+                        args.getString(BookWormApp.KEY_SORT));
             default:
                 // An invalid id was passed in
                 return null;
