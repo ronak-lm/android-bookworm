@@ -164,6 +164,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 
             case R.id.drawer_bestseller:
                 toolbar.setTitle(R.string.drawer_bestseller);
+                toolbar.getMenu().findItem(R.id.action_sort).setVisible(false);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_frame, new BestsellerFragment(), BookWormApp.TAG_BESTSELLER)
@@ -175,6 +176,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 
             case R.id.drawer_to_read:
                 toolbar.setTitle(R.string.drawer_to_read);
+                toolbar.getMenu().findItem(R.id.action_sort).setVisible(true);
                 ListFragment toReadFragment = new ListFragment();
                 Bundle args1 = new Bundle();
                 args1.putInt(BookWormApp.KEY_SHELF, BookColumns.SHELF_TO_READ);
@@ -187,6 +189,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 
             case R.id.drawer_reading:
                 toolbar.setTitle(R.string.drawer_reading);
+                toolbar.getMenu().findItem(R.id.action_sort).setVisible(true);
                 ListFragment readingFragment = new ListFragment();
                 Bundle args2 = new Bundle();
                 args2.putInt(BookWormApp.KEY_SHELF, BookColumns.SHELF_READING);
@@ -199,6 +202,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 
             case R.id.drawer_finished:
                 toolbar.setTitle(R.string.drawer_finished);
+                toolbar.getMenu().findItem(R.id.action_sort).setVisible(true);
                 ListFragment finishedFragment = new ListFragment();
                 Bundle args3 = new Bundle();
                 args3.putInt(BookWormApp.KEY_SHELF, BookColumns.SHELF_FINISHED);

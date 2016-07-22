@@ -11,6 +11,9 @@
     <string name="drawer_about">About</string>
 
     <!-- Toolbar Actions -->
+    <string name="action_sort">Sort Books</string>
+    <string name="action_sort_title">Sort by Title</string>
+    <string name="action_sort_author">Sort by Author</string>
     <string name="action_twitter">Follow on Twitter</string>
     <string name="action_email">Send Feedback</string>
     <string name="action_email_using">Send email&#8230;</string>
