@@ -30,6 +30,7 @@ import com.ronakmanglani.bookworm.ui.activity.BarcodeActivity;
 import com.ronakmanglani.bookworm.ui.activity.MainActivity;
 import com.ronakmanglani.bookworm.ui.activity.SearchActivity;
 import com.ronakmanglani.bookworm.util.DimenUtil;
+import com.ronakmanglani.bookworm.util.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,16 +128,18 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                     public boolean onMenuItemClick(MenuItem item) {
                         int menuId = item.getItemId();
                         if (menuId == R.id.action_sort_title) {
+                            PreferenceUtil.putSortType(BookWormApp.SORT_TITLE);
                             Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(BookWormApp.TAG_LIST);
                             if (fragment != null) {
-                                ((ListFragment) fragment).loadBooksFromDatabase(BookWormApp.SORT_TITLE);
+                                ((ListFragment) fragment).loadBooksFromDatabase();
                             }
                             return true;
                         }
                         if (menuId == R.id.action_sort_author) {
+                            PreferenceUtil.putSortType(BookWormApp.SORT_AUTHOR);
                             Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(BookWormApp.TAG_LIST);
                             if (fragment != null) {
-                                ((ListFragment) fragment).loadBooksFromDatabase(BookWormApp.SORT_AUTHOR);
+                                ((ListFragment) fragment).loadBooksFromDatabase();
                             }
                             return true;
                         }

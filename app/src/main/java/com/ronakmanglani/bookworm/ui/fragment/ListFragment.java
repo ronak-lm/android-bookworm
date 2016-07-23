@@ -25,6 +25,7 @@ import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;
 import com.ronakmanglani.bookworm.ui.view.PaddingDecorationView;
 import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
+import com.ronakmanglani.bookworm.util.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +63,7 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
         bookList.setAdapter(adapter);
 
         // Load books from database
-        loadBooksFromDatabase(BookWormApp.SORT_TITLE);
+        loadBooksFromDatabase();
 
         return rootView;
     }
@@ -73,11 +74,12 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
     }
 
     // Helper methods
-    public void loadBooksFromDatabase(int sortOrder) {
+    public void loadBooksFromDatabase() {
+        int sortOrder = PreferenceUtil.getSortType();
         Bundle args = new Bundle();
         if (sortOrder == BookWormApp.SORT_AUTHOR) {
             args.putString(BookWormApp.KEY_SORT, BookColumns.AUTHORS + " ASC");
-        } else if (sortOrder == BookWormApp.SORT_TITLE) {
+        } else {
             args.putString(BookWormApp.KEY_SORT, BookColumns.TITLE + " ASC");
         }
         getLoaderManager().restartLoader(CURSOR_LOADER_ID, args, this);
