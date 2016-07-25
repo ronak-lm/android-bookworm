@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.ronakmanglani.bookworm.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,11 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ronakmanglani.bookworm.ui.activity.BookActivity"
+        <activity android:name=".ui.activity.BookActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.ronakmanglani.bookworm.ui.activity.SearchActivity"
+        <activity android:name=".ui.activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.ronakmanglani.bookworm.ui.activity.BarcodeActivity"
+        <activity android:name=".ui.activity.BarcodeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.activity.SettingsActivity"
+            android:label="@string/pref_title"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="com.nononsenseapps.filepicker.FilePickerActivity"
             android:label="@string/app_name"
