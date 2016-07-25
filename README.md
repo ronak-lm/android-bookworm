@@ -5,6 +5,16 @@ Explore bestselling books and manage your reading list on your Android phone or 
 ![screen](../master/art/screenshot.jpg)
 
 
+## Features:-
+
+* View New York Times bestseller categories and lists.
+* Search books by title/author or by scanning barcode.
+* View details like author, average rating, pages, description, etc.
+* Maintain your reading lists : To Read, Reading or Finished.
+* Sort your list by title or author.
+* Export app backup to SD card and restore.
+
+
 ## Libraries
 
 * [Barcode Scanner](https://github.com/dm77/barcodescanner)
