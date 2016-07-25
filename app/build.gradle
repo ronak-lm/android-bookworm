@@ -44,6 +44,7 @@ dependencies {
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.6-RELEASE'
+    compile 'com.nononsenseapps:filepicker:2.5.3'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'me.dm7.barcodescanner:zbar:1.8.4'
     compile 'net.simonvt.schematic:schematic:0.6.7'
