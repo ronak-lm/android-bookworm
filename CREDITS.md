@@ -24,6 +24,8 @@ This app uses [Material icons by Google][2] and some images from [Daniel Llamas 
 * [Butter Knife](https://github.com/JakeWharton/butterknife)
 * [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
 * [MaterialLoadingProgressBar](https://github.com/lsjwzh/MaterialLoadingProgressBar)
+* [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker)
+* [Picasso](https://github.com/square/picasso)
 * [Schematic](https://github.com/SimonVT/schematic)
 * [Volley](http://developer.android.com/training/volley/index.html)
 
