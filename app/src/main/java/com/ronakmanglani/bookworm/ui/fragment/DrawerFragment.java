@@ -29,6 +29,7 @@ import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.ui.activity.BarcodeActivity;
 import com.ronakmanglani.bookworm.ui.activity.MainActivity;
 import com.ronakmanglani.bookworm.ui.activity.SearchActivity;
+import com.ronakmanglani.bookworm.ui.activity.SettingsActivity;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 import com.ronakmanglani.bookworm.util.PreferenceUtil;
 
@@ -244,6 +245,11 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                         .replace(R.id.content_frame, finishedFragment, BookWormApp.TAG_LIST)
                         .commit();
                 return true;
+
+            case R.id.drawer_settings:
+                Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
+                startActivity(settingsIntent);
+                break;
 
             case R.id.drawer_about:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

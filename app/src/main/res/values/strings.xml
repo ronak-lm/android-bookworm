@@ -8,6 +8,7 @@
     <string name="drawer_to_read">To Read</string>
     <string name="drawer_reading">Reading</string>
     <string name="drawer_finished">Finished</string>
+    <string name="drawer_settings">Settings</string>
     <string name="drawer_about">About</string>
 
     <!-- Toolbar Actions -->
