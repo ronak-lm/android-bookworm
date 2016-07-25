@@ -141,24 +141,17 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
         // Cover Image
         File bookImageFile = BitmapUtil.loadImageFromStorage(book.getUniqueId());
         if (bookImageFile.exists()) {
-            Picasso.with(getContext()).load(bookImageFile)
+            Picasso.with(getContext())
+                    .load(bookImageFile)
                     .fit().centerCrop()
                     .into(bookCover);
         } else if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
-            Picasso.with(getContext()).load(book.getImageUrl())
+            Picasso.with(getContext())
+                    .load(book.getImageUrl())
                     .fit().centerCrop()
-                    .into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            bookCover.setImageBitmap(bitmap);
-                            // We have the url but image wasn't saved for some reason: Save image again
-                            BitmapUtil.saveImageToStorage(book.getUniqueId(), bitmap);
-                        }
-                        @Override
-                        public void onBitmapFailed(Drawable errorDrawable) { }
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) { }
-                    });
+                    .into(bookCover);
+            // We have the url but image wasn't saved for some reason: Save image again
+            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
         } else {
             bookCover.setImageDrawable(ContextCompat.
                     getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
