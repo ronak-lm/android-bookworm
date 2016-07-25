@@ -15,12 +15,14 @@ Explore bestselling books and manage your reading list on your Android phone or 
 * Export app backup to SD card and restore.
 
 
+
 ## Libraries
 
 * [Barcode Scanner](https://github.com/dm77/barcodescanner)
 * [Butter Knife](https://github.com/JakeWharton/butterknife)
 * [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
 * [MaterialLoadingProgressBar](https://github.com/lsjwzh/MaterialLoadingProgressBar)
+* [Picasso](https://github.com/square/picasso)
 * [Schematic](https://github.com/SimonVT/schematic)
 * [Volley](http://developer.android.com/training/volley/index.html)
 
