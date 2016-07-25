@@ -78,7 +78,7 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
         int sortOrder = PreferenceUtil.getSortType();
         Bundle args = new Bundle();
         if (sortOrder == BookWormApp.SORT_AUTHOR) {
-            args.putString(BookWormApp.KEY_SORT, BookColumns.AUTHORS + " ASC");
+            args.putString(BookWormApp.KEY_SORT, BookColumns.AUTHORS + " ASC, " + BookColumns.TITLE + " ASC");
         } else {
             args.putString(BookWormApp.KEY_SORT, BookColumns.TITLE + " ASC");
         }
