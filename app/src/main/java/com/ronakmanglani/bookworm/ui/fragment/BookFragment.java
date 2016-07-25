@@ -2,6 +2,8 @@ package com.ronakmanglani.bookworm.ui.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,6 +34,7 @@ import com.ronakmanglani.bookworm.util.DatabaseUtil;
 import com.ronakmanglani.bookworm.util.DimenUtil;
 import com.ronakmanglani.bookworm.util.StringUtil;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 
@@ -138,19 +141,24 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
         // Cover Image
         File bookImageFile = BitmapUtil.loadImageFromStorage(book.getUniqueId());
         if (bookImageFile.exists()) {
-            Picasso.with(getContext())
-                    .load(bookImageFile)
-                    .fit()
-                    .centerCrop()
+            Picasso.with(getContext()).load(bookImageFile)
+                    .fit().centerCrop()
                     .into(bookCover);
         } else if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
-            Picasso.with(getContext())
-                    .load(book.getImageUrl())
-                    .fit()
-                    .centerCrop()
-                    .into(bookCover);
-            // We have the url but image wasn't saved for some reason: Save image again
-            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
+            Picasso.with(getContext()).load(book.getImageUrl())
+                    .fit().centerCrop()
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            bookCover.setImageBitmap(bitmap);
+                            // We have the url but image wasn't saved for some reason: Save image again
+                            BitmapUtil.saveImageToStorage(book.getUniqueId(), bitmap);
+                        }
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) { }
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) { }
+                    });
         } else {
             bookCover.setImageDrawable(ContextCompat.
                     getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));

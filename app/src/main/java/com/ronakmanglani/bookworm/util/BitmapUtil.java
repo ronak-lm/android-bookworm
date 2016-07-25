@@ -28,30 +28,33 @@ public class BitmapUtil {
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ContextWrapper cw = new ContextWrapper(BookWormApp.getAppContext());
-                                // Get path to /data/data/your_app_package/app_data/images
-                                File directory = cw.getDir("images", Context.MODE_PRIVATE);
-                                File myPath = new File(directory, bookId + ".png");
-                                // Save bitmap to storage
-                                try {
-                                    FileOutputStream fos = new FileOutputStream(myPath);
-                                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                                    fos.close();
-                                    Log.i(TAG, bookId + " : Save Successful");
-                                } catch (Exception e) {
-                                    Log.e(TAG, bookId + " : Save Failed\n" + Arrays.toString(e.getStackTrace()));
-                                }
-                            }
-                        }).start();
+                        saveImageToStorage(bookId, bitmap);
                     }
                     @Override
                     public void onBitmapFailed(Drawable errorDrawable) { }
                     @Override
                     public void onPrepareLoad(Drawable placeHolderDrawable) { }
                 });
+    }
+    public static void saveImageToStorage(final String bookId, final Bitmap bitmap) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ContextWrapper cw = new ContextWrapper(BookWormApp.getAppContext());
+                // Get path to /data/data/your_app_package/app_data/images
+                File directory = cw.getDir("images", Context.MODE_PRIVATE);
+                File myPath = new File(directory, bookId + ".png");
+                // Save bitmap to storage
+                try {
+                    FileOutputStream fos = new FileOutputStream(myPath);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    fos.close();
+                    Log.i(TAG, bookId + " : Save Successful");
+                } catch (Exception e) {
+                    Log.e(TAG, bookId + " : Save Failed\n" + Arrays.toString(e.getStackTrace()));
+                }
+            }
+        }).start();
     }
     public static File loadImageFromStorage(String bookId) {
         ContextWrapper cw = new ContextWrapper(BookWormApp.getAppContext());

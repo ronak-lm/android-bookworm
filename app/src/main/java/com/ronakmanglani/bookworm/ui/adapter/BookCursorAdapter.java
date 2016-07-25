@@ -2,6 +2,8 @@ package com.ronakmanglani.bookworm.ui.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import com.ronakmanglani.bookworm.ui.adapter.viewholder.BookViewHolder;
 import com.ronakmanglani.bookworm.util.BitmapUtil;
 import com.ronakmanglani.bookworm.util.StringUtil;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 
@@ -75,24 +78,29 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
         // Get book from database
-        Book book = getBookFromCursor(cursor);
+        final Book book = getBookFromCursor(cursor);
         final BookViewHolder holder = (BookViewHolder) viewHolder;
         // Cover image
         File bookImageFile = BitmapUtil.loadImageFromStorage(book.getUniqueId());
         if (bookImageFile.exists()) {
-            Picasso.with(context)
-                    .load(bookImageFile)
-                    .fit()
-                    .centerCrop()
+            Picasso.with(context).load(bookImageFile)
+                    .fit().centerCrop()
                     .into(holder.coverImage);
         } else if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
-            Picasso.with(context)
-                    .load(book.getImageUrl())
-                    .fit()
-                    .centerCrop()
-                    .into(holder.coverImage);
-            // We have the url but image wasn't saved for some reason: Save image again
-            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
+            Picasso.with(context).load(book.getImageUrl())
+                    .fit().centerCrop()
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            holder.coverImage.setImageBitmap(bitmap);
+                            // We have the url but image wasn't saved for some reason: Save image again
+                            BitmapUtil.saveImageToStorage(book.getUniqueId(), bitmap);
+                        }
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) { }
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) { }
+                    });
         } else {
             holder.coverImage.setImageDrawable(ContextCompat.
                     getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
