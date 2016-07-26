@@ -12,9 +12,20 @@
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/ad_view"
         android:padding="@dimen/recycler_view_padding"
         android:clipToPadding="false"
         android:visibility="gone"/>
+
+    <!-- Google AdMob Ads -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="@string/admob_bestseller_banner_id" />
 
     <!-- No Results -->
     <include layout="@layout/layout_no_results"

@@ -17,6 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.api.ApiHelper;
@@ -54,6 +57,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     @BindView(R.id.toolbar)             Toolbar toolbar;
     @BindView(R.id.search_bar)          EditText searchBar;
     @BindView(R.id.search_list)         RecyclerView searchList;
+    @BindView(R.id.ad_view)             AdView adView;
     @BindView(R.id.no_results)          View noResults;
     @BindView(R.id.error_message)       View errorMessage;
     @BindView(R.id.progress_circle)     View progressCircle;
@@ -151,6 +155,17 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             else if (currentState == BookWormApp.STATE_FAILED) {
                 onDownloadFailed();
             }
+        }
+
+        // Load Ad
+        if (!DimenUtil.isTablet()) {
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(getString(R.string.device_moto_g4_id))
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+            adView.loadAd(adRequest);
+        } else {
+            adView.setVisibility(View.GONE);
         }
 
         return v;
@@ -270,6 +285,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                         } catch (Exception e) {
                             // Parsing error
                             onDownloadFailed();
+                            e.printStackTrace();
                         }
                     }
                 },
@@ -278,6 +294,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                     public void onErrorResponse(VolleyError error) {
                         // Network error
                         onDownloadFailed();
+                        error.printStackTrace();
                     }
                 });
         request.setTag(getClass().getName());
