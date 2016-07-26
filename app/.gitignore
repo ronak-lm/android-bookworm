@@ -1,3 +1,4 @@
 /build
 /keystore.jks
+/google-services.json
 /src/main/res/values/keys.xml
