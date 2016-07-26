@@ -3,6 +3,8 @@ package com.ronakmanglani.bookworm;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.android.gms.ads.MobileAds;
+
 public class BookWormApp extends Application {
 
     // Constants
@@ -32,6 +34,7 @@ public class BookWormApp extends Application {
     public void onCreate() {
         super.onCreate();
         mAppContext = getApplicationContext();
+        MobileAds.initialize(mAppContext, getString(R.string.admob_app_id));
     }
 
     // To access context from any class

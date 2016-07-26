@@ -23,6 +23,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.api.VolleySingleton;
@@ -82,6 +85,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
 
     @BindView(R.id.book_description_holder) View bookDescriptionHolder;
     @BindView(R.id.book_description)        TextView bookDescription;
+    @BindView(R.id.ad_view)                 AdView adView;
 
     @BindView(R.id.fab_menu)                FloatingActionMenu fabMenu;
     @BindView(R.id.fab_to_read)             FloatingActionButton fabToRead;
@@ -231,6 +235,13 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
         } else {
             bookDescription.setText(book.getDescription());
         }
+
+        // Load Ads
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(getString(R.string.device_moto_g4_id))
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
 
         return v;
     }
