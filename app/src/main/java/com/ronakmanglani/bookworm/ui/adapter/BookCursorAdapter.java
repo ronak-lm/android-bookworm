@@ -88,10 +88,18 @@ public class BookCursorAdapter extends CursorAdapter<RecyclerView.ViewHolder> {
                     .into(holder.coverImage);
         } else if (!StringUtil.isNullOrEmpty(book.getImageUrl())) {
             Picasso.with(context).load(book.getImageUrl())
-                    .fit().centerCrop()
-                    .into(holder.coverImage);
-            // We have the url but image wasn't saved for some reason: Save image again
-            BitmapUtil.saveImageToStorage(book.getUniqueId(), book.getImageUrl());
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            holder.coverImage.setImageBitmap(bitmap);
+                            // We have the url but image wasn't saved for some reason: Save image again
+                            BitmapUtil.saveImageToStorage(book.getUniqueId(), bitmap);
+                        }
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) { }
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) { }
+                    });
         } else {
             holder.coverImage.setImageDrawable(ContextCompat.
                     getDrawable(BookWormApp.getAppContext(), R.drawable.default_cover_big));
