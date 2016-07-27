@@ -1,6 +1,6 @@
 # Book Worm - Reading List
 
-Explore bestselling books and manage your reading list on your Android phone or tablet.
+Explore bestselling books and manage your reading catalogue on your Android phone or tablet.
 
 ![screen](../master/art/screenshot.jpg)
 
