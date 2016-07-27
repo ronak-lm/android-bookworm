@@ -18,4 +18,5 @@
 
     <color name="divider">#40808080</color>
     <color name="image_background">#40808080</color>
+    <color name="ad_view_background">#323232</color>
 </resources>
