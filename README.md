@@ -15,7 +15,7 @@ Explore bestselling books and manage your reading list on your Android phone or 
 * Export app backup to SD card and restore.
 
 
-## Libraries
+## Libraries Used
 
 * [Barcode Scanner](https://github.com/dm77/barcodescanner)
 * [Butter Knife](https://github.com/JakeWharton/butterknife)
@@ -25,20 +25,3 @@ Explore bestselling books and manage your reading list on your Android phone or 
 * [Picasso](https://github.com/square/picasso)
 * [Schematic](https://github.com/SimonVT/schematic)
 * [Volley](http://developer.android.com/training/volley/index.html)
-
-
-## License
-
-    Copyright 2016 Ronak Manglani
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
