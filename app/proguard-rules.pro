@@ -15,3 +15,24 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# ButterKnife
+-keep public class * implements butterknife.internal.ViewBinder { public <init>(); }
+-keep class butterknife.*
+-keepclasseswithmembernames class * { @butterknife.* <methods>; }
+-keepclasseswithmembernames class * { @butterknife.* <fields>; }
+
+#ZBar Scanner
+-keep class me.dm7.barcodescanner.** { *; }
+-keep class net.sourceforge.zbar.** { *; }
+
+# Picasso
+-dontwarn com.squareup.okhttp.**
+
+# Google AdMob
+-keep public class com.google.android.gms.ads.** {
+   public *;
+}
+-keep public class com.google.ads.** {
+   public *;
+}
