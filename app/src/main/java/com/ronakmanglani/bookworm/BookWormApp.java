@@ -34,7 +34,6 @@ public class BookWormApp extends Application {
     public void onCreate() {
         super.onCreate();
         mAppContext = getApplicationContext();
-        MobileAds.initialize(mAppContext, getString(R.string.admob_app_id));
     }
 
     // To access context from any class
