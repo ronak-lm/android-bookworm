@@ -55,6 +55,9 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
 
     private static final int SHELF_LOADER = 42;
 
+    private Handler adHandler;
+    private Runnable adRunnable;
+
     private Book book;
     private int currentShelf;
     private Unbinder unbinder;
@@ -238,7 +241,7 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
         }
 
         // Load ad after 1 second to prevent lag
-        new Handler().postDelayed(new Runnable() {
+        adRunnable = new Runnable() {
             @Override
             public void run() {
                 AdRequest adRequest = new AdRequest.Builder()
@@ -246,18 +249,19 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
                         .addTestDevice(getString(R.string.device_nexus7_id))
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                         .build();
-                if (adView != null) {
-                    adView.loadAd(adRequest);
-                }
+                adView.loadAd(adRequest);
             }
-        }, 1000);
+        };
+        adHandler = new Handler();
+        adHandler.postDelayed(adRunnable, 1000);
 
         return v;
     }
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
+        adHandler.removeCallbacks(adRunnable);
         unbinder.unbind();
+        super.onDestroyView();
     }
 
     // Database functions

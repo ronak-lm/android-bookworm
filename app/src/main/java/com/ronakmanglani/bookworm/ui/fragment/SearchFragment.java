@@ -49,6 +49,9 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
 
     private Unbinder unbinder;
 
+    private Handler adHandler;
+    private Runnable adRunnable;
+
     private int currentState;
     private int startIndex;
     private int totalItems;
@@ -164,7 +167,7 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             adView.setVisibility(View.GONE);
         } else {
             // Load ad after 1 second to prevent lag
-            new Handler().postDelayed(new Runnable() {
+            adRunnable = new Runnable() {
                 @Override
                 public void run() {
                     AdRequest adRequest = new AdRequest.Builder()
@@ -172,11 +175,11 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
                             .addTestDevice(getString(R.string.device_nexus7_id))
                             .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                             .build();
-                    if (adView != null) {
-                        adView.loadAd(adRequest);
-                    }
+                    adView.loadAd(adRequest);
                 }
-            }, 1000);
+            };
+            adHandler = new Handler();
+            adHandler.postDelayed(adRunnable, 1000);
         }
 
         return v;
@@ -194,9 +197,10 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     }
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         VolleySingleton.getInstance().requestQueue.cancelAll(getClass().getName());
+        adHandler.removeCallbacks(adRunnable);
         unbinder.unbind();
+        super.onDestroyView();
     }
 
     // JSON parsing and display
