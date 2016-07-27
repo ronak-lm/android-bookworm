@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
-import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.model.Book;
 import com.ronakmanglani.bookworm.ui.adapter.listener.OnBookClickListener;

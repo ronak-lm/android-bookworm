@@ -3,8 +3,6 @@ package com.ronakmanglani.bookworm;
 import android.app.Application;
 import android.content.Context;
 
-import com.google.android.gms.ads.MobileAds;
-
 public class BookWormApp extends Application {
 
     // Constants

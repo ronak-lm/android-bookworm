@@ -21,15 +21,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
-import com.ronakmanglani.bookworm.api.VolleySingleton;
 import com.ronakmanglani.bookworm.data.BookColumns;
 import com.ronakmanglani.bookworm.data.BookProvider;
 import com.ronakmanglani.bookworm.model.Book;
