@@ -2,6 +2,7 @@ package com.ronakmanglani.bookworm.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
@@ -158,14 +160,23 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
         }
 
         // Load Ad
-        if (!DimenUtil.isTablet()) {
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice(getString(R.string.device_moto_g4_id))
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .build();
-            adView.loadAd(adRequest);
-        } else {
+        if (DimenUtil.isTablet()) {
             adView.setVisibility(View.GONE);
+        } else {
+            // Load ad after 1 second to prevent lag
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    AdRequest adRequest = new AdRequest.Builder()
+                            .addTestDevice(getString(R.string.device_moto_g4_id))
+                            .addTestDevice(getString(R.string.device_nexus7_id))
+                            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                            .build();
+                    if (adView != null) {
+                        adView.loadAd(adRequest);
+                    }
+                }
+            }, 1000);
         }
 
         return v;

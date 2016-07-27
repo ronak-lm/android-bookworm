@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
@@ -236,12 +237,20 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
             bookDescription.setText(book.getDescription());
         }
 
-        // Load Ads
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(getString(R.string.device_moto_g4_id))
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        adView.loadAd(adRequest);
+        // Load ad after 1 second to prevent lag
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AdRequest adRequest = new AdRequest.Builder()
+                        .addTestDevice(getString(R.string.device_moto_g4_id))
+                        .addTestDevice(getString(R.string.device_nexus7_id))
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                        .build();
+                if (adView != null) {
+                    adView.loadAd(adRequest);
+                }
+            }
+        }, 1000);
 
         return v;
     }
