@@ -197,8 +197,10 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     }
     @Override
     public void onDestroyView() {
+        if (adHandler != null) {
+            adHandler.removeCallbacks(adRunnable);
+        }
         VolleySingleton.getInstance().requestQueue.cancelAll(getClass().getName());
-        adHandler.removeCallbacks(adRunnable);
         unbinder.unbind();
         super.onDestroyView();
     }

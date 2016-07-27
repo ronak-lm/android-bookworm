@@ -259,7 +259,9 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
     }
     @Override
     public void onDestroyView() {
-        adHandler.removeCallbacks(adRunnable);
+        if (adHandler != null) {
+            adHandler.removeCallbacks(adRunnable);
+        }
         unbinder.unbind();
         super.onDestroyView();
     }
