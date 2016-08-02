@@ -20,7 +20,7 @@ You will have to add your keystore file with the name "keystore.jks" in the app 
 	storePassword=YOUR_STORE_PASS_HERE
 	keyPassword=YOUR_KEY_PASS_HERE
 
- [1]: https://github.com/Ronak-LM/BookWorm/fork
- [2]: https://github.com/Ronak-LM/BookWorm/compare
+ [1]: https://github.com/Ronak-LM/book-worm/fork
+ [2]: https://github.com/Ronak-LM/book-worm/compare
  [3]: http://developer.nytimes.com/
  [4]: https://developers.google.com/books/

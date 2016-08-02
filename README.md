@@ -5,7 +5,7 @@ Explore bestselling books and manage your reading catalogue on your Android phon
 ![screen](../master/art/screenshot.jpg)
 
 
-## Features:-
+## Features
 
 * View New York Times bestseller categories and lists.
 * Search books by title/author or by scanning barcode.
