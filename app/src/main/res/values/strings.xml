@@ -80,7 +80,7 @@
     <string name="restore_invalid">The file you selected is invalid</string>
 
     <!-- About Dialog -->
-    <string name="about_version">Version 1.2</string>
+    <string name="about_version">Version 1.5</string>
     <string name="about_made_by">Made By</string>
     <string name="about_name" translatable="false">Ronak Manglani</string>
     <string name="about_powered_by">Powered By</string>
