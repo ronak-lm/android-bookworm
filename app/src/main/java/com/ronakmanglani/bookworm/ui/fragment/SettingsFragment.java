@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.nononsenseapps.filepicker.FilePickerActivity;
 import com.ronakmanglani.bookworm.R;
+import com.ronakmanglani.bookworm.util.BitmapUtil;
 import com.ronakmanglani.bookworm.util.FileUtil;
 
 import java.io.File;
@@ -75,6 +76,7 @@ public class SettingsFragment extends PreferenceFragment {
                 try {
                     File dstFile = getActivity().getDatabasePath(DATABASE_NAME);
                     FileUtil.copyFile(srcFile, dstFile);
+                    BitmapUtil.deleteAllImages();
                     Toast.makeText(getActivity(), R.string.restore_complete, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), R.string.restore_failed, Toast.LENGTH_SHORT).show();

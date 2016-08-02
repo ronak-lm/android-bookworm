@@ -66,4 +66,14 @@ public class BitmapUtil {
             Log.i(TAG, bookId + " - Delete Failed : File doesn't exist");
         }
     }
+    public static void deleteAllImages() {
+        ContextWrapper cw = new ContextWrapper(BookWormApp.getAppContext());
+        // Get path to /data/data/your_app_package/app_data/images
+        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        File[] images = directory.listFiles();
+        for (File image: images) {
+            image.delete();
+        }
+        Log.i(TAG, "All images deleted");
+    }
 }
