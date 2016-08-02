@@ -23,8 +23,6 @@ import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.data.BookColumns;
@@ -51,9 +49,6 @@ import static android.support.v7.widget.Toolbar.VISIBLE;
 public class BookFragment extends Fragment implements OnMenuItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int SHELF_LOADER = 42;
-
-    private Handler adHandler;
-    private Runnable adRunnable;
 
     private Book book;
     private int currentShelf;
@@ -86,7 +81,6 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
 
     @BindView(R.id.book_description_holder) View bookDescriptionHolder;
     @BindView(R.id.book_description)        TextView bookDescription;
-    @BindView(R.id.ad_view)                 AdView adView;
 
     @BindView(R.id.fab_menu)                FloatingActionMenu fabMenu;
     @BindView(R.id.fab_to_read)             FloatingActionButton fabToRead;
@@ -237,28 +231,10 @@ public class BookFragment extends Fragment implements OnMenuItemClickListener, L
             bookDescription.setText(book.getDescription());
         }
 
-        // Load ad after 1 second to prevent lag
-        adRunnable = new Runnable() {
-            @Override
-            public void run() {
-                AdRequest adRequest = new AdRequest.Builder()
-                        .addTestDevice(getString(R.string.device_moto_g4_id))
-                        .addTestDevice(getString(R.string.device_nexus7_id))
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .build();
-                adView.loadAd(adRequest);
-            }
-        };
-        adHandler = new Handler();
-        adHandler.postDelayed(adRunnable, 1000);
-
         return v;
     }
     @Override
     public void onDestroyView() {
-        if (adHandler != null) {
-            adHandler.removeCallbacks(adRunnable);
-        }
         unbinder.unbind();
         super.onDestroyView();
     }

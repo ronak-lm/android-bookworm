@@ -18,8 +18,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.bookworm.BookWormApp;
 import com.ronakmanglani.bookworm.R;
 import com.ronakmanglani.bookworm.api.ApiHelper;
@@ -47,9 +45,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
 
     private Unbinder unbinder;
 
-    private Handler adHandler;
-    private Runnable adRunnable;
-
     private int currentState;
     private int startIndex;
     private int totalItems;
@@ -60,7 +55,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     @BindView(R.id.toolbar)             Toolbar toolbar;
     @BindView(R.id.search_bar)          EditText searchBar;
     @BindView(R.id.search_list)         RecyclerView searchList;
-    @BindView(R.id.ad_view)             AdView adView;
     @BindView(R.id.no_results)          View noResults;
     @BindView(R.id.error_message)       View errorMessage;
     @BindView(R.id.progress_circle)     View progressCircle;
@@ -160,26 +154,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
             }
         }
 
-        // Load Ad
-        if (DimenUtil.isTablet()) {
-            adView.setVisibility(View.GONE);
-        } else {
-            // Load ad after 1 second to prevent lag
-            adRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    AdRequest adRequest = new AdRequest.Builder()
-                            .addTestDevice(getString(R.string.device_moto_g4_id))
-                            .addTestDevice(getString(R.string.device_nexus7_id))
-                            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                            .build();
-                    adView.loadAd(adRequest);
-                }
-            };
-            adHandler = new Handler();
-            adHandler.postDelayed(adRunnable, 1000);
-        }
-
         return v;
     }
     @Override
@@ -195,9 +169,6 @@ public class SearchFragment extends Fragment implements OnBookClickListener {
     }
     @Override
     public void onDestroyView() {
-        if (adHandler != null) {
-            adHandler.removeCallbacks(adRunnable);
-        }
         VolleySingleton.getInstance().requestQueue.cancelAll(getClass().getName());
         unbinder.unbind();
         super.onDestroyView();

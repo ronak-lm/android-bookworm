@@ -5,7 +5,7 @@
     android:id="@+id/book_detail_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/dist_large"
+    android:paddingBottom="@dimen/dist_xxlarge"
     android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/fragment_book">
@@ -26,16 +26,6 @@
 
         <!-- Book Description -->
         <include layout="@layout/layout_book_description" />
-
-        <!-- Google AdMob Ads -->
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/ad_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dist_large"
-            app:adSize="BANNER"
-            app:adUnitId="@string/admob_book_banner_id" />
 
     </LinearLayout>
 

@@ -1,59 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/fragment_search">
 
-    <FrameLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/ad_view_holder">
-
-        <!-- Recycler View -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/recycler_view_padding"
-            android:clipToPadding="false"
-            android:visibility="gone"/>
-
-        <!-- No Results -->
-        <include layout="@layout/layout_no_results"
-            android:visibility="gone"/>
-
-        <!-- Error Message -->
-        <include layout="@layout/layout_error_message"
-            android:visibility="gone"/>
-
-        <!-- Progress Circle -->
-        <include layout="@layout/layout_progress_circle"
-            android:visibility="gone"/>
-
-        <!-- Loading More -->
-        <include layout="@layout/layout_progress_circle_small"
-            android:visibility="gone"/>
-
-    </FrameLayout>
-
-    <!-- Google AdMob Ads -->
-    <FrameLayout android:id="@+id/ad_view_holder"
+    <!-- Recycler View -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/ad_view_background">
+        android:layout_height="match_parent"
+        android:padding="@dimen/recycler_view_padding"
+        android:clipToPadding="false"
+        android:visibility="gone"/>
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/ad_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:adSize="SMART_BANNER"
-            app:adUnitId="@string/admob_bestseller_banner_id" />
+    <!-- No Results -->
+    <include layout="@layout/layout_no_results"
+        android:visibility="gone"/>
 
-    </FrameLayout>
+    <!-- Error Message -->
+    <include layout="@layout/layout_error_message"
+        android:visibility="gone"/>
 
-</RelativeLayout>
+    <!-- Progress Circle -->
+    <include layout="@layout/layout_progress_circle"
+        android:visibility="gone"/>
+
+    <!-- Loading More -->
+    <include layout="@layout/layout_progress_circle_small"
+        android:visibility="gone"/>
+
+</FrameLayout>
