@@ -55,7 +55,7 @@ public class ListFragment extends Fragment implements OnBookClickListener, Loade
         currentShelf = getArguments().getInt(BookWormApp.KEY_SHELF);
 
         // Setup RecyclerView
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 1));
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 2));
         adapter = new BookCursorAdapter(this);
         bookList.setHasFixedSize(true);
         bookList.setLayoutManager(layoutManager);

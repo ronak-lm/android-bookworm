@@ -82,7 +82,7 @@ public class BestsellerFragment extends Fragment implements OnCategoryClickListe
             if (currentState == BookWormApp.STATE_LOADED) {
                 ArrayList<Bestseller> bestsellerBooks = savedInstanceState.getParcelableArrayList(BookWormApp.KEY_BESTSELLER);
 
-                layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 1));
+                layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 2));
                 adapter = new BestsellerAdapter(bestsellerBooks, this);
 
                 bestsellerList.setHasFixedSize(true);
@@ -157,7 +157,7 @@ public class BestsellerFragment extends Fragment implements OnCategoryClickListe
     private void downloadBestsellerList() {
         if (adapter == null) {
             adapter = new BestsellerAdapter(this);
-            layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 1));
+            layoutManager = new GridLayoutManager(getContext(), DimenUtil.getNumberOfColumns(R.dimen.book_grid_card_width, 2));
             bestsellerList.setHasFixedSize(true);
             bestsellerList.setLayoutManager(layoutManager);
             bestsellerList.setAdapter(adapter);
