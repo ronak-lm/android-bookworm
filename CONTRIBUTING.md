@@ -11,7 +11,7 @@ To work, the project will need API keys from [New York Times Bestseller API][3] 
     <string name="google_books_key">YOUR_GOOGLE_BOOKS_KEY_HERE</string>
 
 
-## Siging Release Builds
+## Signing Release Builds
 
 You will have to add your keystore file with the name "keystore.jks" in the app folder. Create a "keystore.properties" file in the the project's root folder with these values:-
 
